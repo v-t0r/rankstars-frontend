@@ -1,0 +1,14 @@
+.modal {
+    margin: auto;
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: var(--secondary-background-color);
+    color: white;
+    border: none;
+    box-shadow:  rgba(0, 0, 0, 0.281) 0px 0px 2rem;
+}
+
+.modal::backdrop{
+    background-color: rgba(0, 0, 0, 0.358);
+    backdrop-filter: blur(4px);
+}

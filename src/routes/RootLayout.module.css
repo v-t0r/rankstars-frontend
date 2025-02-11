@@ -1,0 +1,10 @@
+.new-review-button{
+    cursor: pointer;
+    position: fixed;
+    width: 70px;
+    height: 70px;
+    background-color: aqua;
+    border-radius: 100%;
+    bottom: 100px;
+    right: 100px;
+}

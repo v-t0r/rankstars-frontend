@@ -1,0 +1,124 @@
+.container {
+    width: 30rem;
+    min-height: 30rem;
+}
+
+.container h1 {
+    font-family: "Inkrut Antiqua";
+    font-size: 1.8rem;
+}
+
+.title-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container ul {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-color);
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    height: 30rem;
+    gap: 1rem;  
+    
+    overflow-y: auto;
+    scrollbar-color: var(--input-background-color) var(--background-color);
+}
+
+.container li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container .empty-warning {
+    color: var(--dark-gray);
+    line-height: 1.5rem;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.img-and-username {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+    gap: 1rem;
+}
+
+.username-status {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    margin: auto;
+}
+
+.username-status #username {
+    font-family: "Inkrut Antiqua";
+    font-size: x-large;
+    font-weight: 600;
+    line-height: 1rem;
+    color: var(--light-gray);
+    cursor: pointer;
+}
+
+.username-status #username:hover {
+    color: white;
+}
+
+.username-status #status {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+
+    margin-top: 5px;
+    color: var(--blue-gray);
+}
+
+.container li img {
+    width: 3rem;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-top: 0.3rem;
+}
+
+.button-container button {
+    cursor: pointer;
+    background: none;
+    padding: 0.3rem;
+    border-radius: 0.5rem;
+    border: solid var(--dark-gray) 2px; 
+    color: var(--light-gray);
+
+    width: 5.5rem;
+}
+
+.button-container button:hover {
+    color: white;   
+}
+
+.button-container .follow-button:hover {
+    border: solid var(--positive-color) 2px;
+}
+
+.button-container .unfollow-button:hover{
+    border: solid var(--error-color) 2px;
+}
+
+#close-button {
+    font-size: 1.3rem;
+}

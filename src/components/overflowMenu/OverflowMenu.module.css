@@ -1,0 +1,36 @@
+.menu-container{
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    background-color: var(--secondary-background-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.194) 2px 2px 10px;
+    z-index: 999;
+}
+
+.right-menu{
+    right: 0;
+}
+
+.left-menu{
+    left: 0;
+}
+
+.menu-container ul {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    text-align: left;
+    list-style: none;
+    gap: 0.5rem;
+}
+
+.invisible-click-wall{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0px;
+    left: 0px;
+    z-index: 998;
+}

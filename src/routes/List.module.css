@@ -1,0 +1,76 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    width: 50rem;
+
+}
+
+.title-div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 0.2rem;
+}
+
+.title-div h1 {
+    font-family: "Inknut Antiqua";
+    line-height: 1.0rem;
+    font-weight: 500;
+    text-align: start;
+    text-align: start;
+    font-size: x-large;
+}
+
+.title-div h2 {
+    font-size: large;
+    color: var(--blue-gray);
+    font-weight: 400;
+
+}
+
+.title-div a {
+    text-decoration: none;
+    color: var(--blue-gray);
+}
+
+.title-div a:hover {
+    color: var(--light-gray);
+}
+
+.author-div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+}
+
+.author-div img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+
+.reviews-div > ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    list-style: none;
+}
+
+.reviews-div li {
+    padding: 1rem;
+    background-color: var(--secondary-background-color);
+    border-radius: 0.5rem;
+}
+
+.options-bar-div {
+    border-top: solid var(--blue-gray);
+    border-bottom: solid var(--blue-gray);
+    margin-top: 1rem;
+    padding: 0.6rem 0rem; 
+    width: 100%;
+}

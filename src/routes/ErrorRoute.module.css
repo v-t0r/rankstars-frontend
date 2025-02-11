@@ -1,0 +1,27 @@
+.error-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    width: fit-content;
+    margin: 5rem auto;
+}
+
+.error-container h1 {
+    font-size: 5rem;
+}
+
+.error-container h2 {
+    font-size: 2rem;
+}
+.error-container p {
+    font-size: 1.5rem;
+}
+
+.error-container a {
+    color: rgb(255, 255, 255);
+}
+
+.error-container a:hover {
+    color: rgb(228, 228, 228);
+}

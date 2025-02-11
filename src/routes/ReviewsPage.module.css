@@ -1,0 +1,49 @@
+.header-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-section select {
+    font-size: large;
+    text-align: center;
+    background-color: var(--input-background-color);
+    color: white;
+    padding: 0.4rem 0.4rem;
+    border-radius: 0.5rem;
+    min-width: 1rem;
+    border: none;
+}
+
+.header-section select:focus {
+    border: none;
+    outline: none;
+}
+
+.reviews-section {
+    width: 50rem;
+    margin: auto;
+}
+
+.reviews-section h1 {
+    font-family: "Inknut Antiqua";
+    margin: 1.5rem 0;
+    font-size: x-large;
+    font-weight: 400;
+    line-height: 1rem;
+}
+
+.reviews-section ul{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    list-style: none;
+}
+
+.reviews-section li {
+    padding: 1rem;
+    background-color: var(--secondary-background-color);
+    border-radius: 0.5rem;
+}

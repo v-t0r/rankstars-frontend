@@ -1,0 +1,53 @@
+form {
+    width: 100%;
+    height: fit-content;
+}
+
+.comment-div {
+    --ipt-brdr-rds: 0.3rem;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+
+}
+
+.comment-div textarea {
+    --line-heigth: 1rem;
+    --vertical-padding: 0.5rem;
+    
+    width: 100%;
+    font-size: 1rem;
+    line-height: var(--line-heigth);
+    padding: var(--vertical-padding) 0.5rem;
+    height: calc(var(--line-heigth) + (2 * var(--vertical-padding)) + 1px);
+    max-height: 4rem;
+    resize: none;
+    border-radius: var(--ipt-brdr-rds) 0 0 var(--ipt-brdr-rds);
+    background-color: var(--input-background-color);
+    color: var(--light-gray);
+    scrollbar-width: thin;
+    scrollbar-color: var(--background-color) var(--input-background-color);
+}
+
+.comment-div textarea:focus {
+    outline: none;
+    box-shadow: none
+}
+
+.comment-div .comment-button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background: none;
+    border: none;
+    background-color: var(--input-background-color);
+    color: var(--dark-gray);
+    border-radius: 0 var(--ipt-brdr-rds) var(--ipt-brdr-rds) 0;
+    padding: 0rem 0.3rem;
+}
+
+.comment-div .comment-button:hover {
+    color: var(--light-gray);
+}

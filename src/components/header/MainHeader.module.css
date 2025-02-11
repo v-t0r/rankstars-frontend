@@ -1,0 +1,80 @@
+.header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    background-color: var(--secondary-background-color);
+    padding: 0 3rem;
+    margin: 0 auto;
+    width: var(--header-width);
+    min-width: var(--header-min-width);
+    height: var(--header-height);
+}
+
+.header-logo{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 20px;
+    flex-wrap: nowrap;
+}
+
+.header-logo h1{
+    font-family: "Inknut Antiqua", serif;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.header-logo img {
+    width: 75px;
+    cursor: pointer;
+}
+
+.header a{
+    text-decoration: none;
+    color: var(--inactive-gray-color);
+}
+
+.header a:hover{
+    text-decoration: none;
+    color: white
+}
+
+.search-bar{
+    width: 25rem;
+    height: 2rem;
+    
+    background-color: var(--input-background-color);
+    color: white;
+
+    border-radius: 0.5rem;
+    border: none;
+    padding: 0 1rem;
+    font-size: medium;
+
+    position: absolute;
+    left: 50%;
+    translate: -50% 0%;
+}
+
+@media screen and (max-width: 1050px) {
+    .search-bar{
+        position: relative;
+        translate: 0% 0%;
+        width: 20rem;
+        left: auto
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .header{
+        min-width: 100%;
+        margin: auto;
+        font-size: smaller;
+    }
+
+    .search-bar {
+        visibility: hidden;
+    }
+}

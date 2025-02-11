@@ -1,0 +1,85 @@
+
+:root{
+    --img-width: 2.6rem
+}
+
+.comment-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: fit-content;
+    border-left: solid var(--dark-gray) 2px;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.author-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    gap: 0.5rem;
+}
+
+.author-div p {
+    color: var(--dark-gray);
+    margin-top: 5px;
+}
+
+.author-div img {
+    width: var(--img-width);
+    border-radius: 50%;
+}
+
+.author-div a {
+    font-family: "Inknut Antiqua";
+    font-size: 1.3rem;
+    font-weight: 500;
+    line-height: 1.0rem;
+    color: var(--light-gray);
+    text-decoration: none;
+
+    /* background-color: aqua; */
+}
+
+.author-div a:hover {
+    color: white;
+}
+
+.comment-div p{
+    overflow-wrap: anywhere;
+    margin-left: calc((var(--img-width) / 2) - 1px);
+    padding: 1rem 1rem 1rem 1.75rem;
+}
+
+.options-column{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    align-self: stretch;
+
+}
+
+.options-column button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--light-gray);
+
+}
+
+.options-column button:hover {
+    color: white;
+}
+
+.overflow-menu-list button {
+    display: flex;
+    flex-direction: row;
+    gap: 0.2rem;
+}
+
+.delete-icon {
+    font-size: large;
+}

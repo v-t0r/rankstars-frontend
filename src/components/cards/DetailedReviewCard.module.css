@@ -1,0 +1,125 @@
+
+.card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: auto;
+    width: 100%;
+    max-width: 50rem;
+    gap: 1rem;
+}
+
+.img-and-info {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items:start;
+    gap: 1rem;
+    width: 100%;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 10rem;
+    min-height: 10rem;
+    max-height: 16rem;
+
+    overflow: hidden;
+    cursor: pointer;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.img-container img {
+    width: 100%;
+    height: 100%;
+    /* aspect-ratio: 1/1; */
+    object-fit: cover;
+}
+
+.title-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-top: 0.2rem;
+}
+
+.title-container a {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+.title-container a:hover {
+    color: var(--light-gray);
+}
+
+.title-container h3 {
+    font-family: "Inknut Antiqua";
+    line-height: 1rem;
+}
+
+.review-info {
+    width: 100%;
+}
+
+.rating-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.rating-container a {
+    color: var(--blue-gray);
+    text-decoration: none;
+    text-wrap: nowrap;
+    font-size: meidum;
+    text-align: center;
+}
+
+.rating-container a:hover {
+    color: var(--light-gray);
+}
+
+.rating-container p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.4rem;
+    font-size: 2rem;
+    font-weight: 500;
+    color: white;
+}
+
+.author {
+    margin-top: .4rem;
+}
+
+.author a {
+    color: var(--blue-gray);
+    text-decoration: none;
+    margin-left: 1px;
+    font-size: large;
+}
+
+.author a:hover {
+    color: var(--light-gray);
+}
+
+.review-text{
+    margin-top: 5px;
+    overflow-wrap: anywhere;
+    text-align: justify;
+    color: var(--light-gray);
+}
+
+.review-text p{
+    width: 100%;
+}
