@@ -3,8 +3,8 @@ import classes from "./ReviewsPage.module.css"
 import { useParams } from "react-router-dom"
 
 import { useQuery } from "@tanstack/react-query"
-import { fetchUserReviews } from "../services/users"
-import DetailedReviewCard from "../components/cards/DetailedReviewCard"
+import { fetchUserReviews } from "../../services/users"
+import DetailedReviewCard from "../../components/cards/DetailedReviewCard"
 import { useState } from "react"
 
 

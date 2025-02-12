@@ -3,11 +3,11 @@ import classes from "./ListPage.module.css"
 import { Link, useParams } from "react-router-dom"
 import { useQuery} from "@tanstack/react-query"
 
-import { getPost } from "../services/posts.js"
+import { getPost } from "../../services/posts.js"
 
-import DetailedReviewCard from "../components/cards/DetailedReviewCard"
-import OptionsBar from "../components/optionsBar/OptionsBar.jsx"
-import CommentContainer from "../components/comments/CommentContainer.jsx"
+import DetailedReviewCard from "../../components/cards/DetailedReviewCard.jsx"
+import OptionsBar from "../../components/optionsBar/OptionsBar.jsx"
+import CommentContainer from "../../components/comments/CommentContainer.jsx"
 
 
 export default function ListRoute(){

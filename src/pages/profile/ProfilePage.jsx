@@ -5,17 +5,17 @@ import { useLocation, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
 import { useDispatch, useSelector } from "react-redux"
-import { userActions } from "../store"
+import { userActions } from "../../store"
 
 import { useMutation, useQuery } from "@tanstack/react-query"
-import { queryClient } from "../services/queryClient"
-import { imageBackendUrl } from "../utils/constants"
-import { fetchUserInfo } from "../services/users"
-import { followUser, unfollowUser } from "../services/users"
+import { queryClient } from "../../services/queryClient"
+import { imageBackendUrl } from "../../utils/constants"
+import { fetchUserInfo } from "../../services/users"
+import { followUser, unfollowUser } from "../../services/users"
 
-import CardContainer from "../components/cards/CardContainer"
-import Modal from "../components/modal/Modal"
-import UserList from "../components/userList/UserList"
+import CardContainer from "../../components/cards/CardContainer"
+import Modal from "../../components/modal/Modal"
+import UserList from "../../components/userList/UserList"
 
 export default function ProfileRoute(){
     const {id} = useParams()

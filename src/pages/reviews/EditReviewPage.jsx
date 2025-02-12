@@ -3,13 +3,13 @@ import classes from "./EditReviewPage.module.css"
 import {useMutation, useQuery} from "@tanstack/react-query"
 import { useNavigate, useParams } from "react-router-dom";
 
-import { getPost, postReview, patchPost } from "../services/posts";
+import { getPost, postReview, patchPost } from "../../services/posts";
 
-import { queryClient } from "../services/queryClient";
+import { queryClient } from "../../services/queryClient";
 import { useEffect, useState } from "react";
-import ConfirmationModal from "../components/modal/ConfirmationModal";
-import { getUserId } from "../services/auth";
-import ImagePicker from "../components/forms/ImagePicker";
+import ConfirmationModal from "../../components/modal/ConfirmationModal";
+import { getUserId } from "../../services/auth";
+import ImagePicker from "../../components/forms/ImagePicker";
 
 export default function EditReview(){
     const [validationErrors, setValidationErrors] = useState({})

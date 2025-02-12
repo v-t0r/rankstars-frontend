@@ -1,11 +1,11 @@
 import { Link, useParams } from "react-router-dom"
-import { getPost } from "../services/posts"
+import { getPost } from "../../services/posts"
 import { useQuery } from "@tanstack/react-query"
 
 import classes from "./ReviewPage.module.css"
-import OptionsBar from "../components/optionsBar/OptionsBar"
-import DetailedReviewCard from "../components/cards/DetailedReviewCard"
-import CommentContainer from "../components/comments/CommentContainer"
+import OptionsBar from "../../components/optionsBar/OptionsBar"
+import DetailedReviewCard from "../../components/cards/DetailedReviewCard"
+import CommentContainer from "../../components/comments/CommentContainer"
  
 export default function ReviewRoute(){
     const {id: reviewId} = useParams()

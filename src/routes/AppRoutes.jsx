@@ -2,18 +2,18 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
 import {checkAuthLoader, checkNotAuthLoader, tokenLoader} from "../services/auth.js"
 
-import RootLayout from '../pages/RootLayout.jsx'
-import LoginRoute, { action as loginAction} from '../pages/LoginPage.jsx'
-import SignupRoute, {action as signupAction} from "../pages/SignupPage.jsx"
-import {action as logoutAction} from "../pages/LogoutPage.jsx"
-import FeedPage from '../pages/FeedPage.jsx'
-import ProfileRoute from '../pages/ProfilePage.jsx'
-import ReviewRoute from '../pages/ReviewPage.jsx'
-import ReviewsPage from "../pages/ReviewsPage.jsx"
-import EditReview from "../pages/EditReviewPage.jsx"
-import ListRoute from '../pages/ListPage.jsx'
+import RootLayout from '../pages/layouts/RootLayout.jsx'
+import LoginRoute, { action as loginAction} from '../pages/login/LoginPage.jsx'
+import SignupRoute, {action as signupAction} from "../pages/login/SignupPage.jsx"
+import {action as logoutAction} from "../pages/login/LogoutPage.jsx"
+import FeedPage from '../pages/homePage/FeedPage.jsx'
+import ProfileRoute from '../pages/profile/ProfilePage.jsx'
+import ReviewRoute from '../pages/reviews/ReviewPage.jsx'
+import ReviewsPage from "../pages/reviews/ReviewsPage.jsx"
+import EditReview from "../pages/reviews/EditReviewPage.jsx"
+import ListRoute from '../pages/lists/ListPage.jsx'
 
-import ErrorRoute from '../pages/ErrorPage.jsx'
+import ErrorRoute from '../pages/errors/ErrorPage.jsx'
 
 const router = createBrowserRouter([
     { path : "/", element: <RootLayout />, id: "root", errorElement: <ErrorRoute />, loader: tokenLoader, children: [
