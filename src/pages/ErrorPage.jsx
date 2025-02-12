@@ -1,4 +1,4 @@
-import classes from "./ErrorRoute.module.css"
+import classes from "./ErrorPage.module.css"
 
 import { Link } from "react-router-dom"
 

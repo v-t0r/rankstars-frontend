@@ -1,4 +1,4 @@
-import classes from "NewList.module.css"
+import classes from "NewListPage.module.css"
 
 export default function NewList() {
 

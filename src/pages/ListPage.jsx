@@ -1,4 +1,4 @@
-import classes from "./List.module.css"
+import classes from "./ListPage.module.css"
  
 import { Link, useParams } from "react-router-dom"
 import { useQuery} from "@tanstack/react-query"

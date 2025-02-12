@@ -1,4 +1,4 @@
-import classes from "./EditReview.module.css"
+import classes from "./EditReviewPage.module.css"
 
 import {useMutation, useQuery} from "@tanstack/react-query"
 import { useNavigate, useParams } from "react-router-dom";
