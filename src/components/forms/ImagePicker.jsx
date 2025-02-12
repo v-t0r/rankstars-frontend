@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { imageBackendUrl } from "../../util/http"
+import { imageBackendUrl } from "../../utils/constants"
 import classes from "./ImagePicker.module.css"
 
 export default function ImagePicker({inputName = undefined, inputId = "image", selectedImages, onChange, onRemove, multiple = true, maxImages = 10}){

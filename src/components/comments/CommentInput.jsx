@@ -1,7 +1,7 @@
 import { useRef } from "react"
 import classes from "./CommentInput.module.css"
 import { useMutation } from "@tanstack/react-query"
-import { postComment } from "../../util/fetch/comments"
+import { postComment } from "../../services/comments"
 import { useDispatch, useSelector } from "react-redux"
 import { commentsAction } from "../../store"
 

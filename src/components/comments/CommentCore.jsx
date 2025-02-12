@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom"
-import { imageBackendUrl } from "../../util/http"
+import { imageBackendUrl } from "../../utils/constants"
 import classes from "./CommentCore.module.css"
 import { useState } from "react"
 import OverflowMenu from "../overflowMenu/overflowMenu"
 import { useDispatch, useSelector } from "react-redux"
 import { useMutation } from "@tanstack/react-query"
-import { deleteComment } from "../../util/fetch/comments"
+import { deleteComment } from "../../services/comments"
 import { commentsAction } from "../../store"
 
 export default function CommentCore({comment, type = "comment", onReplyClick}){

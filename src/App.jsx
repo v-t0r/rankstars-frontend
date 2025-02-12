@@ -8,7 +8,7 @@ import LoginRoute, { action as loginAction} from './routes/Login.jsx'
 import SignupRoute, {action as signupAction} from "./routes/Signup.jsx"
 import ErrorRoute from './routes/ErrorRoute.jsx'
 import {action as logoutAction} from "./routes/Logout.jsx"
-import {checkAuthLoader, checkNotAuthLoader, tokenLoader} from "./util/auth.js"
+import {checkAuthLoader, checkNotAuthLoader, tokenLoader} from "./services/auth.js"
 import EditReview from "./routes/EditReview.jsx"
 import ReviewsPage from "./routes/ReviewsPage.jsx"
 

@@ -2,10 +2,11 @@
 import { useNavigate } from "react-router-dom"
 import classes from "./UserList.module.css"
 
-import { imageBackendUrl, queryClient } from "../../util/http"
+import { imageBackendUrl } from "../../utils/constants"
+import { queryClient } from "../../services/queryClient"
 import { useDispatch, useSelector } from "react-redux"
 import { useMutation } from "@tanstack/react-query"
-import { followUser, unfollowUser } from "../../util/fetch/users"
+import { followUser, unfollowUser } from "../../services/users"
 import { userActions } from "../../store"
 
 export default function UsersList({username, profileUserId, users, type, onClose}) {

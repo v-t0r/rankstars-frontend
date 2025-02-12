@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
 
-import { queryClient, imageBackendUrl } from "../util/http"
-import { fetchUserInfo } from "../util/fetch/users"
+import { imageBackendUrl } from "../utils/constants"
+import { queryClient } from "../services/queryClient"
+import { fetchUserInfo } from "../services/users"
 import { useLocation, useParams } from "react-router-dom"
 
 import classes from "./Profile.module.css"
@@ -11,7 +12,7 @@ import { useEffect, useState } from "react"
 import Modal from "../components/modal/Modal"
 import UserList from "../components/userList/UserList"
 import { useDispatch, useSelector } from "react-redux"
-import { followUser, unfollowUser } from "../util/fetch/users"
+import { followUser, unfollowUser } from "../services/users"
 import { userActions } from "../store"
 
 export default function ProfileRoute(){

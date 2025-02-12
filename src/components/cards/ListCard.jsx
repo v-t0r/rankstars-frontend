@@ -1,6 +1,6 @@
 import classes from "./ListCard.module.css"
 
-import { imageBackendUrl } from "../../util/http"
+import { imageBackendUrl } from "../../utils/constants"
 import { useNavigate } from "react-router-dom"
 
 export default function ListCard({list}){

@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom"
-import { imageBackendUrl } from "../../util/http"
+import { imageBackendUrl } from "../../utils/constants"
 
 import classes from "./ReviewCard.module.css"
-import { getRatingColorClass } from "../../util/util"
+import { getRatingColorClass } from "../../utils/functions"
 
 export default function ReviewCard({review}){
     const navigate = useNavigate()

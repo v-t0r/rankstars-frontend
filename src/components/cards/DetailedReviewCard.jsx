@@ -1,8 +1,8 @@
 import classes from "./DetailedReviewCard.module.css"
 
-import { imageBackendUrl } from "../../util/http"
+import { imageBackendUrl } from "../../utils/constants"
 import { Link, useNavigate } from "react-router-dom"
-import { getRatingColorClass } from "../../util/util"
+import { getRatingColorClass } from "../../utils/functions"
 import { useRef, useState } from "react"
 
 export default function DetailedReviewCard({review, reviewPage = false}) {   

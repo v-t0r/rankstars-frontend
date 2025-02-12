@@ -1,6 +1,6 @@
 import classes from "./AltListCard.module.css"
 
-import { imageBackendUrl } from "../../../util/http"
+import { imageBackendUrl } from "../../../utils/constants"
 
 export default function AltListCard ({list}){
     console.log(list)

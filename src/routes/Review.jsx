@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom"
-import { getPost } from "../util/fetch/posts"
+import { getPost } from "../services/posts"
 import { useQuery } from "@tanstack/react-query"
 
 import classes from "./Review.module.css"

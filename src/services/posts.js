@@ -1,5 +1,5 @@
-import { getAuthToken } from "../auth";
-import { backendUrl } from "../http";
+import { getAuthToken } from "./auth";
+import { backendUrl } from "../utils/constants";
 
 export async function fetchReviewInfo({signal, reviewId}) {
     const token = getAuthToken()

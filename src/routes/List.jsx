@@ -3,7 +3,7 @@ import classes from "./List.module.css"
 import { Link, useParams } from "react-router-dom"
 import { useQuery} from "@tanstack/react-query"
 
-import { getPost } from "../util/fetch/posts.js"
+import { getPost } from "../services/posts.js"
 
 import DetailedReviewCard from "../components/cards/DetailedReviewCard"
 import OptionsBar from "../components/optionsBar/OptionsBar.jsx"

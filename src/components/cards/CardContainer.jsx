@@ -1,11 +1,11 @@
 import classes from "./cardContainer.module.css"
 import { useQuery } from "@tanstack/react-query"
 
-import { fetchUserReviews } from "../../util/fetch/users"
+import { fetchUserReviews } from "../../services/users"
 
 import ReviewCard from "./ReviewCard"
 import { Link } from "react-router-dom"
-import { fetchUserLists } from "../../util/fetch/users"
+import { fetchUserLists } from "../../services/users"
 import ListCard from "./ListCard"
 
 export default function CardContainer({userId, type}) {

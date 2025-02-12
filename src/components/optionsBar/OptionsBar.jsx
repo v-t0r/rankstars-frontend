@@ -7,8 +7,8 @@ import { userActions } from "../../store"
 import { useDispatch, useSelector } from "react-redux"
 
 import { useMutation } from "@tanstack/react-query"
-import { deletePost, likeReview } from "../../util/fetch/posts"
-import { queryClient } from "../../util/http"
+import { deletePost, likeReview } from "../../services/posts"
+import { queryClient } from "../../services/queryClient"
 
 import { useNavigate } from "react-router-dom"
 
@@ -26,12 +26,12 @@ export default function OptionsBar({post, type}){
 
     //the post was liked/followed by the logged user?
     let liked
-    let following
+    // let following
     if(type === "reviews"){
         liked = loggedUserInfo.likedReviews.filter(likedReview => likedReview === post._id).length === 1
     }
     if(type == "lists"){
-        following = loggedUserInfo.followingLists.filter(followedList => followedList === post._id).length === 1
+        // following = loggedUserInfo.followingLists.filter(followedList => followedList === post._id).length === 1
     }
 
     const { mutate: likeMutate } = useMutation({

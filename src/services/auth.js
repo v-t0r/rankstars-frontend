@@ -1,7 +1,7 @@
 import { redirect } from "react-router-dom"
 import store from "../store"
 import { userActions } from "../store"
-import { backendUrl } from "./http"
+import { backendUrl } from "../utils/constants"
 
 export function getTokenRemainingTime(){
     const tokenExpiration = localStorage.getItem("tokenExpiration")

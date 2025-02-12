@@ -1,7 +1,7 @@
 import classes from "./CommentContainer.module.css"
 
 import { useQuery } from "@tanstack/react-query"
-import { fetchComments } from "../../util/fetch/comments"
+import { fetchComments } from "../../services/comments"
 import CommentCard from "./CommentCard"
 import { useDispatch, useSelector } from "react-redux"
 import { commentsAction } from "../../store"

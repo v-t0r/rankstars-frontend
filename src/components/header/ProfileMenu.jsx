@@ -5,8 +5,8 @@ import {Form, useLocation} from "react-router-dom"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 
-import { getUserId } from "../../util/auth"
-import { backendUrl } from "../../util/http"
+import { getUserId } from "../../services/auth"
+import { backendUrl } from "../../utils/constants"
 
 export default function PofileMenu(){
     const [menuIsOpen, setMenuIsOpen] = useState(false)

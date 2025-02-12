@@ -1,9 +1,7 @@
-import classes from "./RootLayout.module.css"
-
 import { Outlet, useLoaderData, useSubmit } from "react-router-dom"
 import MainHeader from "../components/header/MainHeader"
 import { useEffect } from "react"
-import { getTokenRemainingTime } from "../util/auth"
+import { getTokenRemainingTime } from "../services/auth"
 
 export default function RootLayout(){
     const token = useLoaderData()
