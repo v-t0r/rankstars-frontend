@@ -9,7 +9,7 @@ import { queryClient } from "../../services/queryClient";
 import { useEffect, useState } from "react";
 import ConfirmationModal from "../../components/modal/ConfirmationModal";
 import { getUserId } from "../../services/auth";
-import ImagePicker from "../../components/forms/ImagePicker";
+import ImagePicker from "../../components/imagePicker/ImagePicker";
 
 export default function EditReview(){
     const [validationErrors, setValidationErrors] = useState({})

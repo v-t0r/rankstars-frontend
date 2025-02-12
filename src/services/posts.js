@@ -128,3 +128,32 @@ export async function likeReview({reviewId, operation}){
     return await response.json()
 }
 
+export async function addReviewToList({reviewId, listId}){
+    addOrRemoverReviewFromList({reviewId, listId, operation: "add"})
+}
+
+export async function removeReviewFromList({reviewId, listId}){
+    addOrRemoverReviewFromList({reviewId, listId, operation: "remove"})
+}
+
+async function addOrRemoverReviewFromList({reviewId, listId, operation}){
+    const token = getAuthToken()
+    const method = operation === "add" ? "POST" : "DELETE"
+
+    const response = await fetch(`${backendUrl}/lists/${listId}/reviews/${reviewId}`, {
+        method: method,
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    })
+
+    if(!response.ok){
+        const error = new Error("Failed to manipulate review on list")
+        error.status = response.status
+        error.info = await response.json()
+        throw error
+    }
+
+    return await response.json()
+}
+
