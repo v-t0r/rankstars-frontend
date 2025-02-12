@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit"
-import userSlice from "./user"
 
-import commentsSlice from "./comments"
+import userSlice from "./userContext"
+import commentsSlice from "./commentsContext"
 
 const store = configureStore({
     reducer: {

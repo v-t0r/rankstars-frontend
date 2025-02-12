@@ -19,7 +19,6 @@ export default function ReviewCard({review}){
                 <div className={`${classes["rating-box"]} ${boxColor}`}>
                     <h3>{review.rating}</h3>
                 </div>
-            
             </div>
             
             <div className={classes["img-container"]} >
