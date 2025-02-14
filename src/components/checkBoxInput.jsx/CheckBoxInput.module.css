@@ -1,0 +1,22 @@
+.main-container {
+    display: flex;
+}
+
+.span-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25%;
+    background-color: var(--input-background-color);
+
+    cursor: pointer;
+    user-select: none; 
+    -webkit-user-select: none;
+    
+}
+
+.checked {
+    background-color: var(--positive-color);
+    padding: 0.2rem;
+}
+

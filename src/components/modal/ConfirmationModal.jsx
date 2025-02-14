@@ -1,9 +1,9 @@
 import classes from "./ConfirmationModal.module.css"
 import Modal from "./Modal"
 
-export default function ConfirmationModal({title, message, onConfirm, onCancel, onClose}){
+export default function ConfirmationModal({title, message, onConfirm, onCancel, onEscape}){
 
-    return <Modal onClose={onClose}>
+    return <Modal onClose={onEscape}>
         <div className={classes["confirmation-modal"]}>
         <h2>{title}</h2>
         <p>{message}</p>

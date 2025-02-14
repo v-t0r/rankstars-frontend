@@ -101,7 +101,6 @@ export default function EditReview(){
             errors.rating = "Rating can't be empty." 
         }
 
-
         if(Object.keys(errors).length > 0){
             setValidationErrors(errors)
             return

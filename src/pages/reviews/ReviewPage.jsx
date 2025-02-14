@@ -12,7 +12,8 @@ export default function ReviewRoute(){
 
     const {data, isPending, isError, error} = useQuery({
         queryKey: ["review", `${reviewId}`],
-        queryFn: ({signal}) => getPost({postId: reviewId, type: "reviews", signal})
+        queryFn: ({signal}) => getPost({postId: reviewId, type: "reviews", signal}),
+        staleTime: 0
     })
 
     let content
@@ -43,7 +44,6 @@ export default function ReviewRoute(){
                     <OptionsBar post={review} type={"reviews"}/>
                 </div>
                 
-
                 <CommentContainer postId = {review._id} type={"reviews"} />
 
             </div>

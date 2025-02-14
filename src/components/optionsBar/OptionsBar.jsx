@@ -15,6 +15,8 @@ import { useNavigate } from "react-router-dom"
 import OverflowMenu from "../overflowMenu/overflowMenu"
 import CommentInput from "../comments/CommentInput"
 import ConfirmationModal from "../modal/ConfirmationModal"
+import Modal from "../modal/Modal"
+import ListList from "../listList/ListList"
 
 export default function OptionsBar({post, type}){
     const loggedUserInfo = useSelector(state => state.user.user)
@@ -22,7 +24,8 @@ export default function OptionsBar({post, type}){
     const navigate = useNavigate()
 
     const [overflowMenuVisibility, setOverflowMenuVisibility] = useState(false)
-    const [modalVisibility, setModalVisibility] = useState(false)
+    const [deleteModalVisibility, setdeleteModalVisibility] = useState(false)
+    const [listsModalVisibility, setListsModalVisibility] = useState(false)
 
     //the post was liked/followed by the logged user?
     let liked
@@ -95,10 +98,15 @@ export default function OptionsBar({post, type}){
             {overflowMenuVisibility && <OverflowMenu right={"0"} top={"25px"} handleCloseMenu={() => setOverflowMenuVisibility(false)}>
                 <ul className={classes["overflow-menu-list"]}>
                     
-                    {/* Menu options exclusvie to reviews */}
-                    {type === "reveiws" && 
+                    {/* Menu options exclusive to reviews */}
+                    {type === "reviews" && 
                         <li>
-                            <button className="text-button">
+                            <button 
+                                onClick={() => {
+                                    setOverflowMenuVisibility(false)
+                                    setListsModalVisibility(true)
+                                }} 
+                                className="text-button">
                                 <span className={`material-symbols-outlined ${classes["list-icon"]}`}>library_add</span>Add to a List
                             </button>
                         </li>
@@ -115,7 +123,7 @@ export default function OptionsBar({post, type}){
                         </li>
 
                         <li>
-                            <button onClick={() => setModalVisibility(true)} className="negative-button">
+                            <button onClick={() => setdeleteModalVisibility(true)} className="negative-button">
                                 <span className={`material-symbols-outlined ${classes["list-icon"]}`}>delete</span>Delete {type ==="reviews" ? "Review" : "List" }
                             </button>
                         </li>
@@ -125,13 +133,18 @@ export default function OptionsBar({post, type}){
             </OverflowMenu>}
         </div>
         
-        {modalVisibility && <ConfirmationModal 
+        {deleteModalVisibility && <ConfirmationModal 
             title={`Delete ${type ==="reviews" ? "Review" : "List" }`}
             message={`Are you shure you want to delete this ${type ==="reviews" ? "review" : "list" }?`}
             onConfirm={() => deleteMutate({id: post._id, type: type})}
-            onCancel={() => setModalVisibility(false)}
-            onClose={() => setModalVisibility(false)}
+            onCancel={() => setdeleteModalVisibility(false)}
+            onEscape={() => setdeleteModalVisibility(false)}
         />}
+
+        {listsModalVisibility && <Modal onEscape={() => setListsModalVisibility(false)}>
+            <ListList review={post} onClose={() => setListsModalVisibility(false)} />
+        </Modal>}
+
 
     </div>
 }
