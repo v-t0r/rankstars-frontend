@@ -1,6 +1,8 @@
 import classes from "./DetailedListCard.module.css"
 
-export default function DetailedListCard({review}){
-    <p>Infos aqui</p>
-
+export default function DetailedListCard({list}){
+    
+    return <div className={classes["card"]}>
+            <p>{list._id}</p>
+        </div>
 }

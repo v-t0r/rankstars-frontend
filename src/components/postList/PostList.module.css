@@ -1,0 +1,18 @@
+.posts-section {
+    width: 50rem;
+    margin: auto;
+}
+
+.posts-section ul{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    list-style: none;
+}
+
+.posts-section li {
+    padding: 1rem;
+    background-color: var(--secondary-background-color);
+    border-radius: 0.5rem;
+}
