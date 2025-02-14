@@ -34,7 +34,7 @@ export default function ListRoute(){
             
             <div className={classes["title-div"]}>
                 <h1>{list.title}</h1>
-                <h2>a list by <Link>{list.author.username}</Link></h2>
+                <h2>a list by <Link to={`/profile/${list.author._id}`}>{list.author.username}</Link></h2>
             </div>
             
             <div className={classes["reviews-div"]}>

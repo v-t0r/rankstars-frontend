@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom"
+import { Link, useLocation, useParams } from "react-router-dom"
 import { getPost } from "../../services/posts"
 import { useQuery } from "@tanstack/react-query"
 
@@ -9,6 +9,8 @@ import CommentContainer from "../../components/comments/CommentContainer"
  
 export default function ReviewRoute(){
     const {id: reviewId} = useParams()
+
+    const location = useLocation()
 
     const {data, isPending, isError, error} = useQuery({
         queryKey: ["review", `${reviewId}`],
@@ -31,9 +33,9 @@ export default function ReviewRoute(){
 
         content = <>
             <div className={classes["general-container"]}>
-                <Link className={classes["back-link"]} to={`/profile/${review.author._id}/reviews`} >
+                <Link className={classes["back-link"]} to={location.state ? location.state.prevPage : "/"} >
                     <span className={`material-symbols-outlined ${classes["menu-icon"]}`}>arrow_back</span>
-                    all reviews
+                    {location.state ? location.state.linkText : "back"}
                 </Link>
                 <div className={classes["review-div"]}>
                     <DetailedReviewCard review={review} reviewPage={true} />

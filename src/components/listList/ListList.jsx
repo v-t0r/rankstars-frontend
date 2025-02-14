@@ -31,8 +31,8 @@ export default function ListList({review, onClose}){
     })
 
     useEffect(() => {
-        queryClient.invalidateQueries()
-    }, [])
+        queryClient.invalidateQueries(["lists", "user", `${userId}`])
+    }, [userId])
 
     function handleSubmit(event){
         event.preventDefault()

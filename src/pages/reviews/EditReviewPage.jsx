@@ -114,7 +114,6 @@ export default function EditReview(){
     }
 
     let content
-
     if(isPending){
         content = <h1>Fetching review information...</h1>
     }

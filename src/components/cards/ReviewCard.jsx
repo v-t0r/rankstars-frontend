@@ -10,7 +10,7 @@ export default function ReviewCard({review}){
     const {boxColor, borderColor} = getRatingColorClass(review.rating)
 
     return (<>
-        <div onClick={() => navigate(`/review/${review._id}`)} className={`${classes["card"]} ${borderColor}`}>
+        <div  onClick={() => navigate(`/review/${review._id}`, { state: { prevPage: location.pathname, linkText: "back" } } )}  className={`${classes["card"]} ${borderColor}`}>
             <div className={classes["info"]}>
                 <div className={classes["title-container"]}>
                     <h3>{review.title}</h3>
