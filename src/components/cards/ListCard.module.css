@@ -9,6 +9,8 @@
     border-radius: 0.5rem;
     margin: 0px 2px;
     cursor: pointer;
+
+    overflow: hidden;
 }
 
 .card:hover{
