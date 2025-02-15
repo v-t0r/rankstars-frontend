@@ -56,7 +56,7 @@ export async function unfollowUser(userId) {
     return await response.json()
 }
 
-export async function fetchUserReviews(signal, userId, sortBy = {sortBy: 'updatedAt', order: -1}) {
+export async function fetchUserReviews(signal, userId, sortBy = {sortBy: 'createdAt', order: -1}) {
     const token = getAuthToken()
 
     const response = await fetch(`${backendUrl}/users/${userId}/reviews?sortBy=${sortBy.sortBy}&order=${sortBy.order}`, {
