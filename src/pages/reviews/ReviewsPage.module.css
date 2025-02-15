@@ -15,7 +15,7 @@
 .header-section select {
     font-size: large;
     text-align: center;
-    background-color: var(--input-background-color);
+    background-color: var(--secondary-background-color);
     color: white;
     padding: 0.4rem 0.4rem;
     border-radius: 0.5rem;

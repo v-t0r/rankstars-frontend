@@ -8,6 +8,7 @@
 .image-columns {
     display: flex;
     flex-direction: row;
+    width: 14rem;
     flex: 1;
 }
 

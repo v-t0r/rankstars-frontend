@@ -54,6 +54,10 @@
     border-radius: 50%;
 }
 
+.reviews-div {
+    width: 100%;
+}
+
 .reviews-div > ul {
     display: flex;
     flex-direction: column;

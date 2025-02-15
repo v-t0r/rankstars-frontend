@@ -17,8 +17,8 @@ export default function ReviewsPage() {
                     <select id="type" value={JSON.stringify(sortBy)} onChange={(e) => setSortBy(JSON.parse(e.target.value))} >
                         <option value={JSON.stringify({sortBy: 'createdAt', order: -1})}>Newest Posts</option>
                         <option value={JSON.stringify({sortBy: 'createdAt', order: 1})}>Earliest Posts</option>
-                        <option value={JSON.stringify({sortBy: 'rating', order: 1})}>Highest Ratings</option>
-                        <option value={JSON.stringify({sortBy: 'rating', order: -1})}>Lowest Ratings</option>
+                        <option value={JSON.stringify({sortBy: 'rating', order: -1})}>Highest Ratings</option>
+                        <option value={JSON.stringify({sortBy: 'rating', order: 1})}>Lowest Ratings</option>
                     </select>
                 </div>
             </div>

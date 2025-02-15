@@ -32,8 +32,9 @@ export default function DetailedReviewCard({review, reviewPage = false}) {
     return <div className={classes["card"]}>
         <div className={classes["img-and-info"]}>
             <div 
-                onClick={() => navigate(`/review/${review._id}`, { state: { prevPage: location.pathname, linkText: "back" } } )} 
-                className={classes["img-container"]}>
+                onClick={() => navigate(`/review/${review._id}`, { state: { prevPage: location.pathname, linkText: "back" }})} 
+                className={classes["img-container"]}
+            >
                 <img 
                     ref={imageRef} 
                     src={`${imageBackendUrl}/${review.imagesUrls[0]}`} 
