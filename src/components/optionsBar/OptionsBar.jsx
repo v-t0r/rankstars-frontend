@@ -23,9 +23,11 @@ export default function OptionsBar({post, type}){
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const [overflowMenuVisibility, setOverflowMenuVisibility] = useState(false)
-    const [deleteModalVisibility, setdeleteModalVisibility] = useState(false)
-    const [listsModalVisibility, setListsModalVisibility] = useState(false)
+    const [modalsVisibility, setModalsVisibility] = useState({
+        overflowMenu: false, 
+        deleteModal: false, 
+        listsModal: false
+    })
 
     //the post was liked/followed by the logged user?
     let liked
@@ -89,13 +91,13 @@ export default function OptionsBar({post, type}){
         <CommentInput parent={post} type={type} />
         
         <div className={classes["more-options-div"]}>  
-            <button onClick={() => setOverflowMenuVisibility(state => !state)} className={classes["more-options-button"]}>
+            <button onClick={() => setModalsVisibility(prevState => ({...prevState, overflowMenu: true }))} className={classes["more-options-button"]}>
                 <span className={`material-symbols-outlined`}>
                     more_vert
                 </span>
             </button>
 
-            {overflowMenuVisibility && <OverflowMenu right={"0"} top={"25px"} handleCloseMenu={() => setOverflowMenuVisibility(false)}>
+            {modalsVisibility.overflowMenu && <OverflowMenu right={"0"} top={"25px"} handleCloseMenu={() => setModalsVisibility(prevState => ({...prevState, overflowMenu: false }))}>
                 <ul className={classes["overflow-menu-list"]}>
                     
                     {/* Menu options exclusive to reviews */}
@@ -103,8 +105,8 @@ export default function OptionsBar({post, type}){
                         <li>
                             <button 
                                 onClick={() => {
-                                    setOverflowMenuVisibility(false)
-                                    setListsModalVisibility(true)
+                                    setModalsVisibility(prevState => ({...prevState, overflowMenu: false }))
+                                    setModalsVisibility(prevState => ({...prevState, listsModal: true }))
                                 }} 
                                 className="text-button">
                                 <span className={`material-symbols-outlined ${classes["list-icon"]}`}>library_add</span>Add to a List
@@ -123,7 +125,7 @@ export default function OptionsBar({post, type}){
                         </li>
 
                         <li>
-                            <button onClick={() => setdeleteModalVisibility(true)} className="negative-button">
+                            <button onClick={() => setModalsVisibility(prevState => ({...prevState, deleteModal: true}))} className="negative-button">
                                 <span className={`material-symbols-outlined ${classes["list-icon"]}`}>delete</span>Delete {type ==="reviews" ? "Review" : "List" }
                             </button>
                         </li>
@@ -133,16 +135,16 @@ export default function OptionsBar({post, type}){
             </OverflowMenu>}
         </div>
         
-        {deleteModalVisibility && <ConfirmationModal 
+        {modalsVisibility.deleteModal && <ConfirmationModal 
             title={`Delete ${type ==="reviews" ? "Review" : "List" }`}
             message={`Are you shure you want to delete this ${type ==="reviews" ? "review" : "list" }?`}
             onConfirm={() => deleteMutate({id: post._id, type: type})}
-            onCancel={() => setdeleteModalVisibility(false)}
-            onEscape={() => setdeleteModalVisibility(false)}
+            onCancel={() => setModalsVisibility(prevState => ({...prevState, deleteModal: false}))}
+            onEscape={() => setModalsVisibility(prevState => ({...prevState, deleteModal: false}))}
         />}
 
-        {listsModalVisibility && <Modal onEscape={() => setListsModalVisibility(false)}>
-            <ListList review={post} onClose={() => setListsModalVisibility(false)} />
+        {modalsVisibility.listsModal && <Modal onEscape={() => setModalsVisibility(prevState => ({...prevState, listsModal: false}))}>
+            <ListList review={post} onClose={() => setModalsVisibility(prevState => ({...prevState, listsModal: false}))}/>
         </Modal>}
 
 

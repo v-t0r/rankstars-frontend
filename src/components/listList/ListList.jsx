@@ -7,7 +7,7 @@ import { addReviewToList, removeReviewFromList } from "../../services/posts"
 import { queryClient } from "../../services/queryClient"
 import { useEffect } from "react"
 
-export default function ListList({review, onClose}){
+export default function ListList({review, onClose, onNewList=null}){
     const userId = useSelector(state => state.user.user._id)
 
     const {data, isPending, isError} = useQuery({
@@ -90,7 +90,8 @@ export default function ListList({review, onClose}){
         <div className={classes["lists-div"]}>
             <form onSubmit={handleSubmit}>
                 <div className={classes["lists-list"]}>
-                {listsContent}
+                    {onNewList && <p>+ Create New List</p>}
+                    {listsContent}
                 </div>
                 <div className={classes["action-buttons"]}>
                     <button type="button" className="negative-button" onClick={onClose}>cancel</button>
