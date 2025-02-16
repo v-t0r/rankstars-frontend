@@ -1,0 +1,51 @@
+.new-list-form{
+    width: 25rem;
+}
+
+.header-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-div h1 {
+    font-size: x-large;
+}
+
+.header-div button {
+    font-size: larger;
+}
+
+.inputs-div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.label-input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.label-input label {
+    font-size: large
+}
+
+.label-input input {
+    background-color: var(--input-background-color);
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    color: white;
+    font-size: large;
+}
+
+.action-buttons-div {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    justify-content: right;
+}

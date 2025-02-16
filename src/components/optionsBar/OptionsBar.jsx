@@ -17,6 +17,7 @@ import CommentInput from "../comments/CommentInput"
 import ConfirmationModal from "../modal/ConfirmationModal"
 import Modal from "../modal/Modal"
 import ListList from "../listList/ListList"
+import NewListForm from "../newListForm/newListForm"
 
 export default function OptionsBar({post, type}){
     const loggedUserInfo = useSelector(state => state.user.user)
@@ -26,7 +27,8 @@ export default function OptionsBar({post, type}){
     const [modalsVisibility, setModalsVisibility] = useState({
         overflowMenu: false, 
         deleteModal: false, 
-        listsModal: false
+        listsModal: false,
+        newListModal: false
     })
 
     //the post was liked/followed by the logged user?
@@ -74,7 +76,6 @@ export default function OptionsBar({post, type}){
         likeMutate({reviewId: post._id, operation: liked ? "deslike" : "like"})
     }
     
-
     return <div className={classes["options-bar"]}>
             
         {type === "reviews" && 
@@ -143,10 +144,20 @@ export default function OptionsBar({post, type}){
             onEscape={() => setModalsVisibility(prevState => ({...prevState, deleteModal: false}))}
         />}
 
-        {modalsVisibility.listsModal && <Modal onEscape={() => setModalsVisibility(prevState => ({...prevState, listsModal: false}))}>
-            <ListList review={post} onClose={() => setModalsVisibility(prevState => ({...prevState, listsModal: false}))}/>
+        {(modalsVisibility.listsModal || modalsVisibility.newListModal) && <Modal onEscape={() => setModalsVisibility(prevState => ({...prevState, listsModal: false, newListModal: false}))}>
+            {modalsVisibility.listsModal && <ListList 
+                review={post} 
+                onClose={() => setModalsVisibility(prevState => ({...prevState, listsModal: false}))}
+                onNewList={() => {
+                    setModalsVisibility(prevState => ({...prevState, listsModal: false, newListModal: true}))
+                }}
+            />}
+            {modalsVisibility.newListModal && <NewListForm 
+                review={post} 
+                onClose={() => setModalsVisibility(prevState => ({...prevState, newListModal: false}))}
+                onCancel={() => setModalsVisibility(prevState => ({...prevState, newListModal: false, listsModal: true}))}
+            />}
         </Modal>}
-
 
     </div>
 }

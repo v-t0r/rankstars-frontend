@@ -90,7 +90,9 @@ export default function ListList({review, onClose, onNewList=null}){
         <div className={classes["lists-div"]}>
             <form onSubmit={handleSubmit}>
                 <div className={classes["lists-list"]}>
-                    {onNewList && <p>+ Create New List</p>}
+                    {onNewList && <div className={classes["new-list-div"]}>
+                        <button type="button" onClick={onNewList}>+ Create New List</button>
+                    </div>}
                     {listsContent}
                 </div>
                 <div className={classes["action-buttons"]}>

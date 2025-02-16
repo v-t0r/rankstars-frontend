@@ -52,3 +52,24 @@
     justify-content: right;
     gap: 1rem;
 }
+
+.new-list-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+
+.new-list-div button {
+    width: fit-content;
+    font-size: large;
+    background: none;
+    border: none;
+    color: var(--light-gray);
+    cursor: pointer;
+}
+
+.new-list-div button:hover {
+    color: white;
+}

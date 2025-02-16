@@ -128,6 +128,29 @@ export async function likeReview({reviewId, operation}){
     return await response.json()
 }
 
+
+export async function createList(listData){
+    const token = getAuthToken()
+    
+    const response = await fetch(`${backendUrl}/lists`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+        },
+        body: listData
+    })
+
+    if(!response.ok){
+        const error = new Error("Fail to create a new list.")
+        error.status = response.status
+        error.info = await response.json()
+        throw error
+    }
+
+    return response.json()
+}
+
+
 export async function addReviewToList({reviewId, listId}){
     addOrRemoverReviewFromList({reviewId, listId, operation: "add"})
 }
