@@ -17,6 +17,8 @@ export default function EditListForm({list, onClose}){
         reviews: list.reviews
     })
 
+    const [validationErrors, setValidationErrors] = useState([])
+
     const {mutate: patchListMutate} = useMutation({
         mutationFn: patchPost,
         onSuccess: () => {
@@ -27,6 +29,16 @@ export default function EditListForm({list, onClose}){
 
     function handleSubmit(e){
         e.preventDefault()
+
+        let errors = []
+        if(listForm.title.trim().length === 0){
+            errors = [...errors, ["title", "Title can't be empty!"]]
+        }
+
+        if(errors.length !== 0){
+            setValidationErrors(errors)
+            return
+        }
 
         const formData = new FormData()
         formData.append("title", listForm.title)
@@ -80,6 +92,7 @@ export default function EditListForm({list, onClose}){
             <div className={classes["label-input-div"]}>
                 <label htmlFor="title">Title</label>
                 <input id="title" value={listForm.title}  onChange={(e) => setListForm(prevState => ({...prevState, title: e.target.value}))} />
+                {validationErrors.map((error, index) => error[0] === "title" && <p className="error-text" key={index}>{error[1]}</p>)}
             </div>
 
             <div className={classes["label-input-div"]}>
@@ -102,6 +115,7 @@ export default function EditListForm({list, onClose}){
                             })}
 
                         </SortableContext>
+
                     </DndContext>
                 </div>
             </div>
@@ -113,5 +127,4 @@ export default function EditListForm({list, onClose}){
         </form>
 
     </>
-
 }
