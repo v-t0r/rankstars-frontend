@@ -1,0 +1,32 @@
+.grabber {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    gap: 4px;
+    padding: 0.2rem 0.4rem;
+    margin: 0 0.3rem 0 0;  
+    touch-action: none;
+
+}
+
+.grabber:hover {
+    .dot{
+        background-color: gray;
+    }
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+}
+
+.dot {
+    width: 3px;
+    height: 3px;
+    background-color: rgba(128, 128, 128, 0.607);
+    border-radius: 0.05rem;
+}
+

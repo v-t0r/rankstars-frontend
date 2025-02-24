@@ -18,6 +18,7 @@ import ConfirmationModal from "../modal/ConfirmationModal"
 import Modal from "../modal/Modal"
 import ListList from "../listList/ListList"
 import NewListForm from "../newListForm/newListForm"
+import EditListForm from "../editListForm.jsx/EditListForm"
 
 export default function OptionsBar({post, type}){
     const loggedUserInfo = useSelector(state => state.user.user)
@@ -28,7 +29,8 @@ export default function OptionsBar({post, type}){
         overflowMenu: false, 
         deleteModal: false, 
         listsModal: false,
-        newListModal: false
+        newListModal: false,
+        editListModal: false
     })
 
     //the post was liked/followed by the logged user?
@@ -75,6 +77,15 @@ export default function OptionsBar({post, type}){
     function handleLike(){
         likeMutate({reviewId: post._id, operation: liked ? "deslike" : "like"})
     }
+
+    function handleEditPost() {
+        if(type === "reviews"){
+            navigate("edit-review")
+        }
+        if(type === "lists"){
+            setModalsVisibility(prevState=>({...prevState, editListModal: true, overflowMenu: false}))
+        }
+    }
     
     return <div className={classes["options-bar"]}>
             
@@ -120,7 +131,7 @@ export default function OptionsBar({post, type}){
                         <span className={classes["divider-line"]}></span>
                         
                         <li>
-                            <button className="text-button" onClick={() => navigate(type ==="reviews" ? "edit-review" : "edit-list" )}>
+                            <button className="text-button" onClick={handleEditPost}>
                                 <span className={`material-symbols-outlined ${classes["list-icon"]}`}>edit_square</span>Edit {type ==="reviews" ? "Review" : "List" }
                             </button>
                         </li>
@@ -157,6 +168,13 @@ export default function OptionsBar({post, type}){
                 onClose={() => setModalsVisibility(prevState => ({...prevState, newListModal: false}))}
                 onCancel={() => setModalsVisibility(prevState => ({...prevState, newListModal: false, listsModal: true}))}
             />}
+        </Modal>}
+
+        {modalsVisibility.editListModal && <Modal >
+            <EditListForm 
+                list={post}
+                onClose={() => setModalsVisibility(prevState => ({...prevState, editListModal: false}))} 
+            />
         </Modal>}
 
     </div>

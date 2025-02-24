@@ -10,6 +10,7 @@ import OptionsBar from "../../components/optionsBar/OptionsBar.jsx"
 import CommentContainer from "../../components/comments/CommentContainer.jsx"
 
 
+
 export default function ListRoute(){
     const {id: listId} = useParams()
 
@@ -57,5 +58,6 @@ export default function ListRoute(){
     return <>
         {content}
         
+
     </>
 }

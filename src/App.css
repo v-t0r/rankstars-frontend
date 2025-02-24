@@ -7,7 +7,6 @@
 }
 
 :root {
-
     /* Colors */
     --background-color: rgb(26, 47, 65);
     --secondary-background-color: rgb(33, 57, 78);
@@ -34,7 +33,6 @@
     --header-min-width: 900px;
 
     --header-height: 5rem;
-
 }
 
 body {

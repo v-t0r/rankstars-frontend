@@ -1,0 +1,18 @@
+.item-card{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.grabber-and-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.remove-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,61 @@
+.form-div {
+    width: 30rem;
+}
+
+.header-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-div h1 {
+    font-size: x-large;
+}
+
+.header-div button {
+    font-size: larger;
+}
+
+.label-input-div{
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.label-input-div label {
+    font-size: medium;
+    text-transform: uppercase;
+}
+
+.label-input-div input{
+    font-size: larger;
+    color: white;
+    background-color: var(--background-color);
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+}
+
+.reviews-div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;   
+    background-color: var(--background-color);
+    padding: 1rem; 
+    border-radius: 0.5rem;
+
+    min-height: 16rem;
+    max-height: 22rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-color: var(--input-background-color) var(--background-color);
+}
+
+.action-buttons-div {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    justify-content: right;
+}
