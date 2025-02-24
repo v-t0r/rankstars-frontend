@@ -1,8 +1,11 @@
 import { useMutation } from "@tanstack/react-query"
 import classes from "./NewListForm.module.css"
 import { createList, addReviewToList } from "../../services/posts"
+import { useState } from "react"
 
 export default function NewListForm({review, onClose, onCancel}){
+
+    const [validationErrors, setValidationErrors] = useState([])
 
     const { mutate: newListMutate } = useMutation({
         mutationFn: createList,
@@ -18,6 +21,19 @@ export default function NewListForm({review, onClose, onCancel}){
         e.preventDefault()
 
         const formData = new FormData(e.target)
+        
+        const data = Object.fromEntries(formData)
+        let errors = []
+        
+        if(data.title.trim().length === 0){
+            errors = [...errors, ["title", "Title can't be empty!"]]
+        }
+        
+        if(errors.length !== 0){
+            setValidationErrors(errors)
+            return 
+        }
+        
         newListMutate(formData)
     }
 
@@ -28,13 +44,14 @@ export default function NewListForm({review, onClose, onCancel}){
         </div>
         <div className={classes["inputs-div"]}>
             <div className={classes["label-input"]}>
-                <label htmlFor="title" hidden>Title</label>
-                <input name="title" id="title" placeholder="Title" />
+                <label htmlFor="title" >Title</label>
+                <input name="title" id="title" placeholder="(you must choose a title)" />
+                {validationErrors.map((error, index) => error[0] === "title" && <p className="error-text" key={index}>{error[1]}</p>)}
             </div>
 
             <div className={classes["label-input"]}>
-                <label htmlFor="description" hidden>Description</label>
-                <input name="description" id="description" placeholder="Description"/>
+                <label htmlFor="description">Description</label>
+                <input name="description" id="description" placeholder="(this is optional)"/>
             </div>
         </div>
         

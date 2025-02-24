@@ -30,11 +30,13 @@
 }
 
 .label-input label {
-    font-size: large
+    font-size:medium;
+
+    color: var(--light-gray);
 }
 
 .label-input input {
-    background-color: var(--input-background-color);
+    background-color: var(--background-color);
     border: none;
     padding: 0.5rem;
     border-radius: 0.3rem;
