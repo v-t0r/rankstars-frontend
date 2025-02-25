@@ -23,10 +23,15 @@ export async function fetchReviewInfo({signal, reviewId}) {
     return review
 }
 
-export async function getPost({signal, postId, type}) {
+export async function getPost({signal, postId, type, sortBy = {sortBy: "userOrder", order: null}}) {
     const token = getAuthToken()
 
-    const response = await fetch(`${backendUrl}/${type}/${postId}`, {
+    let sortQuery = ""
+    if(type === "lists" && sortBy.sortBy !=="userOrder"){
+        sortQuery = `?sortBy=${sortBy.sortBy}&order=${sortBy.order}`
+    }
+
+    const response = await fetch(`${backendUrl}/${type}/${postId}${sortQuery}`, {
         signal: signal,
         method: "GET",
         headers: {

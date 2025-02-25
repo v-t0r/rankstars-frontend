@@ -7,6 +7,15 @@
 
 }
 
+.header-div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+}
+
 .title-div {
     display: flex;
     flex-direction: column;
@@ -52,6 +61,22 @@
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
+}
+
+.select-div select{
+    font-size: medium;
+    text-align: center;
+    background-color: var(--secondary-background-color);
+    color: white;
+    padding: 0.4rem 0.4rem;
+    border-radius: 0.5rem;
+    min-width: 1rem;
+    border: none;
+}
+
+.select-div select:focus {
+    border: none;
+    outline: none;
 }
 
 .reviews-div {
