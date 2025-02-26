@@ -16,6 +16,7 @@ import { followUser, unfollowUser } from "../../services/users"
 import CardContainer from "../../components/cards/CardContainer"
 import Modal from "../../components/modal/Modal"
 import UserList from "../../components/userList/UserList"
+import { AnimatePresence } from "framer-motion"
 
 export default function ProfileRoute(){
     const {id} = useParams()
@@ -146,14 +147,16 @@ export default function ProfileRoute(){
                 </div>
             </section>
 
-            {followersModalOpen && <Modal onClose={() => handleModal("followers")}>
-                    <UserList username={data.user.username} profileUserId={data.user._id} type="followers" users={followers} onClose={() => handleModal("followers")}/>
-                </Modal>
-            }
-            {followingModalOpen && <Modal onClose={() => handleModal("following")}>
-                    <UserList username={data.user.username} profileUserId={data.user._id} type="following" users={following} onClose={() => handleModal("following")}/>
-                </Modal>
-            }
+            <AnimatePresence>
+                {followersModalOpen && <Modal onClose={() => handleModal("followers")}>
+                        <UserList username={data.user.username} profileUserId={data.user._id} type="followers" users={followers} onClose={() => handleModal("followers")}/>
+                    </Modal>
+                }
+                {followingModalOpen && <Modal onClose={() => handleModal("following")}>
+                        <UserList username={data.user.username} profileUserId={data.user._id} type="following" users={following} onClose={() => handleModal("following")}/>
+                    </Modal>
+                }
+            </AnimatePresence>
             
         </>
     }
