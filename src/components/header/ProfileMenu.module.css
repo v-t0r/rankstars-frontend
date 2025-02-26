@@ -19,13 +19,12 @@
     align-items: center;
 
     background-color: var(--secondary-background-color);
-    
     top: var(--header-height);
     right: 0;
     
     height: calc(100vh - var(--header-height));
     width: fit-content;
-    z-index: 1000;
+    
 
     padding: 1rem 0;
     
@@ -79,6 +78,8 @@
     height: 100vh;
     top: 0px;
     left: 0px;
+    overflow: hidden;
+
     z-index: 999;
 }
 

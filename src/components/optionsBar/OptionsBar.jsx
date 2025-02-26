@@ -19,6 +19,7 @@ import Modal from "../modal/Modal"
 import ListList from "../listList/ListList"
 import NewListForm from "../newListForm/newListForm"
 import EditListForm from "../editListForm.jsx/EditListForm"
+import { AnimatePresence } from "framer-motion"
 
 export default function OptionsBar({post, type}){
     const loggedUserInfo = useSelector(state => state.user.user)
@@ -147,35 +148,39 @@ export default function OptionsBar({post, type}){
             </OverflowMenu>}
         </div>
         
-        {modalsVisibility.deleteModal && <ConfirmationModal 
-            title={`Delete ${type ==="reviews" ? "Review" : "List" }`}
-            message={`Are you shure you want to delete this ${type ==="reviews" ? "review" : "list" }?`}
-            onConfirm={() => deleteMutate({id: post._id, type: type})}
-            onCancel={() => setModalsVisibility(prevState => ({...prevState, deleteModal: false}))}
-            onEscape={() => setModalsVisibility(prevState => ({...prevState, deleteModal: false}))}
-        />}
+        <AnimatePresence>
 
-        {(modalsVisibility.listsModal || modalsVisibility.newListModal) && <Modal onEscape={() => setModalsVisibility(prevState => ({...prevState, listsModal: false, newListModal: false}))}>
-            {modalsVisibility.listsModal && <ListList 
-                review={post} 
-                onClose={() => setModalsVisibility(prevState => ({...prevState, listsModal: false}))}
-                onNewList={() => {
-                    setModalsVisibility(prevState => ({...prevState, listsModal: false, newListModal: true}))
-                }}
+            {modalsVisibility.deleteModal && <ConfirmationModal 
+                title={`Delete ${type ==="reviews" ? "Review" : "List" }`}
+                message={`Are you shure you want to delete this ${type ==="reviews" ? "review" : "list" }?`}
+                onConfirm={() => deleteMutate({id: post._id, type: type})}
+                onCancel={() => setModalsVisibility(prevState => ({...prevState, deleteModal: false}))}
+                onEscape={() => setModalsVisibility(prevState => ({...prevState, deleteModal: false}))}
             />}
-            {modalsVisibility.newListModal && <NewListForm 
-                review={post} 
-                onClose={() => setModalsVisibility(prevState => ({...prevState, newListModal: false}))}
-                onCancel={() => setModalsVisibility(prevState => ({...prevState, newListModal: false, listsModal: true}))}
-            />}
-        </Modal>}
 
-        {modalsVisibility.editListModal && <Modal >
-            <EditListForm 
-                list={post}
-                onClose={() => setModalsVisibility(prevState => ({...prevState, editListModal: false}))} 
-            />
-        </Modal>}
+            {(modalsVisibility.listsModal || modalsVisibility.newListModal) && <Modal onEscape={() => setModalsVisibility(prevState => ({...prevState, listsModal: false, newListModal: false}))}>
+                {modalsVisibility.listsModal && <ListList 
+                    review={post} 
+                    onClose={() => setModalsVisibility(prevState => ({...prevState, listsModal: false}))}
+                    onNewList={() => {
+                        setModalsVisibility(prevState => ({...prevState, listsModal: false, newListModal: true}))
+                    }}
+                />}
+                {modalsVisibility.newListModal && <NewListForm 
+                    review={post} 
+                    onClose={() => setModalsVisibility(prevState => ({...prevState, newListModal: false}))}
+                    onCancel={() => setModalsVisibility(prevState => ({...prevState, newListModal: false, listsModal: true}))}
+                />}
+            </Modal>}
+
+            {modalsVisibility.editListModal && <Modal >
+                <EditListForm 
+                    list={post}
+                    onClose={() => setModalsVisibility(prevState => ({...prevState, editListModal: false}))} 
+                />
+            </Modal>}
+
+        </AnimatePresence>
 
     </div>
 }

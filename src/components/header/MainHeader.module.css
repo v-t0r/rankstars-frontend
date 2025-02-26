@@ -10,6 +10,7 @@
     width: var(--header-width);
     min-width: var(--header-min-width);
     height: var(--header-height);
+
 }
 
 .header-logo{

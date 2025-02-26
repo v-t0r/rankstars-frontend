@@ -2,6 +2,8 @@ import classes from "./Modal.module.css"
 import { useRef, useEffect } from "react"
 import { createPortal } from "react-dom"
 
+import { motion } from "framer-motion"
+
 export default function Modal({ children, onEscape }){
     const dialog = useRef()
 
@@ -17,9 +19,16 @@ export default function Modal({ children, onEscape }){
     }, [])
 
     return createPortal(
-        <dialog ref={dialog} className={classes["modal"]} onCancel={onEscape}>
+        <motion.dialog 
+            ref={dialog} 
+            className={classes["modal"]}
+            onCancel={onEscape}
+            initial={{opacity: 0, y: 30}}
+            animate={{opacity: 1, y: 0}}
+            exit={{opacity: 0, y: -30}}
+        >
             {children}
-        </dialog>,
+        </motion.dialog>,
         document.getElementById("modal")
     )
 }

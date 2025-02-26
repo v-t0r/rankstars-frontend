@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import ConfirmationModal from "../../components/modal/ConfirmationModal";
 import { getUserId } from "../../services/auth";
 import ImagePicker from "../../components/imagePicker/ImagePicker";
+import { AnimatePresence } from "framer-motion";
 
 export default function EditReview(){
     const [validationErrors, setValidationErrors] = useState({})
@@ -175,12 +176,14 @@ export default function EditReview(){
     return <>
         {content}
 
-        {modal && <ConfirmationModal
-            onConfirm={() => navigate(reviewId ? `/review/${reviewId}` : "/")}
-            onCancel={() => setModal(false)}
-            onClose={() => setModal(false)}
-            title={"Cancel Review"}
-            message={"Are you shure you want cancel this review?"}
-        />}
+        <AnimatePresence>
+            {modal && <ConfirmationModal
+                onConfirm={() => navigate(reviewId ? `/review/${reviewId}` : "/")}
+                onCancel={() => setModal(false)}
+                onClose={() => setModal(false)}
+                title={"Cancel Review"}
+                message={"Are you shure you want cancel this review?"}
+            />}
+        </AnimatePresence>
     </>
 }
