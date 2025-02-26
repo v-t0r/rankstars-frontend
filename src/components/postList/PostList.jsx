@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query"
 import { fetchUserLists, fetchUserReviews } from "../../services/users"
 import DetailedReviewCard from "../cards/DetailedReviewCard"
 import DetailedListCard from "../cards/DetailedListCard"
+import LoaderDots from "../loaderDots/LoaderDots"
 
 export default function PostList({sortBy, type = "reviews"}) {
     const {id} = useParams()
@@ -18,7 +19,7 @@ export default function PostList({sortBy, type = "reviews"}) {
     let content
     if(isPending) {
         content = <>
-            <p>Loading {type}...</p>
+            <LoaderDots />
         </>
     }
      

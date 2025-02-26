@@ -7,6 +7,7 @@ import ReviewCard from "./ReviewCard"
 import { Link } from "react-router-dom"
 import { fetchUserLists } from "../../services/users"
 import ListCard from "./ListCard"
+import LoaderDots from "../loaderDots/LoaderDots"
 
 export default function CardContainer({userId, type}) {
 
@@ -20,9 +21,7 @@ export default function CardContainer({userId, type}) {
 
     let content
     if(isPending){
-        content = <>
-            <p>Loading content...</p>
-        </>
+        content = <LoaderDots />
     }
 
     if(isError){
@@ -55,7 +54,7 @@ export default function CardContainer({userId, type}) {
             
         </div>
         <span></span>
-       
+
         {content}
     </div>
 

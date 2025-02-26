@@ -6,6 +6,7 @@ import CommentCard from "./CommentCard"
 import { useDispatch, useSelector } from "react-redux"
 import { commentsAction } from "../../store"
 import { useEffect } from "react"
+import LoaderDots from "../loaderDots/LoaderDots"
 
 export default function CommentContainer({postId, type}){
     const dispatch = useDispatch()
@@ -20,7 +21,7 @@ export default function CommentContainer({postId, type}){
     if(isPending) {
         content = <>
             <h1>Comments</h1>
-            <p>Loading comments...</p>
+            <LoaderDots />
         </>
     }
 

@@ -6,6 +6,7 @@ import CheckBoxInput from "../checkBoxInput.jsx/CheckBoxInput"
 import { addReviewToList, removeReviewFromList } from "../../services/posts"
 import { queryClient } from "../../services/queryClient"
 import { useEffect } from "react"
+import LoaderDots from "../loaderDots/LoaderDots"
 
 export default function ListList({review, onClose, onNewList=null}){
     const userId = useSelector(state => state.user.user._id)
@@ -54,7 +55,7 @@ export default function ListList({review, onClose, onNewList=null}){
 
     let listsContent
     if(isPending){
-        listsContent = <p>Loading your lists...</p>
+        listsContent = <LoaderDots />
     }
     if(isError){
         listsContent = <p>Error while loading your lists. Please, try again later!</p>

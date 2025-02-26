@@ -17,6 +17,7 @@ import CardContainer from "../../components/cards/CardContainer"
 import Modal from "../../components/modal/Modal"
 import UserList from "../../components/userList/UserList"
 import { AnimatePresence } from "framer-motion"
+import LoaderDots from "../../components/loaderDots/LoaderDots"
 
 export default function ProfileRoute(){
     const {id} = useParams()
@@ -97,7 +98,7 @@ export default function ProfileRoute(){
 
     let content
     if(isPending){
-        content = <p>Loading...</p>
+        content = <LoaderDots/>
     }
     if(isError){
         content = <>

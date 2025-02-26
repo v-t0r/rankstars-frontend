@@ -6,6 +6,7 @@ import classes from "./ReviewPage.module.css"
 import OptionsBar from "../../components/optionsBar/OptionsBar"
 import DetailedReviewCard from "../../components/cards/DetailedReviewCard"
 import CommentContainer from "../../components/comments/CommentContainer"
+import LoaderDots from "../../components/loaderDots/LoaderDots"
  
 export default function ReviewRoute(){
     const {id: reviewId} = useParams()
@@ -21,7 +22,7 @@ export default function ReviewRoute(){
     let content
 
     if(isPending) {
-        content = <p>Loading review info...</p>
+        content = <LoaderDots />
     }
 
     if(isError) {

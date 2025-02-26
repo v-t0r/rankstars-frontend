@@ -10,6 +10,7 @@ import { getPost } from "../../services/posts.js"
 import DetailedReviewCard from "../../components/cards/DetailedReviewCard.jsx"
 import OptionsBar from "../../components/optionsBar/OptionsBar.jsx"
 import CommentContainer from "../../components/comments/CommentContainer.jsx"
+import LoaderDots from "../../components/loaderDots/LoaderDots.jsx"
 
 export default function ListRoute(){
     const {id: listId} = useParams()
@@ -23,7 +24,7 @@ export default function ListRoute(){
 
     let content
     if(isPending){
-        content = <p>Loading list...</p>
+        content = <LoaderDots />
     }
 
     if(isError){

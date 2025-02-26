@@ -11,6 +11,7 @@ import ConfirmationModal from "../../components/modal/ConfirmationModal";
 import { getUserId } from "../../services/auth";
 import ImagePicker from "../../components/imagePicker/ImagePicker";
 import { AnimatePresence } from "framer-motion";
+import LoaderDots from "../../components/loaderDots/LoaderDots";
 
 export default function EditReview(){
     const [validationErrors, setValidationErrors] = useState({})
@@ -116,7 +117,7 @@ export default function EditReview(){
 
     let content
     if(isPending){
-        content = <h1>Fetching review information...</h1>
+        content = <LoaderDots />
     }
 
     if(isError){
