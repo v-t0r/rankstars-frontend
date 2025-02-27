@@ -1,0 +1,23 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    /* background-color: red; */
+    margin-top: 1rem !important;
+    width: fit-content;
+    margin: auto;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    gap: 1rem;   
+}
+
+.card .message-div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.card h1 {
+    font-family: "Inknut Antiqua";
+    line-height: 1rem;
+    font-size: x-large;
+}

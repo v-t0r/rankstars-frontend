@@ -11,6 +11,7 @@ import DetailedReviewCard from "../../components/cards/DetailedReviewCard.jsx"
 import OptionsBar from "../../components/optionsBar/OptionsBar.jsx"
 import CommentContainer from "../../components/comments/CommentContainer.jsx"
 import LoaderDots from "../../components/loaderDots/LoaderDots.jsx"
+import ErrorCard from "../../components/errorCard/ErrorCard.jsx"
 
 export default function ListRoute(){
     const {id: listId} = useParams()
@@ -28,7 +29,7 @@ export default function ListRoute(){
     }
 
     if(isError){
-        content = <p>Error while loading this list.</p>
+        content = <ErrorCard />
     }
 
     if(data){

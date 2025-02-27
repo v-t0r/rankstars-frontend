@@ -18,6 +18,7 @@ import Modal from "../../components/modal/Modal"
 import UserList from "../../components/userList/UserList"
 import { AnimatePresence } from "framer-motion"
 import LoaderDots from "../../components/loaderDots/LoaderDots"
+import ErrorCard from "../../components/errorCard/ErrorCard"
 
 export default function ProfileRoute(){
     const {id} = useParams()
@@ -102,8 +103,11 @@ export default function ProfileRoute(){
     }
     if(isError){
         content = <>
-            <p>Something went wrong...</p>
-            <p>{error.message}</p>
+            {error.status === 404 ? 
+                <ErrorCard title="User not exist!" message={<p>Are you shure this is the address you are looking for?</p>} />
+                :
+                <ErrorCard />
+            }
         </>
     }
     if(data){

@@ -8,6 +8,7 @@ import { Link } from "react-router-dom"
 import { fetchUserLists } from "../../services/users"
 import ListCard from "./ListCard"
 import LoaderDots from "../loaderDots/LoaderDots"
+import ErrorCard from "../errorCard/ErrorCard"
 
 export default function CardContainer({userId, type}) {
 
@@ -25,9 +26,7 @@ export default function CardContainer({userId, type}) {
     }
 
     if(isError){
-        content = <>
-            <p>Error while fetching user content...</p>
-        </>
+        content = <ErrorCard title="Fail to fetch this info." message={<p>Try again later!</p>} />
     }
 
     if(data){

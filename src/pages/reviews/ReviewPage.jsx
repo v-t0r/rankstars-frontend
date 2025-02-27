@@ -7,13 +7,14 @@ import OptionsBar from "../../components/optionsBar/OptionsBar"
 import DetailedReviewCard from "../../components/cards/DetailedReviewCard"
 import CommentContainer from "../../components/comments/CommentContainer"
 import LoaderDots from "../../components/loaderDots/LoaderDots"
+import ErrorCard from "../../components/errorCard/ErrorCard"
  
 export default function ReviewRoute(){
     const {id: reviewId} = useParams()
 
     const location = useLocation()
 
-    const {data, isPending, isError, error} = useQuery({
+    const {data, isPending, isError} = useQuery({
         queryKey: ["review", `${reviewId}`],
         queryFn: ({signal}) => getPost({postId: reviewId, type: "reviews", signal}),
         staleTime: 0
@@ -26,7 +27,7 @@ export default function ReviewRoute(){
     }
 
     if(isError) {
-        content = <p>{error.message}</p>
+        content = <ErrorCard />
     }
 
     if(data) {

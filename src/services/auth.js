@@ -39,19 +39,30 @@ export async function checkAuthLoader(){
     }
 
     const userId = getUserId()
-    const response = await fetch(`${backendUrl}/users/${userId}`)
 
-    if(!response.ok){
-        const error = new Error("Could not fetch the user info.")
-        error.status = response.status
-        error.info = await response.json()
+    try{
+
+        const response = await fetch(`${backendUrl}/users/${userId}`)
+
+        if(!response.ok){
+            const error = new Error("Could not fetch the user info.")
+            error.status = response.status
+            error.info = await response.json()
+            throw error
+        }
+
+        const userInfo = await response.json()
+        store.dispatch(userActions.updateUserInfo(userInfo))
+        return null
+
+    }catch(error){
+        if(!error.status){
+            error.status = 500
+        }
         throw error
     }
 
-    const userInfo = await response.json()
-    store.dispatch(userActions.updateUserInfo(userInfo))
-
-    return null
+    
 }
 
 export function checkNotAuthLoader(){ //you can only access the login/signup page if you are not logged
