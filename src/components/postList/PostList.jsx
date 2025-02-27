@@ -13,7 +13,7 @@ export default function PostList({sortBy, type = "reviews"}) {
     
     const { data, isPending, isError } = useQuery({
         queryKey: [type, "user", `${id}`, `${sortBy.sortBy}`, `${sortBy.order}`],
-        queryFn: ({signal}) => type === "reviews" ? fetchUserReviews(signal, id, sortBy) : fetchUserLists(signal, id)
+        queryFn: ({signal}) => type === "reviews" ? fetchUserReviews(signal, id, sortBy) : fetchUserLists(signal, id, sortBy)
     })
 
     let content

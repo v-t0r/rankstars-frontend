@@ -78,10 +78,10 @@ export async function fetchUserReviews(signal, userId, sortBy = {sortBy: 'create
     return reviews
 }
 
-export async function fetchUserLists(signal, userId) {
+export async function fetchUserLists(signal, userId, sortBy = {sortBy: 'createdAt', order: -1}) {
     const token = getAuthToken()
 
-    const response = await fetch (`${backendUrl}/users/${userId}/lists`, {
+    const response = await fetch (`${backendUrl}/users/${userId}/lists?sortBy=${sortBy.sortBy}&order=${sortBy.order}`, {
         signal: signal,
         method: "GET",
         headers: {
