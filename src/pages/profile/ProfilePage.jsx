@@ -20,7 +20,7 @@ import { AnimatePresence } from "framer-motion"
 import LoaderDots from "../../components/loaderDots/LoaderDots"
 import ErrorCard from "../../components/errorCard/ErrorCard"
 
-export default function ProfileRoute(){
+export default function ProfilePage(){
     const {id} = useParams()
     const loggedUserInfo = useSelector(state => state.user.user)
 

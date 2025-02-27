@@ -13,7 +13,7 @@ import ImagePicker from "../../components/imagePicker/ImagePicker";
 import { AnimatePresence } from "framer-motion";
 import LoaderDots from "../../components/loaderDots/LoaderDots";
 
-export default function EditReview(){
+export default function EditReviewPage(){
     const [validationErrors, setValidationErrors] = useState({})
     const [modal, setModal] = useState(false) //false is closed, true is opened
 

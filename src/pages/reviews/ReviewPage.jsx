@@ -9,7 +9,7 @@ import CommentContainer from "../../components/comments/CommentContainer"
 import LoaderDots from "../../components/loaderDots/LoaderDots"
 import ErrorCard from "../../components/errorCard/ErrorCard"
  
-export default function ReviewRoute(){
+export default function ReviewPage(){
     const {id: reviewId} = useParams()
 
     const location = useLocation()

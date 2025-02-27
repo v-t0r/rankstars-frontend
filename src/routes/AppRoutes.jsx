@@ -3,36 +3,36 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import {checkAuthLoader, checkNotAuthLoader, tokenLoader} from "../services/auth.js"
 
 import RootLayout from '../pages/layouts/RootLayout.jsx'
-import LoginRoute, { action as loginAction} from '../pages/login/LoginPage.jsx'
-import SignupRoute, {action as signupAction} from "../pages/login/SignupPage.jsx"
+import LoginPage, { action as loginAction} from '../pages/login/LoginPage.jsx'
+import SignupPage, {action as signupAction} from "../pages/login/SignupPage.jsx"
 import {action as logoutAction} from "../pages/login/LogoutPage.jsx"
-import FeedPage from '../pages/homePage/FeedPage.jsx'
-import ProfileRoute from '../pages/profile/ProfilePage.jsx'
-import ReviewRoute from '../pages/reviews/ReviewPage.jsx'
+import HomePage from '../pages/homePage/HomePage.jsx'
+import ProfilePage from '../pages/profile/ProfilePage.jsx'
+import ReviewPage from '../pages/reviews/ReviewPage.jsx'
 import ReviewsPage from "../pages/reviews/ReviewsPage.jsx"
-import EditReview from "../pages/reviews/EditReviewPage.jsx"
-import ListRoute from '../pages/lists/ListPage.jsx'
+import EditReviewPage from "../pages/reviews/EditReviewPage.jsx"
+import ListPage from '../pages/lists/ListPage.jsx'
 
-import ErrorRoute from '../pages/errors/ErrorPage.jsx'
+import ErrorPage from '../pages/errors/ErrorPage.jsx'
 import ListsPage from "../pages/lists/ListsPage.jsx"
 
 const router = createBrowserRouter([
-    { path : "/", element: <RootLayout />, id: "root", errorElement: <ErrorRoute />, loader: tokenLoader, children: [
+    { path : "/", element: <RootLayout />, id: "root", errorElement: <ErrorPage />, loader: tokenLoader, children: [
       {path: "/", loader: checkAuthLoader, children: [
-        {path: "/", element: <FeedPage />},
-        {path: "profile/:id", element: <ProfileRoute />},
+        {path: "/", element: <HomePage />},
+        {path: "profile/:id", element: <ProfilePage />},
         {path: "profile/:id/reviews", element: <ReviewsPage /> },
         {path: "profile/:id/lists", element: <ListsPage />},
-        {path: "/review/:id", element: <ReviewRoute />},
-        {path: "/review/new-review", element: <EditReview />},
-        {path: "/review/:id/edit-review", element: <EditReview />},
-        {path: "/list/:id", element: <ListRoute />},
-        {path: "/profile", element: <ProfileRoute />},
+        {path: "/review/:id", element: <ReviewPage />},
+        {path: "/review/new-review", element: <EditReviewPage />},
+        {path: "/review/:id/edit-review", element: <EditReviewPage />},
+        {path: "/list/:id", element: <ListPage />},
+        {path: "/profile", element: <ProfilePage />},
         {path: "/logout", action: logoutAction }
       ]},
       {path: "/", loader: checkNotAuthLoader, children: [
-        {path: "/login", element: <LoginRoute />, action: loginAction },
-        {path: "/signup", element: <SignupRoute />, action: signupAction },
+        {path: "/login", element: <LoginPage />, action: loginAction },
+        {path: "/signup", element: <SignupPage />, action: signupAction },
       ]},
     ]}
 ])

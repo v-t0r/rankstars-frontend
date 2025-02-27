@@ -13,7 +13,7 @@ import CommentContainer from "../../components/comments/CommentContainer.jsx"
 import LoaderDots from "../../components/loaderDots/LoaderDots.jsx"
 import ErrorCard from "../../components/errorCard/ErrorCard.jsx"
 
-export default function ListRoute(){
+export default function ListPage(){
     const {id: listId} = useParams()
 
     const [sortBy, setSortBy] = useState({sortBy: 'userOrder', order: null})

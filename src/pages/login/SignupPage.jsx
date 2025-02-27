@@ -2,7 +2,7 @@ import { backendUrl } from "../../utils/constants"
 import classes from "./LoginPage.module.css"
 import { Form, Link, redirect, useActionData, useNavigation } from "react-router-dom"
 
-export default function LoginRoute(){
+export default function SignupPage(){
 
     const data = useActionData() //para obter o retorno do action
     const navigation  = useNavigation() //para obter o estado do action 
