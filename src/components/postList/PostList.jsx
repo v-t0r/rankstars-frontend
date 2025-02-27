@@ -4,8 +4,8 @@ import { useParams } from "react-router-dom"
 
 import { useQuery } from "@tanstack/react-query"
 import { fetchUserLists, fetchUserReviews } from "../../services/users"
-import DetailedReviewCard from "../cards/DetailedReviewCard"
-import DetailedListCard from "../cards/DetailedListCard"
+import DetailedReviewCard from "../cards/reviewCard/DetailedReviewCard"
+import DetailedListCard from "../cards/listCard/DetailedListCard"
 import LoaderDots from "../loaderDots/LoaderDots"
 
 export default function PostList({sortBy, type = "reviews"}) {

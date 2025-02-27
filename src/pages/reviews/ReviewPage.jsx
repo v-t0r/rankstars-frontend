@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query"
 
 import classes from "./ReviewPage.module.css"
 import OptionsBar from "../../components/optionsBar/OptionsBar"
-import DetailedReviewCard from "../../components/cards/DetailedReviewCard"
+import DetailedReviewCard from "../../components/cards/reviewCard/DetailedReviewCard"
 import CommentContainer from "../../components/comments/CommentContainer"
 import LoaderDots from "../../components/loaderDots/LoaderDots"
 import ErrorCard from "../../components/errorCard/ErrorCard"

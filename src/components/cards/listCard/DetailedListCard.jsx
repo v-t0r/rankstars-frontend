@@ -2,7 +2,7 @@ import classes from "./DetailedListCard.module.css"
 
 import { Link, useLocation, useNavigate } from "react-router-dom"
 
-import ImageGrid from "../imageGrid/ImageGrid"
+import ImageGrid from "../../imageGrid/ImageGrid"
 
 export default function DetailedListCard({list}){
     const navigate = useNavigate()

@@ -7,7 +7,7 @@ import { useQuery} from "@tanstack/react-query"
 
 import { getPost } from "../../services/posts.js"
 
-import DetailedReviewCard from "../../components/cards/DetailedReviewCard.jsx"
+import DetailedReviewCard from "../../components/cards/reviewCard/DetailedReviewCard.jsx"
 import OptionsBar from "../../components/optionsBar/OptionsBar.jsx"
 import CommentContainer from "../../components/comments/CommentContainer.jsx"
 import LoaderDots from "../../components/loaderDots/LoaderDots.jsx"

@@ -3,10 +3,10 @@ import { useQuery } from "@tanstack/react-query"
 
 import { fetchUserReviews } from "../../services/users"
 
-import ReviewCard from "./ReviewCard"
+import ReviewCard from "./reviewCard/ReviewCard"
 import { Link } from "react-router-dom"
 import { fetchUserLists } from "../../services/users"
-import ListCard from "./ListCard"
+import ListCard from "./listCard/ListCard"
 import LoaderDots from "../loaderDots/LoaderDots"
 import ErrorCard from "../errorCard/ErrorCard"
 
