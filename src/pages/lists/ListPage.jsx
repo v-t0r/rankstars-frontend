@@ -58,6 +58,13 @@ export default function ListPage(){
             
             
             <div className={classes["reviews-div"]}>
+                {list.reviews.length === 0 && 
+                    <div className={classes["empty-warning"]}>
+                        <h2>This list is still empty...</h2>
+                        <p>Come back in the future!</p>
+                    </div>
+                }
+
                 <ul>
                     {list.reviews.map(review => {
                         return <li key={review._id} ><DetailedReviewCard review={review}/></li>
