@@ -1,4 +1,4 @@
-import classes from "./ProfileMenu.module.css"
+import classes from "./sideMenu.module.css"
 
 import { useEffect, useState } from "react"
 import {Form, useLocation} from "react-router-dom"
@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { getUserId } from "../../services/auth"
 import { backendUrl } from "../../utils/constants"
 
-export default function PofileMenu(){
+export default function SideMenu(){
     const [menuIsOpen, setMenuIsOpen] = useState(false)
 
     const location = useLocation()

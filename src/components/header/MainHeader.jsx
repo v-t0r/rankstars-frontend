@@ -2,7 +2,7 @@ import classes from "./MainHeader.module.css"
 
 import {Link, useNavigate, useRouteLoaderData} from "react-router-dom"
 
-import ProfileMenu from "./ProfileMenu"
+import SideMenu from "../sideMenu/SideMenu"
 
 export default function MainHeader(){
     const token = useRouteLoaderData("root")
@@ -22,7 +22,7 @@ export default function MainHeader(){
             {token && <input className={classes["search-bar"]} type="text"/>}
 
             {!token && <Link to="/login">Login/Signup </Link>}
-            {token && <ProfileMenu/>}
+            {token && <SideMenu/>}
             
         </header>
     </>
