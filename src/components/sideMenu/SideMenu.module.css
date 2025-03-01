@@ -22,17 +22,14 @@
     top: var(--header-height);
     right: 0;
     
-    height: calc(100vh - var(--header-height));
     width: fit-content;
     
-
     padding: 1rem 0;
     
-    /* Experimental */
     border-radius: 1rem;
     box-shadow: rgba(0, 0, 0, 0.269) 0px 0px 2rem;
-    margin: 1rem;
-    height: calc(100vh - var(--header-height) - 2*1rem);
+    margin: 15px 15px;
+    height: calc(100vh - var(--header-height) - 2*15px);
 }
 
 .side-menu ul {
@@ -44,21 +41,25 @@
 
 .side-menu li {
     margin: 0 1rem;
-    /* border-bottom: solid var(--blue-gray) 2px; */
     border-radius: 0.5rem;
 }
 
 .side-menu li:hover {
     background-color: rgba(0, 0, 0, 0.215);
     cursor: pointer;
+    p, a {
+        color: white;
+    }
 }
 
-.side-menu a {
+.side-menu a,
+.side-menu p {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
     padding: 1rem 1.2rem;
+    color: var(--inactive-gray-color)
 }
 
 .side-menu .menu-icon {

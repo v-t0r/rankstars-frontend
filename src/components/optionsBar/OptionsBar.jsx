@@ -19,6 +19,7 @@ import Modal from "../modal/Modal"
 import ListList from "../listList/ListList"
 import NewListForm from "../newListForm/newListForm"
 import EditListForm from "../editListForm.jsx/EditListForm"
+import NewReviewForm from "../newReviewForm/NewReviewForm"
 import { AnimatePresence } from "framer-motion"
 
 export default function OptionsBar({post, type}){
@@ -31,7 +32,8 @@ export default function OptionsBar({post, type}){
         deleteModal: false, 
         listsModal: false,
         newListModal: false,
-        editListModal: false
+        editListModal: false,
+        editReviewModal: false
     })
 
     //the post was liked/followed by the logged user?
@@ -81,7 +83,7 @@ export default function OptionsBar({post, type}){
 
     function handleEditPost() {
         if(type === "reviews"){
-            navigate("edit-review")
+            setModalsVisibility(prevState=>({...prevState, editReviewModal: true, overflowMenu: false}))
         }
         if(type === "lists"){
             setModalsVisibility(prevState=>({...prevState, editListModal: true, overflowMenu: false}))
@@ -173,11 +175,15 @@ export default function OptionsBar({post, type}){
                 />}
             </Modal>}
 
-            {modalsVisibility.editListModal && <Modal >
+            {modalsVisibility.editListModal && <Modal onEscape={() => setModalsVisibility(prevState => ({...prevState, editListModal: false}))}>
                 <EditListForm 
                     list={post}
                     onClose={() => setModalsVisibility(prevState => ({...prevState, editListModal: false}))} 
                 />
+            </Modal>}
+
+            {modalsVisibility.editReviewModal && <Modal onEscape={() => setModalsVisibility(prevState => ({...prevState, editReviewModal: false}))}>
+                <NewReviewForm reviewId={post._id} onCancel={() => setModalsVisibility(prevState => ({...prevState, editReviewModal: false}))}/>
             </Modal>}
 
         </AnimatePresence>

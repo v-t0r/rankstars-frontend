@@ -83,7 +83,6 @@ export default function ListPage(){
 
     return <>
         {content}
-        
-
+    
     </>
 }

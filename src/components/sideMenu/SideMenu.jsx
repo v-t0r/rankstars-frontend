@@ -9,9 +9,12 @@ import { motion, AnimatePresence } from "framer-motion"
 
 import { getUserId } from "../../services/auth"
 import { backendUrl } from "../../utils/constants"
+import Modal from "../modal/Modal"
+import NewReviewForm from "../newReviewForm/NewReviewForm"
 
 export default function SideMenu(){
     const [menuIsOpen, setMenuIsOpen] = useState(false)
+    const [modalVisibility, setModalVisibility] = useState({newReview: false})
 
     const location = useLocation()
     const userId = getUserId()
@@ -51,9 +54,9 @@ export default function SideMenu(){
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to={`/review/new-review`}>
+                                    <p onClick={() => setModalVisibility(prevState => ({...prevState, newReview: true}))}>
                                         <span className={`material-symbols-outlined ${classes["menu-icon"]}`}>rate_review</span>New Review
-                                    </Link>
+                                    </p>
                                 </li>
                                 <li>
                                     <Link to={`/profile/${userId}/reviews`}>
@@ -73,8 +76,13 @@ export default function SideMenu(){
                     </div> 
                     
                 }
+
+                {modalVisibility.newReview && 
+                    <Modal onEscape={() => setModalVisibility(prevState => ({...prevState, newReview: false}))}>
+                        <NewReviewForm onCancel={() => setModalVisibility(prevState => ({...prevState, newReview: false}))}/>
+                    </Modal>
+                }
             </AnimatePresence>
-            {/* Quando o usuário clicar em qualquer lugar com o menu aberto, ele fecha */}
 
         </>
     )

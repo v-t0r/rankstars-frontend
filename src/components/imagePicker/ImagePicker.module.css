@@ -1,6 +1,6 @@
 :root {
-    --image-preview-width: 8.8rem;
-    --image-preview-height: 8.8rem;
+    --image-preview-width: 87px;
+    --image-preview-height: 87px;
 }
 
 .main-container {
@@ -17,7 +17,6 @@
     gap: 1rem;
     justify-content: space-between;
     padding-bottom: 0.5rem;
-
     overflow-y: auto;
     scrollbar-color: var(--input-background-color) var(--background-color);
 }

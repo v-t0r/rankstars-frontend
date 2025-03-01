@@ -18,11 +18,17 @@ export default function Modal({ children, onEscape }){
         }
     }, [])
 
+    function handleEscape(e){
+        // a ação de escape só afeta essa modal
+        e.stopPropagation()
+        onEscape()
+    }
+
     return createPortal(
         <motion.dialog 
             ref={dialog} 
             className={classes["modal"]}
-            onCancel={onEscape}
+            onCancel={handleEscape}
             initial={{opacity: 0, y: 30}}
             animate={{opacity: 1, y: 0}}
             exit={{opacity: 0, y: -30}}
