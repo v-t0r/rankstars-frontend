@@ -7,18 +7,15 @@ export default function ErrorPage(){
 
     console.log(error)
 
-    let errorContent
+    let errorContent = <>
+            <p>Looks like we are having trouble with our servers!</p>
+            <p>Can you please try again later?</p>
+        </>
+
     if(error.status === 404){
         errorContent = <>
             <p>Looks like you fall in the void!</p> 
             <p>Why not you <Link>click here</Link> and go back to the start?</p>
-        </>
-    }
-
-    if(error.status == 500){
-        errorContent = <>
-            <p>Looks like we are having trouble with our servers!</p>
-            <p>Can you please try again later?</p>
         </>
     }
 
