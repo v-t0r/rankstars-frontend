@@ -1,27 +1,18 @@
-import { Outlet, useLoaderData, useSubmit } from "react-router-dom"
+import { Outlet, redirect } from "react-router-dom"
 import MainHeader from "../../components/header/MainHeader"
 import { useEffect } from "react"
-import { getTokenRemainingTime } from "../../services/auth"
+import { useSelector } from "react-redux"
 
 export default function RootLayout(){
-    const token = useLoaderData()
-    const submit = useSubmit()
-
+    const user = useSelector(state => state.user.user)
+    
     useEffect(() => {
-        if(!token) { //if thats no token, dont do anything
+        if(!user) { //if thats no user, go to login
+            redirect("/login")
             return 
         }
 
-        if(token === "EXPIRED"){
-            submit(null, {action: "/logout", method: "post"})
-        }
-
-        const tokenRemainingTime = getTokenRemainingTime()
-
-        setTimeout(() => {
-            submit(null, {action: "/logout", method: "post"})
-        }, tokenRemainingTime) //set a time to remaining time
-    }, [token, submit])
+    }, [user])
 
     return <>
         <MainHeader />
@@ -30,8 +21,6 @@ export default function RootLayout(){
         </main>
 
         <footer>RankStars 2024 - Um projeto React & Express.JS</footer>
-
-        {/* <div className={classes["new-review-button"]}></div> */}
-
+        
     </>
 }

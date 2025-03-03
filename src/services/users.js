@@ -1,4 +1,3 @@
-import { getAuthToken } from "./auth";
 import { backendUrl } from "../utils/constants";
 
 export async function fetchUserInfo({signal, id}) {
@@ -17,13 +16,10 @@ export async function fetchUserInfo({signal, id}) {
 }
 
 export async function followUser(userId) {
-    const token = getAuthToken()
 
     const response = await fetch(`${backendUrl}/users/${userId}/followers`, {
         method: "POST",
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
+        credentials: "include",
     })
 
     if(!response.ok) {
@@ -37,13 +33,10 @@ export async function followUser(userId) {
 }
 
 export async function unfollowUser(userId) {
-    const token = getAuthToken()
 
     const response = await fetch(`${backendUrl}/users/${userId}/followers`, {
         method: "DELETE",
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
+        credentials: "include",
     })
 
     if(!response.ok) {
@@ -57,14 +50,11 @@ export async function unfollowUser(userId) {
 }
 
 export async function fetchUserReviews(signal, userId, sortBy = {sortBy: 'createdAt', order: -1}) {
-    const token = getAuthToken()
 
     const response = await fetch(`${backendUrl}/users/${userId}/reviews?sortBy=${sortBy.sortBy}&order=${sortBy.order}`, {
         signal: signal,
         method: "GET",
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
+        credentials: "include",
     })
 
     if(!response.ok) {
@@ -79,14 +69,11 @@ export async function fetchUserReviews(signal, userId, sortBy = {sortBy: 'create
 }
 
 export async function fetchUserLists(signal, userId, sortBy = {sortBy: 'createdAt', order: -1}) {
-    const token = getAuthToken()
 
     const response = await fetch (`${backendUrl}/users/${userId}/lists?sortBy=${sortBy.sortBy}&order=${sortBy.order}`, {
         signal: signal,
         method: "GET",
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
+        credentials: "include",
     })
 
     if(!response.ok){

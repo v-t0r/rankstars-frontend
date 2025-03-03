@@ -1,7 +1,6 @@
 import { backendUrl } from "../../utils/constants"
 import classes from "./LoginPage.module.css"
 import { Form, Link, redirect, useActionData, useNavigation } from "react-router-dom"
-// import store, { userActions } from "../store"
 
 export default function LoginPage(){
 
@@ -54,6 +53,7 @@ export async function action({ request }) {
 
     const response = await fetch(`${backendUrl}/login`, {
         method: "POST",
+        credentials: "include",
         body: JSON.stringify({
             email: postData.email,
             password: postData.password

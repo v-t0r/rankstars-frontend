@@ -1,11 +1,12 @@
 import classes from "./MainHeader.module.css"
 
-import {Link, useNavigate, useRouteLoaderData} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 
 import SideMenu from "../sideMenu/SideMenu"
+import { useSelector } from "react-redux"
 
 export default function MainHeader(){
-    const token = useRouteLoaderData("root")
+    const user = useSelector(state => state.user.user)
     const navigate = useNavigate()
     
     function handleHome() {
@@ -19,10 +20,10 @@ export default function MainHeader(){
                 <h1 onClick={handleHome}>rankstars</h1>
             </div>
 
-            {token && <input className={classes["search-bar"]} type="text"/>}
+            {user && <input className={classes["search-bar"]} type="text"/>}
 
-            {!token && <Link to="/login">Login/Signup </Link>}
-            {token && <SideMenu/>}
+            {!user && <Link to="/login">Login/Signup </Link>}
+            {user && <SideMenu/>}
             
         </header>
     </>

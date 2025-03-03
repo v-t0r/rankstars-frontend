@@ -1,15 +1,11 @@
-import { getAuthToken } from "./auth";
 import { backendUrl } from "../utils/constants";
 
 export async function fetchReviewInfo({signal, reviewId}) {
-    const token = getAuthToken()
 
     const response = await fetch(`${backendUrl}/reviews/${reviewId}`, {
         signal: signal,
         method: "GET",
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
+        credentials: "include",
     })
 
     if(!response.ok) {
@@ -24,7 +20,6 @@ export async function fetchReviewInfo({signal, reviewId}) {
 }
 
 export async function getPost({signal, postId, type, sortBy = {sortBy: "userOrder", order: null}}) {
-    const token = getAuthToken()
 
     let sortQuery = ""
     if(type === "lists" && sortBy.sortBy !=="userOrder"){
@@ -34,9 +29,7 @@ export async function getPost({signal, postId, type, sortBy = {sortBy: "userOrde
     const response = await fetch(`${backendUrl}/${type}/${postId}${sortQuery}`, {
         signal: signal,
         method: "GET",
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
+        credentials: "include",
     })
 
     if(!response.ok) {
@@ -51,13 +44,10 @@ export async function getPost({signal, postId, type, sortBy = {sortBy: "userOrde
 }
 
 export async function postReview(reviewData) {
-    const token = getAuthToken()
 
     const response = await fetch(`${backendUrl}/reviews`, {
         method: "POST",
-        headers: {
-            "Authorization": `Bearer ${token}`
-        },
+        credentials: "include",
         body: reviewData
     })
 
@@ -73,13 +63,10 @@ export async function postReview(reviewData) {
 }
 
 export async function patchPost({id, data, type}) {
-    const token = getAuthToken()
 
     const response = await fetch(`${backendUrl}/${type}/${id}`,{
         method: "PATCH",
-        headers: {
-            "Authorization": `Bearer ${token}`
-        },
+        credentials: "include",
         body: data
     })
 
@@ -94,13 +81,10 @@ export async function patchPost({id, data, type}) {
 }
 
 export async function deletePost({id, type}){
-    const token = getAuthToken()
     
     const response = await fetch(`${backendUrl}/${type}/${id}`, {
         method: "DELETE",
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
+        credentials: "include",
     })
 
     if(!response.ok){
@@ -114,13 +98,10 @@ export async function deletePost({id, type}){
 }
 
 export async function likeReview({reviewId, operation}){
-    const token = getAuthToken()
 
     const response = await fetch(`${backendUrl}/reviews/${reviewId}/likes`, {
         method: operation == "like" ? "POST" : "DELETE",
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
+        credentials: "include",
     })
 
     if(!response.ok){
@@ -135,13 +116,10 @@ export async function likeReview({reviewId, operation}){
 
 
 export async function createList(listData){
-    const token = getAuthToken()
     
     const response = await fetch(`${backendUrl}/lists`, {
         method: "POST",
-        headers: {
-            "Authorization": `Bearer ${token}`,
-        },
+        credentials: "include",
         body: listData
     })
 
@@ -165,14 +143,11 @@ export async function removeReviewFromList({reviewId, listId}){
 }
 
 async function addOrRemoverReviewFromList({reviewId, listId, operation}){
-    const token = getAuthToken()
     const method = operation === "add" ? "POST" : "DELETE"
 
     const response = await fetch(`${backendUrl}/lists/${listId}/reviews/${reviewId}`, {
         method: method,
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
+        credentials: "include",
     })
 
     if(!response.ok){

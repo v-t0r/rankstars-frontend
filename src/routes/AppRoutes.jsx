@@ -1,11 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
-import {checkAuthLoader, checkNotAuthLoader, tokenLoader} from "../services/auth.js"
+import {checkAuthLoader} from "../services/auth.js"
 
 import RootLayout from '../pages/layouts/RootLayout.jsx'
 import LoginPage, { action as loginAction} from '../pages/login/LoginPage.jsx'
 import SignupPage, {action as signupAction} from "../pages/login/SignupPage.jsx"
-import {action as logoutAction} from "../pages/login/LogoutPage.jsx"
+import LogoutPage from "../pages/login/LogoutPage.jsx"
 import HomePage from '../pages/homePage/HomePage.jsx'
 import ProfilePage from '../pages/profile/ProfilePage.jsx'
 import ReviewPage from '../pages/reviews/ReviewPage.jsx'
@@ -17,7 +17,7 @@ import ErrorPage from '../pages/errors/ErrorPage.jsx'
 import ListsPage from "../pages/lists/ListsPage.jsx"
 
 const router = createBrowserRouter([
-    { path : "/", element: <RootLayout />, id: "root", errorElement: <ErrorPage />, loader: tokenLoader, children: [
+    { path : "/", element: <RootLayout />, id: "root", errorElement: <ErrorPage />, children: [
       {path: "/", loader: checkAuthLoader, children: [
         {path: "/", element: <HomePage />},
         {path: "profile/:id", element: <ProfilePage />},
@@ -28,11 +28,11 @@ const router = createBrowserRouter([
         {path: "/review/:id/edit-review", element: <EditReviewPage />},
         {path: "/list/:id", element: <ListPage />},
         {path: "/profile", element: <ProfilePage />},
-        {path: "/logout", action: logoutAction }
       ]},
-      {path: "/", loader: checkNotAuthLoader, children: [
+      {path: "/", children: [
         {path: "/login", element: <LoginPage />, action: loginAction },
         {path: "/signup", element: <SignupPage />, action: signupAction },
+        {path: "/logout", element: <LogoutPage />}
       ]},
     ]}
 ])

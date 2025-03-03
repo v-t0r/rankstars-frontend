@@ -1,7 +1,7 @@
 import classes from "./sideMenu.module.css"
 
 import { useEffect, useState } from "react"
-import {Form, useLocation} from "react-router-dom"
+import { useLocation} from "react-router-dom"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 
@@ -71,7 +71,7 @@ export default function SideMenu(){
 
                                 <li><Link to={`/`}><span className={`material-symbols-outlined ${classes["menu-icon"]}`}>info</span>About RankStars</Link></li>                    
                             </ul>
-                            <Form action="/logout" method="post"><button className={`negative-button ${classes["logout-button"]}`} type="submit"><span className={`material-symbols-outlined ${classes["menu-icon"]}`}>logout</span>Logout</button></Form>
+                            <Link to={`/logout`} className={`negative-button ${classes["logout-button"]}`} type="submit"><span className={`material-symbols-outlined ${classes["menu-icon"]}`}>logout</span>Logout</Link>
                         </motion.div>
                     </div> 
                     

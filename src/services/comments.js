@@ -1,4 +1,3 @@
-import { getAuthToken } from "./auth";
 import { backendUrl } from "../utils/constants";
 
 export async function fetchComments({id, type, answers = false, signal}){
@@ -19,12 +18,12 @@ export async function fetchComments({id, type, answers = false, signal}){
 }
 
 export async function postComment({id, type, comment}) {
-    const token = getAuthToken()
+
     const response = await fetch((`${backendUrl}/${type}/${id}/comments`),{
         method: "POST",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({
             content: comment
@@ -42,13 +41,9 @@ export async function postComment({id, type, comment}) {
 }
 
 export async function deleteComment({id}) {
-    const token = getAuthToken()
-
     const response = await fetch((`${backendUrl}/comments/${id}`),{
         method: "DELETE",
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
+        credentials: "include",
     })
 
     if(!response.ok){

@@ -87,15 +87,15 @@ export default function NewReviewForm({reviewId = undefined, onCancel}){
         let errors = []
 
         if(data.title.trim().length === 0){
-            errors.append(["title", "The title can't be empty!"]) 
+            errors = [...errors, (["title", "The title can't be empty!"])]
         }
 
         if(+data.rating < 0 || +data.rating > 100){
-            errors.append(["rating", "Rating must be between 0 and 100."]) 
+            errors = [...errors, (["rating", "Rating must be between 0 and 100."])]
         }
 
         if(data.rating === ""){
-            errors.append(["rating", "Rating can't be empty."])
+            errors = [...errors, (["rating", "Rating can't be empty."])]
         }
 
         if(errors.length > 0){
