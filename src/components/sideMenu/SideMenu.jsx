@@ -8,7 +8,7 @@ import { useSelector } from "react-redux"
 import { motion, AnimatePresence } from "framer-motion"
 
 import { getUserId } from "../../services/auth"
-import { backendUrl } from "../../utils/constants"
+import { imageBackendUrl } from "../../utils/constants"
 import Modal from "../modal/Modal"
 import NewReviewForm from "../newReviewForm/NewReviewForm"
 
@@ -32,7 +32,7 @@ export default function SideMenu(){
     return(
         <>
             <div className={classes["img-container"]}>
-                <img className={classes["profile-img"]} src={`${backendUrl}/${profilePicUrl}`} alt="Profile Picture" onClick={handleOpenMenu}/>
+                <img className={classes["profile-img"]} src={`${imageBackendUrl}/${profilePicUrl}`} alt="Profile Picture" onClick={handleOpenMenu}/>
             </div>
             
             <AnimatePresence>
@@ -83,8 +83,6 @@ export default function SideMenu(){
                     </Modal>
                 }
             </AnimatePresence>
-
         </>
     )
-
 }
