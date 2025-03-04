@@ -2,7 +2,7 @@
 
 import { createSlice } from "@reduxjs/toolkit"
 
-const initialState = {user: null}
+const initialState = {user: null, expDate: null}
 
 const userSlice = createSlice({
     name: "user",
@@ -13,6 +13,10 @@ const userSlice = createSlice({
         updateUserInfo(state, action){
             state.user = action.payload.user
         },
+
+        updateExpDate(state, action){
+            state.expDate = action.payload.expDate
+        }
     }
 })
 

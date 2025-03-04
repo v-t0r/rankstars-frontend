@@ -15,5 +15,8 @@ export function getRatingColorClass(rating){
     }
 
     return {boxColor, borderColor}
+}
 
+export function calcRemainingTime(date){
+    return  date - Date.now()
 }

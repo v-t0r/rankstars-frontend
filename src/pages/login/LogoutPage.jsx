@@ -10,6 +10,7 @@ export default function LogoutPage(){
 
     useEffect(() => {
         store.dispatch(userActions.updateUserInfo({user: null}))
+        store.dispatch(userActions.updateExpDate({expDate: null}))
         async function logout(){
             await fetch(`${backendUrl}/logout`, {
                 credentials: "include"

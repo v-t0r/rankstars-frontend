@@ -1,3 +1,4 @@
+import store, { userActions } from "../../store"
 import { backendUrl } from "../../utils/constants"
 import classes from "./LoginPage.module.css"
 import { Form, Link, redirect, useActionData, useNavigation } from "react-router-dom"
@@ -63,18 +64,22 @@ export async function action({ request }) {
         }
     })
     
-    const responseJson = await response.json()
-
     if(response.status === 401){
         errorResponse.errors.general = "Email or password incorrect! Please, try again!"
         return errorResponse   
     }
 
-    //const expirationTime = new Date().getTime() + (1000 * 60 * 60)
-    const expirationTime = new Date().getTime() + (1000 * 60 * 60)
-    localStorage.setItem("token", responseJson.token)
-    localStorage.setItem("tokenExpiration", expirationTime.toString())
-    localStorage.setItem("userId", responseJson.userId)
+    const {userId} = await response.json()
+
+    const userInfoResponse = await fetch(`${backendUrl}/users/${userId}`)
+
+    if(!userInfoResponse.ok){
+        errorResponse.errors.general = "Our servers are down. Try again later!"
+        return errorResponse 
+    }
+
+    const userInfo = await userInfoResponse.json()
+    store.dispatch(userActions.updateUserInfo(userInfo))
 
     return redirect("/")
 }

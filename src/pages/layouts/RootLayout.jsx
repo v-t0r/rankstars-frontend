@@ -1,19 +1,32 @@
-import { Outlet, redirect } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom"
 import MainHeader from "../../components/header/MainHeader"
-import { useEffect } from "react"
 import { useSelector } from "react-redux"
+import { useEffect, useRef } from "react"
+import { calcRemainingTime } from "../../utils/functions"
 
 export default function RootLayout(){
-    const user = useSelector(state => state.user.user)
+    const {user, expDate} = useSelector(state => state.user)
+    const navigate = useNavigate()
+    const timeoutRef = useRef(null)
     
-    useEffect(() => {
-        if(!user) { //if thats no user, go to login
-            redirect("/login")
-            return 
+    useEffect(()=> {
+            
+        //apaga timeout anterior se houver
+        if(timeoutRef.current) {
+            clearTimeout(timeoutRef.current)
+        }
+            
+        //se user está logado, deve setar timeout
+        if(user){
+            timeoutRef.current = setTimeout(()=> {
+                navigate("/logout")
+            }, calcRemainingTime(expDate))
         }
 
-    }, [user])
-
+        //se por algum motivo houver uma re-run, apaga timeout anterior
+        return () => clearTimeout(timeoutRef.current)
+    }, [user, expDate, navigate])
+    
     return <>
         <MainHeader />
         <main>
@@ -21,6 +34,5 @@ export default function RootLayout(){
         </main>
 
         <footer>RankStars 2024 - Um projeto React & Express.JS</footer>
-        
     </>
 }

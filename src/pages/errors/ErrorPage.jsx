@@ -15,11 +15,14 @@ export default function ErrorPage(){
         }
     }, [error, navigate])
     
-
-    let errorContent = <>
+    
+    let errorContent = <></>
+    if(error.status !== 401) {
+            errorContent = <>
             <p>Looks like we are having trouble with our servers!</p>
             <p>Can you please try again later?</p>
         </>
+    }
 
     if(error.status === 404){
         errorContent = <>

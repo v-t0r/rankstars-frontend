@@ -7,7 +7,6 @@ import { useSelector } from "react-redux"
 
 import { motion, AnimatePresence } from "framer-motion"
 
-import { getUserId } from "../../services/auth"
 import { imageBackendUrl } from "../../utils/constants"
 import Modal from "../modal/Modal"
 import NewReviewForm from "../newReviewForm/NewReviewForm"
@@ -17,9 +16,8 @@ export default function SideMenu(){
     const [modalVisibility, setModalVisibility] = useState({newReview: false})
 
     const location = useLocation()
-    const userId = getUserId()
 
-    const {profilePicUrl} = useSelector(state => state.user.user)
+    const {profilePicUrl, _id: userId} = useSelector(state => state.user.user)
 
     useEffect(()=>{
         setMenuIsOpen(false)
