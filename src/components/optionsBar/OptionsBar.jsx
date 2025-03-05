@@ -3,7 +3,7 @@ import classes from "./OptionsBar.module.css"
 
 import { useState } from "react"
 
-import { userActions } from "../../store"
+import { loginModalActions, userActions } from "../../store"
 import { useDispatch, useSelector } from "react-redux"
 
 import { useMutation } from "@tanstack/react-query"
@@ -78,6 +78,11 @@ export default function OptionsBar({post, type}){
     }
 
     function handleLike(){
+        if(!loggedUserInfo){
+            dispatch(loginModalActions.setLoginModalVisibility(true))
+            return
+        }
+
         likeMutate({reviewId: post._id, operation: liked ? "deslike" : "like"})
     }
 
@@ -105,51 +110,56 @@ export default function OptionsBar({post, type}){
 
         <CommentInput parent={post} type={type} />
         
-        <div className={classes["more-options-div"]}>  
-            <button onClick={() => setModalsVisibility(prevState => ({...prevState, overflowMenu: true }))} className={classes["more-options-button"]}>
-                <span className={`material-symbols-outlined`}>
-                    more_vert
-                </span>
-            </button>
+        {loggedUserInfo?._id === post.author._id &&
+            <div className={classes["more-options-div"]}>  
+                <button onClick={() => setModalsVisibility(prevState => ({...prevState, overflowMenu: true }))} className={classes["more-options-button"]}>
+                    <span className={`material-symbols-outlined`}>
+                        more_vert
+                    </span>
+                </button>
 
-            {modalsVisibility.overflowMenu && <OverflowMenu right={"0"} top={"25px"} handleCloseMenu={() => setModalsVisibility(prevState => ({...prevState, overflowMenu: false }))}>
-                <ul className={classes["overflow-menu-list"]}>
-                    
-                    {/* Menu options exclusive to reviews */}
-                    {type === "reviews" && 
-                        <li>
-                            <button 
-                                onClick={() => {
-                                    setModalsVisibility(prevState => ({...prevState, overflowMenu: false }))
-                                    setModalsVisibility(prevState => ({...prevState, listsModal: true }))
-                                }} 
-                                className="text-button">
-                                <span className={`material-symbols-outlined ${classes["list-icon"]}`}>library_add</span>Add to a List
-                            </button>
-                        </li>
-                    }
-
-                    {/* Menu options exclusive to the owner post */}
-                    {loggedUserInfo?._id === post.author._id && <>
-                        <span className={classes["divider-line"]}></span>
+                {modalsVisibility.overflowMenu && <OverflowMenu right={"0"} top={"25px"} handleCloseMenu={() => setModalsVisibility(prevState => ({...prevState, overflowMenu: false }))}>
+                    <ul className={classes["overflow-menu-list"]}>
                         
-                        <li>
-                            <button className="text-button" onClick={handleEditPost}>
-                                <span className={`material-symbols-outlined ${classes["list-icon"]}`}>edit_square</span>Edit {type ==="reviews" ? "Review" : "List" }
-                            </button>
-                        </li>
+                        {/* Menu options exclusive to reviews */}
+                        {type === "reviews" && 
+                            <li>
+                                <button 
+                                    onClick={() => {
+                                        setModalsVisibility(prevState => ({...prevState, overflowMenu: false }))
+                                        if(!loggedUserInfo){
+                                            dispatch(loginModalActions.setLoginModalVisibility(true))
+                                            return
+                                        }
+                                        setModalsVisibility(prevState => ({...prevState, listsModal: true }))
+                                    }} 
+                                    className="text-button">
+                                    <span className={`material-symbols-outlined ${classes["list-icon"]}`}>library_add</span>Add to a List
+                                </button>
+                            </li>
+                        }
 
-                        <li>
-                            <button onClick={() => setModalsVisibility(prevState => ({...prevState, deleteModal: true}))} className="negative-button">
-                                <span className={`material-symbols-outlined ${classes["list-icon"]}`}>delete</span>Delete {type ==="reviews" ? "Review" : "List" }
-                            </button>
-                        </li>
-                    </>}
-                    
-                </ul>
-            </OverflowMenu>}
-        </div>
-        
+                        {/* Menu options exclusive to the owner post */}
+                        {loggedUserInfo?._id === post.author._id && <>
+                            {type === "review" &&<span className={classes["divider-line"]}></span>}
+                            
+                            <li>
+                                <button className="text-button" onClick={handleEditPost}>
+                                    <span className={`material-symbols-outlined ${classes["list-icon"]}`}>edit_square</span>Edit {type ==="reviews" ? "Review" : "List" }
+                                </button>
+                            </li>
+
+                            <li>
+                                <button onClick={() => setModalsVisibility(prevState => ({...prevState, deleteModal: true}))} className="negative-button">
+                                    <span className={`material-symbols-outlined ${classes["list-icon"]}`}>delete</span>Delete {type ==="reviews" ? "Review" : "List" }
+                                </button>
+                            </li>
+                        </>}
+                        
+                    </ul>
+                </OverflowMenu>}
+            </div>
+        }
         <AnimatePresence>
 
             {modalsVisibility.deleteModal && <ConfirmationModal 

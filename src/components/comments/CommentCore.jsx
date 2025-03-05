@@ -12,6 +12,8 @@ export default function CommentCore({comment, type = "comment", onReplyClick}){
     const loggedUserInfo = useSelector(state => state.user.user)
     const dispatch = useDispatch()
 
+    const [overflowMenuVisibility, setOverflowMenuVisibility] = useState(false)
+
     const {mutate: deleteMutate} = useMutation({
         mutationFn: deleteComment,
         onSuccess: () => {
@@ -24,8 +26,6 @@ export default function CommentCore({comment, type = "comment", onReplyClick}){
         }
     })
     
-    const [overflowMenuVisibility, setOverflowMenuVisibility] = useState(false)
-
     return <div className={classes["comment-card"]}>
         <div>
             <div className={classes["author-div"]}>
@@ -46,7 +46,7 @@ export default function CommentCore({comment, type = "comment", onReplyClick}){
         </div>
         
         <div className={classes["options-column"]}>
-            <button onClick={() => setOverflowMenuVisibility(state => !state) }><span className={`material-symbols-outlined`}>more_vert</span></button>
+            {loggedUserInfo?._id === comment.author._id && <button onClick={() => setOverflowMenuVisibility(state => !state) }><span className={`material-symbols-outlined`}>more_vert</span></button>}
             <button><span className={`material-symbols-outlined`}>keyboard_arrow_up</span></button>
             <p>0</p>
             <button><span className={`material-symbols-outlined`}>keyboard_arrow_down</span></button>

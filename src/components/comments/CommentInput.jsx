@@ -3,7 +3,7 @@ import classes from "./CommentInput.module.css"
 import { useMutation } from "@tanstack/react-query"
 import { postComment } from "../../services/comments"
 import { useDispatch, useSelector } from "react-redux"
-import { commentsAction } from "../../store"
+import { commentsAction, loginModalActions } from "../../store"
 
 export default function CommentInput({parent, type}){
     const sendButtonRef = useRef()
@@ -32,6 +32,12 @@ export default function CommentInput({parent, type}){
 
     function handleSubmitComment(event) {
         event.preventDefault()
+
+        //usuario nao logado
+        if(!loggedUserInfo){
+            dispatch(loginModalActions.setLoginModalVisibility(true))
+            return
+        }
 
         const formData = new FormData(event.target)
         const data = Object.fromEntries(formData)

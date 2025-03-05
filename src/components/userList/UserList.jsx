@@ -7,7 +7,7 @@ import { queryClient } from "../../services/queryClient"
 import { useDispatch, useSelector } from "react-redux"
 import { useMutation } from "@tanstack/react-query"
 import { followUser, unfollowUser } from "../../services/users"
-import { userActions } from "../../store"
+import { loginModalActions, userActions } from "../../store"
 
 export default function UsersList({username, profileUserId, users, type, onClose}) {
     
@@ -48,20 +48,19 @@ export default function UsersList({username, profileUserId, users, type, onClose
         dispatch(userActions.updateUserInfo({user: newLoggedUserInfo}))
     }
 
-    function handleFollow(userId){
-        
-        mutateFollowUser(userId)
-    }
-
-    function handleUnfollow(userId){
-        
-        mutateUnfollowUser(userId)
+    function handleFollow(userId, followingStatus){
+        //user não está logado
+        if(!loggedUserInfo){
+            dispatch(loginModalActions.setLoginModalVisibility(true))
+            onClose()
+            return
+        }
+        followingStatus === "unfollow" ? mutateUnfollowUser(userId) : mutateFollowUser(userId)
     }
 
     // verify if the logged user follows or not the users in the list
     // and if the user in the list follows the logged users
     const following_status = users.map(user => {
-
         if(loggedUserInfo){
             if(user._id == loggedUserInfo._id){
                 return "it's you!"
@@ -94,8 +93,8 @@ export default function UsersList({username, profileUserId, users, type, onClose
                             <p id={classes["username"]} onClick={() => navigate(`/profile/${user._id}`)}>{user.username}</p>
                             <p id={classes["status"]}>{user.status}</p>
                         </div>
-                        
                     </div>
+
                     <div className={classes["button-container"]}>
                         {!(following_status[index] === "it's you!") && 
                             <button 
@@ -103,7 +102,7 @@ export default function UsersList({username, profileUserId, users, type, onClose
                                     (following_status[index] === "follow" || following_status[index] === "follow back") ? 
                                     classes["follow-button"] : classes["unfollow-button"]
                                 }
-                                onClick={following_status[index] === "unfollow"? () => handleUnfollow(user._id) : () => handleFollow(user._id)}
+                                onClick={() => handleFollow(user._id, following_status[index])}
                             >        
                                 {following_status[index]}
                             </button>
