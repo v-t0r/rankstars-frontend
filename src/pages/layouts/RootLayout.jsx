@@ -1,36 +1,39 @@
-import { Outlet, useNavigate } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 import MainHeader from "../../components/header/MainHeader"
-import { useSelector } from "react-redux"
-import { useEffect, useRef } from "react"
-import { calcRemainingTime } from "../../utils/functions"
+import Modal from "../../components/modal/Modal"
+import LoginForm from "../../components/loginForm/LoginForm"
+import { useDispatch, useSelector } from "react-redux"
+import { loginModalActions } from "../../store"
+import { AnimatePresence } from "framer-motion"
+import SignupForm from "../../components/loginForm/SignupForm"
 
 export default function RootLayout(){
-    const {user, expDate} = useSelector(state => state.user)
-    const navigate = useNavigate()
-    const timeoutRef = useRef(null)
-    
-    useEffect(()=> {
-            
-        //apaga timeout anterior se houver
-        if(timeoutRef.current) {
-            clearTimeout(timeoutRef.current)
-        }
-            
-        //se user está logado, deve setar timeout
-        if(user){
-            timeoutRef.current = setTimeout(()=> {
-                navigate("/logout")
-            }, calcRemainingTime(expDate))
-        }
-
-        //se por algum motivo houver uma re-run, apaga timeout anterior
-        return () => clearTimeout(timeoutRef.current)
-    }, [user, expDate, navigate])
+    const {visibility: loginModalVisibility, signupMode} = useSelector(state => state.loginModal)
+    const dispatch = useDispatch()
     
     return <>
         <MainHeader />
         <main>
             <Outlet />
+
+            <AnimatePresence>
+                {loginModalVisibility && 
+                    <Modal onEscape={() => dispatch(loginModalActions.setLoginModalVisibility(false))}>
+                        { signupMode ? 
+                            <SignupForm 
+                            onClose={() => dispatch(loginModalActions.setLoginModalVisibility(false))}
+                            onLogin={() => dispatch(loginModalActions.setSignupMode(false))}
+                            />
+                            : 
+                            <LoginForm 
+                                onClose={() => dispatch(loginModalActions.setLoginModalVisibility(false))}
+                                onSignup={() => dispatch(loginModalActions.setSignupMode(true))}
+                            />
+                        }
+                    </Modal>
+                }
+            </AnimatePresence>
+
         </main>
 
         <footer>RankStars 2024 - Um projeto React & Express.JS</footer>

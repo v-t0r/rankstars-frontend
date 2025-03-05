@@ -32,16 +32,6 @@
     cursor: pointer;
 }
 
-.header a{
-    text-decoration: none;
-    color: var(--inactive-gray-color);
-}
-
-.header a:hover{
-    text-decoration: none;
-    color: white
-}
-
 .search-bar{
     width: 25rem;
     height: 2rem;

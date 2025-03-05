@@ -1,5 +1,3 @@
-// Este arquivo é somente um exemplo de slice
-
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {user: null, expDate: null}

@@ -1,12 +1,14 @@
 import classes from "./MainHeader.module.css"
 
-import {Link, useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 
 import SideMenu from "../sideMenu/SideMenu"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { loginModalActions } from "../../store"
 
 export default function MainHeader(){
     const user = useSelector(state => state.user.user)
+    const  dispatch = useDispatch()
     const navigate = useNavigate()
     
     function handleHome() {
@@ -22,7 +24,7 @@ export default function MainHeader(){
 
             {user && <input className={classes["search-bar"]} type="text"/>}
 
-            {!user && <Link to="/login">Login/Signup </Link>}
+            {!user && <button className="text-button" onClick={() => dispatch(loginModalActions.setLoginModalVisibility(true))}>Login/Signup</button>}
             {user && <SideMenu/>}
             
         </header>

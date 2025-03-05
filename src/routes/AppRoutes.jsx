@@ -1,7 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
-import {checkAuthentication, userContextLoader} from "../services/auth.js"
-
 import RootLayout from '../pages/layouts/RootLayout.jsx'
 import LoginPage, { action as loginAction} from '../pages/login/LoginPage.jsx'
 import SignupPage, {action as signupAction} from "../pages/login/SignupPage.jsx"
@@ -16,7 +14,7 @@ import ListsPage from "../pages/lists/ListsPage.jsx"
 
 const router = createBrowserRouter([
     { path : "/", element: <RootLayout />, id: "root", errorElement: <ErrorPage />, children: [
-      {path: "/", loader: async() => { await userContextLoader(); return checkAuthentication(true)}, children: [
+      {path: "/", children: [
         {path: "/", element: <HomePage />},
         {path: "profile/:id", element: <ProfilePage />},
         {path: "profile/:id/reviews", element: <ReviewsPage /> },
@@ -25,7 +23,7 @@ const router = createBrowserRouter([
         {path: "/list/:id", element: <ListPage />},
         {path: "/profile", element: <ProfilePage />},
       ]},
-      {path: "/",  loader: async() => { await userContextLoader(); return checkAuthentication(false)}, children: [
+      {path: "/", children: [
         {path: "/login", element: <LoginPage />, action: loginAction },
         {path: "/signup", element: <SignupPage />, action: signupAction },
       ]},

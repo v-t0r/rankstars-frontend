@@ -66,7 +66,7 @@ export async function action({ request }) {
     
     if(response.status === 401){
         errorResponse.errors.general = "Email or password incorrect! Please, try again!"
-        return errorResponse   
+        return errorResponse
     }
 
     const {userId} = await response.json()

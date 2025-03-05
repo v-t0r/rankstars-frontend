@@ -61,17 +61,22 @@ export default function UsersList({username, profileUserId, users, type, onClose
     // verify if the logged user follows or not the users in the list
     // and if the user in the list follows the logged users
     const following_status = users.map(user => {
-        if(user._id == loggedUserInfo._id){
-            return "it's you!"
-        }
-        if(loggedUserInfo.following.filter(value => value._id === user._id).length){
-            return "unfollow"
-        }
-        if(loggedUserInfo.followers.filter(value => value._id === user._id).length){
-            return "follow back"
-        }else{
+
+        if(loggedUserInfo){
+            if(user._id == loggedUserInfo._id){
+                return "it's you!"
+            }
+            if(loggedUserInfo.following.filter(value => value._id === user._id).length){
+                return "unfollow"
+            }
+            if(loggedUserInfo.followers.filter(value => value._id === user._id).length){
+                return "follow back"
+            }else{
+                return "follow"
+            }
+        }else{{
             return "follow"
-        }
+        }}
     })
 
     return <div className={classes["container"]}>

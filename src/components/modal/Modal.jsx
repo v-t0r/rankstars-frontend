@@ -32,6 +32,8 @@ export default function Modal({ children, onEscape }){
             initial={{opacity: 0, y: 30}}
             animate={{opacity: 1, y: 0}}
             exit={{opacity: 0, y: -30}}
+            layout
+            transition={{layout: {type: "spring", bounce: 0.6, duration: 0.5}}}
         >
             {children}
         </motion.dialog>,

@@ -1,7 +1,6 @@
 import store, { userActions } from "../../store"
 import { useNavigate } from "react-router-dom"
 
-import { backendUrl } from "../../utils/constants"
 import { useEffect } from "react"
 
 export default function LogoutPage(){
@@ -10,13 +9,7 @@ export default function LogoutPage(){
 
     useEffect(() => {
         store.dispatch(userActions.updateUserInfo({user: null}))
-        store.dispatch(userActions.updateExpDate({expDate: null}))
-        async function logout(){
-            await fetch(`${backendUrl}/logout`, {
-                credentials: "include"
-            })
-        }
-        logout()
+
         navigate("/login")
     }, [navigate])
 

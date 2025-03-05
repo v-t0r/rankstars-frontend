@@ -5,7 +5,7 @@ import { useLocation, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
 import { useDispatch, useSelector } from "react-redux"
-import { userActions } from "../../store"
+import { loginModalActions, userActions } from "../../store"
 
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { queryClient } from "../../services/queryClient"
@@ -35,13 +35,16 @@ export default function ProfilePage(){
         setFollowingModalOpen(false)
     }, [location])
 
-    const loggedUserProfile = id === loggedUserInfo._id //This profile is from the logged user?
-
-    const loggedUserFollows = loggedUserInfo.following.filter(user => user._id === id).length === 1
-    const followingLoggedUser = loggedUserInfo.followers.filter(user => user._id === id ).length === 1
-
+    let loggedUserProfile = false
+    let loggedUserFollows = false
+    let followingLoggedUser = false
     
-
+    if(loggedUserInfo){
+        loggedUserProfile = id === loggedUserInfo._id //This profile is from the logged user?
+        loggedUserFollows = loggedUserInfo.following.filter(user => user._id === id).length === 1
+        followingLoggedUser = loggedUserInfo.followers.filter(user => user._id === id ).length === 1
+    }
+    
     //query para recupear informações do user
     const { data, isPending, isError, error } = useQuery({
         queryKey: ["users", "profile", `${id}`],
@@ -133,7 +136,12 @@ export default function ProfilePage(){
                     <div className={classes["followers-following"]}>
                         <p onClick={() => handleModal("following")}>{totalFollowing} Following</p>
                         <p onClick={() => handleModal("followers")} >{totalFollowers} {totalFollowers === 1? "Follower" : "Followers"}</p>
-                        {!loggedUserProfile && <button className={followOp == "follow" ? classes["follow-button"] : classes["unfollow-button"]} onClick={() => mutate(id)}>{buttonText}</button>}
+                        {!loggedUserProfile && 
+                            <button 
+                                className={followOp == "follow" ? classes["follow-button"] : classes["unfollow-button"]} 
+                                onClick={() => loggedUserInfo ? mutate(id) : dispatch(loginModalActions.setLoginModalVisibility(true))}>{buttonText}
+                            </button>
+                        }
                     </div>
 
                 </div>

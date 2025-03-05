@@ -55,7 +55,7 @@ export default function CommentCore({comment, type = "comment", onReplyClick}){
 
         {overflowMenuVisibility && <OverflowMenu right={"0"} bottom={"50px"} handleCloseMenu={() => setOverflowMenuVisibility(false)}>
                 <ul className={classes["overflow-menu-list"]}>
-                    {loggedUserInfo._id === comment.author._id && 
+                    {loggedUserInfo?._id === comment.author._id && 
                         <li>
                             <button onClick={() => deleteMutate({id: comment._id})} className="negative-button">
                                 <span className= {`material-symbols-outlined ${classes["delete-icon"]}`}>delete</span>Delete

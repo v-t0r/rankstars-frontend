@@ -1,7 +1,7 @@
 .modal {
     margin: auto;
-    padding: 2rem;
-    border-radius: 1rem;
+    padding: 40px;
+    border-radius: 5%;
     background-color: var(--secondary-background-color);
     color: white;
     border: none;

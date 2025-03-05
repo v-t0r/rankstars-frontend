@@ -40,7 +40,7 @@ export default function OptionsBar({post, type}){
     let liked
     // let following
     if(type === "reviews"){
-        liked = loggedUserInfo.likedReviews.filter(likedReview => likedReview === post._id).length === 1
+        liked = loggedUserInfo ? loggedUserInfo.likedReviews.filter(likedReview => likedReview === post._id).length === 1 : false
     }
     if(type == "lists"){
         // following = loggedUserInfo.followingLists.filter(followedList => followedList === post._id).length === 1
@@ -130,7 +130,7 @@ export default function OptionsBar({post, type}){
                     }
 
                     {/* Menu options exclusive to the owner post */}
-                    {loggedUserInfo._id === post.author._id && <>
+                    {loggedUserInfo?._id === post.author._id && <>
                         <span className={classes["divider-line"]}></span>
                         
                         <li>

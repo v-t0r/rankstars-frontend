@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { imageBackendUrl } from "../../utils/constants"
 import Modal from "../modal/Modal"
 import NewReviewForm from "../newReviewForm/NewReviewForm"
+import { logout } from "../../services/auth"
 
 export default function SideMenu(){
     const [menuIsOpen, setMenuIsOpen] = useState(false)
@@ -69,10 +70,11 @@ export default function SideMenu(){
 
                                 <li><Link to={`/`}><span className={`material-symbols-outlined ${classes["menu-icon"]}`}>info</span>About RankStars</Link></li>                    
                             </ul>
-                            <Link to={`/logout`} className={`negative-button ${classes["logout-button"]}`} type="submit"><span className={`material-symbols-outlined ${classes["menu-icon"]}`}>logout</span>Logout</Link>
+                            <button onClick={logout} className={`negative-button ${classes["logout-button"]}`}>
+                                <span className={`material-symbols-outlined ${classes["menu-icon"]}`}>logout</span>Logout
+                            </button>
                         </motion.div>
-                    </div> 
-                    
+                    </div>  
                 }
 
                 {modalVisibility.newReview && 
