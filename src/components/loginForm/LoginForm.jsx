@@ -1,12 +1,10 @@
-import { userActions } from "../../store"
+import { createUserContext } from "../../services/auth"
 import { backendUrl } from "../../utils/constants"
 import classes from "./LoginForm.module.css"
 import { useState } from "react"
-import { useDispatch } from "react-redux"
 
 export default function LoginForm({onClose, onSignup}){
     const [validationErrors, setValidationErrors] = useState([])
-    const dispatch = useDispatch()
 
     async function handleSubmit(e){
         e.preventDefault()
@@ -40,19 +38,7 @@ export default function LoginForm({onClose, onSignup}){
             return
         }
 
-        const {userId} = await response.json()
-
-        const userInfoResponse = await fetch(`${backendUrl}/users/${userId}`)
-
-        if(!userInfoResponse.ok){
-            errors = [...errors, ["general", "Looks like our servers are down. Try again later!"]]
-            setValidationErrors(errors)
-            return 
-        }
-
-        const userInfo = await userInfoResponse.json()
-        dispatch(userActions.updateUserInfo(userInfo))
-
+        createUserContext()
         onClose()
     }
 

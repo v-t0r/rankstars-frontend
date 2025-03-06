@@ -1,9 +1,28 @@
 // import { redirect } from "react-router-dom"
-import store from "../store"
-import { userActions } from "../store"
+import store, { userActions } from "../store"
 import { backendUrl } from "../utils/constants"
-// import { backendUrl } from "../utils/constants"
 
+export async function createUserContext(){
+    try{
+        const response = await fetch(`${backendUrl}/users/myuser`)
+
+        if(!response.ok){
+            const error = new Error("There is no authenticated user.")
+            error.status = response.status
+            error.info = await response.json()
+            return 
+        }
+
+        const userInfo = await response.json()
+        store.dispatch(userActions.updateUserInfo(userInfo))
+
+    }catch(error){
+        if(!error.status){
+            error.status = 500
+        }
+        throw error
+    }
+}
 
 export async function logout(){
     

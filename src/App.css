@@ -144,7 +144,7 @@ footer {
     outline: solid rgb(222, 189, 80) 2px;
 }
 .bad-border:hover {
-    outline: solid red 2px;
+    outline: solid rgb(255, 77, 77) 2px;
 }
 
 @media screen and (max-width: 750px) {
