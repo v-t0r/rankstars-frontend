@@ -6,11 +6,29 @@ import { useDispatch, useSelector } from "react-redux"
 import { loginModalActions } from "../../store"
 import { AnimatePresence } from "framer-motion"
 import SignupForm from "../../components/loginForm/SignupForm"
+import { useEffect, useRef } from "react"
+import { calcRemainingTime } from "../../utils/functions"
+import { logout } from "../../services/auth"
 
 export default function RootLayout(){
     const {visibility: loginModalVisibility, signupMode} = useSelector(state => state.loginModal)
+
+    const expDate = useSelector(state => state.user.expDate)
     const dispatch = useDispatch()
+    const timeoutRef = useRef(null)
     
+    useEffect(()=>{
+        if(timeoutRef.current){
+            clearTimeout(timeoutRef.current)
+        }
+        
+        if(expDate){
+            timeoutRef.current = setTimeout(() => {
+                logout()
+            }, calcRemainingTime(expDate))
+        }
+    }, [expDate])
+
     return <>
         <MainHeader />
         <main>

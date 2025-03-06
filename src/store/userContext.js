@@ -12,7 +12,8 @@ const userSlice = createSlice({
             state.user = action.payload.user
         },
 
-        updateExpDate(state, action){
+        createUserContext(state, action){
+            state.user = action.payload.user
             state.expDate = action.payload.expDate
         }
     }

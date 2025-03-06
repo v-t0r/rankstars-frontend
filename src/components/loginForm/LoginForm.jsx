@@ -37,8 +37,9 @@ export default function LoginForm({onClose, onSignup}){
             setValidationErrors(errors)
             return
         }
-
-        createUserContext()
+        
+        const { expDate } = await response.json()
+        createUserContext(expDate)
         onClose()
     }
 

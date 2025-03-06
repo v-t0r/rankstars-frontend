@@ -11,9 +11,10 @@ import ReviewsPage from "../pages/reviews/ReviewsPage.jsx"
 import ListPage from '../pages/lists/ListPage.jsx'
 import ErrorPage from '../pages/errors/ErrorPage.jsx'
 import ListsPage from "../pages/lists/ListsPage.jsx"
+import { authenticationLoader } from "../services/auth.js"
 
 const router = createBrowserRouter([
-    { path : "/", element: <RootLayout />, id: "root", errorElement: <ErrorPage />, children: [
+    { path : "/", element: <RootLayout />, loader: authenticationLoader ,id: "root", errorElement: <ErrorPage />, children: [
       {path: "/", children: [
         {path: "/", element: <HomePage />},
         {path: "profile/:id", element: <ProfilePage />},

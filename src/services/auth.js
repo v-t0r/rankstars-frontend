@@ -2,7 +2,7 @@
 import store, { userActions } from "../store"
 import { backendUrl } from "../utils/constants"
 
-export async function createUserContext(){
+export async function createUserContext(expDate){
     try{
         const response = await fetch(`${backendUrl}/users/myuser`)
 
@@ -14,7 +14,7 @@ export async function createUserContext(){
         }
 
         const userInfo = await response.json()
-        store.dispatch(userActions.updateUserInfo(userInfo))
+        store.dispatch(userActions.createUserContext({user: userInfo.user, expDate: expDate}))
 
     }catch(error){
         if(!error.status){
@@ -22,6 +22,24 @@ export async function createUserContext(){
         }
         throw error
     }
+}
+
+export async function authenticationLoader(){
+    try{
+        const response = await fetch(`${backendUrl}/auth/status`)
+        const status = await response.json()
+
+        if(!status.authenticated){
+            return null
+        }
+
+        createUserContext(status.expDate)
+        return null
+    }catch(error){
+        error.status = 500
+        throw error
+    }
+
 }
 
 export async function logout(){
@@ -38,7 +56,7 @@ export async function logout(){
             throw error
         }
 
-        store.dispatch(userActions.updateUserInfo({user: null}))
+        store.dispatch(userActions.createUserContext({user: null, expDate: null}))
 
     }catch(error){
         if(!error.status){
