@@ -2,14 +2,22 @@ import { useMutation } from "@tanstack/react-query"
 import classes from "./NewListForm.module.css"
 import { createList, addReviewToList } from "../../services/posts"
 import { useState } from "react"
+import { queryClient } from "../../services/queryClient"
 
-export default function NewListForm({review, onClose, onCancel}){
+export default function NewListForm({onClose, onCancel, onReviewPage=false, review=null}){
 
     const [validationErrors, setValidationErrors] = useState([])
 
     const { mutate: newListMutate } = useMutation({
         mutationFn: createList,
-        onSuccess: (data) => addReviewMutate({reviewId: review._id, listId: data.list._id})
+        onSuccess: (data) => {
+            if(review){
+                addReviewMutate({reviewId: review._id, listId: data.list._id})
+            }else{
+                queryClient.invalidateQueries()
+                onClose()
+            }
+        }
     })
 
     const { mutate: addReviewMutate } = useMutation({
@@ -57,7 +65,7 @@ export default function NewListForm({review, onClose, onCancel}){
         
 
         <div className={classes["action-buttons-div"]}>
-            <button type="button" className="text-button" onClick={onCancel}>back</button>
+            <button type="button" className={onReviewPage ? "text-button" : "negative-button"} onClick={onCancel}>{onReviewPage ? "back" : "cancel"}</button>
             <button type="submit" className="button secondary-button">Create</button>
         </div>
 

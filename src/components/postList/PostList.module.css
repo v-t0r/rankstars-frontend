@@ -1,5 +1,5 @@
 .posts-section {
-    width: 50rem;
+    width: 800px;
     margin: auto;
 }
 
@@ -7,12 +7,12 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    gap: 1rem;
+    gap: 16px;
     list-style: none;
 }
 
 .posts-section li {
-    padding: 1rem;
+    padding: 16px;
     background-color: var(--secondary-background-color);
-    border-radius: 0.5rem;
+    border-radius: 8px;
 }

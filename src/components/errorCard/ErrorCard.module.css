@@ -1,19 +1,18 @@
 .card {
     display: flex;
     flex-direction: column;
-    /* background-color: red; */
-    margin-top: 1rem !important;
+    margin-top: 16px !important;
     width: fit-content;
     margin: auto;
-    padding: 2.5rem;
-    border-radius: 1rem;
-    gap: 1rem;   
+    padding: 40px;
+    border-radius: 16px;
+    gap: 16px;   
 }
 
 .card .message-div {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 8px;
 }
 
 .card h1 {

@@ -3,8 +3,8 @@
     width: fit-content;
     height: fit-content;
     background-color: var(--secondary-background-color);
-    border-radius: 0.5rem;
-    padding: 1rem;
+    border-radius: 8px;
+    padding: 16px;
     box-shadow: rgba(0, 0, 0, 0.194) 2px 2px 10px;
     z-index: 999;
 }
@@ -23,7 +23,7 @@
     width: max-content;
     text-align: left;
     list-style: none;
-    gap: 0.5rem;
+    gap: 8px;
 }
 
 .invisible-click-wall{

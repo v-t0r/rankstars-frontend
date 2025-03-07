@@ -5,7 +5,7 @@
     justify-content: space-between;
     
     background-color: var(--secondary-background-color);
-    padding: 0 3rem;
+    padding: 0 48px;
     margin: 0 auto;
     width: var(--header-width);
     min-width: var(--header-min-width);
@@ -33,15 +33,15 @@
 }
 
 .search-bar{
-    width: 25rem;
-    height: 2rem;
+    width: 400px;
+    height: 32px;
     
     background-color: var(--input-background-color);
     color: white;
 
-    border-radius: 0.5rem;
+    border-radius: 8px;
     border: none;
-    padding: 0 1rem;
+    padding: 0 16px;
     font-size: medium;
 
     position: absolute;
@@ -53,7 +53,7 @@
     .search-bar{
         position: relative;
         translate: 0% 0%;
-        width: 20rem;
+        width: 320px;
         left: auto
     }
 }

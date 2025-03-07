@@ -11,10 +11,11 @@ import { imageBackendUrl } from "../../utils/constants"
 import Modal from "../modal/Modal"
 import NewReviewForm from "../newReviewForm/NewReviewForm"
 import { logout } from "../../services/auth"
+import NewListForm from "../newListForm/newListForm"
 
 export default function SideMenu(){
     const [menuIsOpen, setMenuIsOpen] = useState(false)
-    const [modalVisibility, setModalVisibility] = useState({newReview: false})
+    const [modalVisibility, setModalVisibility] = useState({newReview: false, newList: false})
 
     const location = useLocation()
 
@@ -63,6 +64,11 @@ export default function SideMenu(){
                                     </Link>
                                 </li>
                                 <li>
+                                    <p onClick={() => setModalVisibility(prevState => ({...prevState, newList: true}))}>
+                                        <span className={`material-symbols-outlined ${classes["menu-icon"]}`}>list_alt_add</span>New List
+                                    </p>
+                                </li>
+                                <li>
                                     <Link to={`/profile/${userId}/lists`}>
                                         <span className={`material-symbols-outlined ${classes["menu-icon"]}`}>list_alt</span>My Lists
                                     </Link>
@@ -77,11 +83,20 @@ export default function SideMenu(){
                     </div>  
                 }
 
-                {modalVisibility.newReview && 
+                {modalVisibility.newReview &&
                     <Modal onEscape={() => setModalVisibility(prevState => ({...prevState, newReview: false}))}>
                         <NewReviewForm onCancel={() => setModalVisibility(prevState => ({...prevState, newReview: false}))}/>
+                    </Modal>                    
+                }
+
+                {modalVisibility.newList && 
+                    <Modal onEscape={() => setModalVisibility(prevState => ({...prevState, newList: false}))}>
+                        <NewListForm 
+                            onCancel={() => setModalVisibility(prevState => ({...prevState, newList: false}))}
+                            onClose={() => setModalVisibility(prevState => ({...prevState, newList: false}))}/>
                     </Modal>
                 }
+
             </AnimatePresence>
         </>
     )

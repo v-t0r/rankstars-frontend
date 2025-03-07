@@ -1,9 +1,9 @@
 .general-container{
     display: flex;
     flex-direction: column;
-    width: 50rem;
+    width: 800px;
     margin: auto;
-    margin-top: 2rem;
+    margin-top: 32px;
 }
 
 .general-container .back-link {
@@ -11,8 +11,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 0.2rem;
-    margin-bottom: 0.5rem;
+    gap: 3px;
+    margin-bottom: 8px;
 
     font-size: large;
 }
@@ -28,11 +28,11 @@
 }
 
 .review-div {
-    padding-top: 0.6rem;
+    padding-top: 10px;
     border-top: solid var(--blue-gray) 2px;
 }
 
 .options-bar-div{
-    padding: 0.6rem 0rem; 
+    padding: 10px 0; 
     border-bottom: solid var(--blue-gray) 2px;
 }

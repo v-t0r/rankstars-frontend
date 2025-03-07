@@ -8,8 +8,8 @@
     justify-content: center;
     align-items: center;
     width: fit-content;
-    gap: 0.5rem;
-    margin: 3rem auto;
+    gap: 8px;
+    margin: 48px auto;
     height: fit-content;
 }
 
@@ -18,10 +18,9 @@
     height: 14px;
     border-radius: 50%;
     display: block;
-    margin: 15px auto;
+    margin: 16px auto;
     position: relative;
     background-color: white;
-    
 }
 
 #dot-1 {

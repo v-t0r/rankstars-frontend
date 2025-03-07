@@ -40,7 +40,7 @@
 }
 
 .rating-input input {
-    width: 3.5rem;
+    width: 56px;
     text-align: end;
 }
 
@@ -65,7 +65,7 @@ input[type="file"] button{
     font-size: mediu;
     text-transform: uppercase;
     font-weight: 500;
-    gap: 0.5rem;
+    gap: 8px;
 }
 
 .select-div select {
@@ -78,7 +78,7 @@ input[type="file"] button{
 .image-picker-div  {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 8px;
 }
 
 .image-picker-div label {
@@ -98,7 +98,7 @@ input[type="file"] button{
     .form{
         min-width: 0;
         width: 90%;
-        padding: 1rem;
+        padding: 16px;
     }
 
     .title-rating {
@@ -120,7 +120,7 @@ input[type="file"] button{
     }
 
     .form textarea {
-        height: 15rem;
+        height: 240px;
         font-size: large;
     }
 }

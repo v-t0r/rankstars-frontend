@@ -4,7 +4,7 @@ form {
 }
 
 .comment-div {
-    --ipt-brdr-rds: 0.3rem;
+    --ipt-brdr-rds: 5px;
 
     display: flex;
     flex-direction: row;
@@ -15,14 +15,14 @@ form {
 
 .comment-div textarea {
     --line-heigth: 1rem;
-    --vertical-padding: 0.5rem;
+    --vertical-padding: 8px;
     
     width: 100%;
     font-size: 1rem;
     line-height: var(--line-heigth);
-    padding: var(--vertical-padding) 0.5rem;
+    padding: var(--vertical-padding) 8px;
     height: calc(var(--line-heigth) + (2 * var(--vertical-padding)) + 1px);
-    max-height: 4rem;
+    max-height: 64px;
     resize: none;
     border-radius: var(--ipt-brdr-rds) 0 0 var(--ipt-brdr-rds);
     background-color: var(--input-background-color);
@@ -45,7 +45,7 @@ form {
     background-color: var(--input-background-color);
     color: var(--dark-gray);
     border-radius: 0 var(--ipt-brdr-rds) var(--ipt-brdr-rds) 0;
-    padding: 0rem 0.3rem;
+    padding: 0 5px;
 }
 
 .comment-div .comment-button:hover {

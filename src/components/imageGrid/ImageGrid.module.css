@@ -1,14 +1,14 @@
 .image-rows {
     display: flex;
     flex-direction: column;
-    height: 14rem;
+    height: 224px;
     flex: 1;
 }
 
 .image-columns {
     display: flex;
     flex-direction: row;
-    width: 14rem;
+    width: 224px;
     flex: 1;
 }
 

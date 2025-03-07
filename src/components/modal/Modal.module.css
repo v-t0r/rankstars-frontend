@@ -1,11 +1,11 @@
 .modal {
     margin: auto;
     padding: 40px;
-    border-radius: 5%;
+    border-radius: 10px;
     background-color: var(--secondary-background-color);
     color: white;
     border: none;
-    box-shadow:  rgba(0, 0, 0, 0.281) 0px 0px 2rem;
+    box-shadow:  rgba(0, 0, 0, 0.281) 0px 0px 32px;
 }
 
 .modal::backdrop{

@@ -1,7 +1,7 @@
 import classes from "./ListCard.module.css"
 
 import { useNavigate } from "react-router-dom"
-import ImageGrid from "../../imageGrid/imageGrid"
+import ImageGrid from "../../imageGrid/ImageGrid"
 
 export default function ListCard({list}){
     const navigate = useNavigate()

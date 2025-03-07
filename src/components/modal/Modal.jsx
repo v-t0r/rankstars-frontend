@@ -29,11 +29,13 @@ export default function Modal({ children, onEscape }){
             ref={dialog} 
             className={classes["modal"]}
             onCancel={handleEscape}
-            initial={{opacity: 0, y: 30}}
-            animate={{opacity: 1, y: 0}}
+            // initial={{opacity: 0, y: 30
+            // animate={{opacity: 1, y: 0}}
+            initial={{opacity: 0, scale: 0.9}}
+            animate={{opacity: 1, scale: 1}}
             exit={{opacity: 0, y: -30}}
             layout
-            transition={{layout: {type: "spring", bounce: 0.6, duration: 0.5}}}
+            transition={{type: "spring", bounce: 0.5, duration: 0.5}}
         >
             {children}
         </motion.dialog>,

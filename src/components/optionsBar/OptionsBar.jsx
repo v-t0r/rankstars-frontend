@@ -20,7 +20,7 @@ import ListList from "../listList/ListList"
 import NewListForm from "../newListForm/newListForm"
 import EditListForm from "../editListForm.jsx/EditListForm"
 import NewReviewForm from "../newReviewForm/NewReviewForm"
-import { AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 
 export default function OptionsBar({post, type}){
     const loggedUserInfo = useSelector(state => state.user.user)
@@ -99,18 +99,18 @@ export default function OptionsBar({post, type}){
             
         {type === "reviews" && 
             <div className={classes["like-div"]}>
-                <button className={`${classes["like-button"]} ${liked ? classes["liked-button"] : undefined}`} onClick={handleLike}>
+                <motion.button whileTap={{scale: 1.2}} className={`${classes["like-button"]} ${liked ? classes["liked-button"] : undefined}`} onClick={handleLike}>
                     <span className={`material-symbols-outlined  ${classes["like-icon"]} ${liked ? classes["liked-icon"] : undefined}`}>
                         favorite
                     </span>
-                </button>
+                </motion.button>
                 <p>{post.totalLikes}</p>
             </div>
         }
 
         <CommentInput parent={post} type={type} />
         
-        {loggedUserInfo?._id === post.author._id &&
+        {(loggedUserInfo?._id === post.author._id || type === "reviews") &&
             <div className={classes["more-options-div"]}>  
                 <button onClick={() => setModalsVisibility(prevState => ({...prevState, overflowMenu: true }))} className={classes["more-options-button"]}>
                     <span className={`material-symbols-outlined`}>
@@ -141,7 +141,7 @@ export default function OptionsBar({post, type}){
 
                         {/* Menu options exclusive to the owner post */}
                         {loggedUserInfo?._id === post.author._id && <>
-                            {type === "review" &&<span className={classes["divider-line"]}></span>}
+                            {type === "reviews" &&<span className={classes["divider-line"]}></span>}
                             
                             <li>
                                 <button className="text-button" onClick={handleEditPost}>
@@ -182,6 +182,7 @@ export default function OptionsBar({post, type}){
                     review={post} 
                     onClose={() => setModalsVisibility(prevState => ({...prevState, newListModal: false}))}
                     onCancel={() => setModalsVisibility(prevState => ({...prevState, newListModal: false, listsModal: true}))}
+                    onReviewPage = {true}
                 />}
             </Modal>}
 

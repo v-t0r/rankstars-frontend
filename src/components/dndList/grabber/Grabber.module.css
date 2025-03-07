@@ -5,8 +5,8 @@
     justify-content: center;
     cursor: pointer;
     gap: 4px;
-    padding: 0.2rem 0.4rem;
-    margin: 0 0.3rem 0 0;  
+    padding: 3px 6px;
+    margin: 0 5px 0 0;  
     touch-action: none;
 
 }
@@ -24,9 +24,8 @@
 }
 
 .dot {
-    width: 3px;
-    height: 3px;
+    width: 4px;
+    height: 4px;
     background-color: rgba(128, 128, 128, 0.607);
-    border-radius: 0.05rem;
 }
 

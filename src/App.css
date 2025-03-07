@@ -32,7 +32,7 @@
     --header-width: 100%;
     --header-min-width: 900px;
 
-    --header-height: 5rem;
+    --header-height: 80px;
 }
 
 body {
@@ -61,17 +61,23 @@ a:hover {
     color: white;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
 footer {
     text-align: center;
 }
 
 .button{
     width: fit-content;
-    padding: 0.7rem 1.3rem;
+    padding: 12px 20px;
     color: white;
     background-color: var(--button-color);
     font: bold;
-    border-radius: 0.5rem;
+    border-radius: 8px;
     font-size: medium;
     font-weight: 500;
     border: none;
@@ -156,6 +162,6 @@ footer {
     
     .button{
         font-size: small;
-        padding: 0.5rem 1.2rem;
+        padding: 8px 20px;
     }
 }

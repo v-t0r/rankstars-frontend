@@ -3,10 +3,10 @@
     flex-direction: column;
     align-items: center;
     background-color: var(--secondary-background-color);
-    width: 14rem;
-    height: 17rem;
+    width: 224px;
+    height: 272px;
     font-family: "Inknut Antiqua";
-    border-radius: 0.5rem;
+    border-radius: 8px;
     margin: 0px 2px;
     cursor: pointer;
 
@@ -20,8 +20,8 @@
 .title-div{
     display: flex;
     align-items: center;
-    height: 3rem;
-    padding: 0.5rem;
+    height: 48px;
+    padding: 8px;
     z-index: 2;
 
 }

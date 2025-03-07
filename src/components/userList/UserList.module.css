@@ -1,6 +1,6 @@
 .container {
-    width: 30rem;
-    min-height: 30rem;
+    width: 480px;
+    min-height: 480px;
 }
 
 .container h1 {
@@ -19,11 +19,11 @@
     display: flex;
     flex-direction: column;
     background-color: var(--background-color);
-    margin-top: 1rem;
-    padding: 1rem;
-    border-radius: 1rem;
-    height: 30rem;
-    gap: 1rem;  
+    margin-top: 16px;
+    padding: 16px;
+    border-radius: 16px;
+    height: 480px;
+    gap: 16px;  
     
     overflow-y: auto;
     scrollbar-color: var(--input-background-color) var(--background-color);
@@ -40,7 +40,7 @@
     color: var(--dark-gray);
     line-height: 1.5rem;
     text-align: center;
-    margin-top: 1rem;
+    margin-top: 16px;
 }
 
 .img-and-username {
@@ -48,7 +48,7 @@
     flex-direction: row;
     justify-content: start;
     align-items: start;
-    gap: 1rem;
+    gap: 16px;
 }
 
 .username-status {
@@ -84,8 +84,8 @@
 }
 
 .container li img {
-    width: 3rem;
-    border-radius: 100%;
+    width: 48px;
+    border-radius: 50%;
     cursor: pointer;
 }
 
@@ -93,18 +93,18 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding-top: 0.3rem;
+    padding-top: 5px;
 }
 
 .button-container button {
     cursor: pointer;
     background: none;
-    padding: 0.3rem;
-    border-radius: 0.5rem;
+    padding: 5px;
+    border-radius: 8px;
     border: solid var(--dark-gray) 2px; 
     color: var(--light-gray);
 
-    width: 5.5rem;
+    width: 85px;
 }
 
 .button-container button:hover {
