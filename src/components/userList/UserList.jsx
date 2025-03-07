@@ -27,15 +27,14 @@ export default function UsersList({username, profileUserId, users, type, onClose
     })
 
     function updateUserContext(operation, userId){
-        const user = users.filter(user => user._id === userId) //lista com somente o user (des)seguido
         let newLoggedUserInfo = structuredClone(loggedUserInfo)
         
         //adiociona ou removo o user
         if(operation == "follow"){
-            newLoggedUserInfo.following = [...loggedUserInfo.following, ...user]
+            newLoggedUserInfo.following = [...loggedUserInfo.following, userId]
         }
         if(operation == "unfollow"){
-            newLoggedUserInfo.following = loggedUserInfo.following.filter(user => user._id !== userId)
+            newLoggedUserInfo.following = loggedUserInfo.following.filter(user => user !== userId)
         }
 
         //invalido as queries para atualizar a ui
@@ -65,10 +64,10 @@ export default function UsersList({username, profileUserId, users, type, onClose
             if(user._id == loggedUserInfo._id){
                 return "it's you!"
             }
-            if(loggedUserInfo.following.filter(value => value._id === user._id).length){
+            if(loggedUserInfo.following.includes(user._id)){
                 return "unfollow"
             }
-            if(loggedUserInfo.followers.filter(value => value._id === user._id).length){
+            if(loggedUserInfo.followers.includes(user._id)){
                 return "follow back"
             }else{
                 return "follow"

@@ -1,10 +1,12 @@
+import { createUserContext } from "../../services/auth"
+import { backendUrl } from "../../utils/constants"
 import classes from "./LoginForm.module.css"
 import { useState } from "react"
 
 export default function SignupForm({onClose, onLogin}){
     const [validationErrors, setValidationErrors] = useState([])
 
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault()
 
         const formData = new FormData(e.target)
@@ -32,7 +34,35 @@ export default function SignupForm({onClose, onLogin}){
             return
         }
 
-        console.log("Fez o singup")
+        try{
+            const response = await fetch(`${backendUrl}/signup`, {
+                method: "POST",
+                body: formData,
+                credentials: "include"
+            })
+
+            if(response.status === 422){
+                const errorInfo = await response.json()
+                errors = [...errors, ["general", ...errorInfo.data.map(error => error.msg)]]
+                setValidationErrors(errors)
+                return
+            }
+
+            //LOGIN AUTOMATICO APÓS SIGNUP
+            const responseLogin = await fetch(`${backendUrl}/login`, {
+                method: "POST",
+                credentials: "include",
+                body: formData
+            })
+
+            const { expDate } = await responseLogin.json()
+            createUserContext(expDate)
+            onClose()
+
+        }catch(error){
+            error.status = 500
+            throw error
+        }
     }
 
     return <div className={classes["container"]}> 
@@ -66,7 +96,7 @@ export default function SignupForm({onClose, onLogin}){
                 <input type="password" name="confirm-password" id="confirm-password"/>
                 {validationErrors.map((error, index) => error[0] === "confirm-password" && <p key={index} className="error-text">{error[1]}</p>)}
             </div>
-
+            {validationErrors.map((error, index) => error[0] === "general" && <p key={index} className="error-text">{error[1]}</p>)}
             <div className={classes["button-link"]}>
                 <button className="button" type="submit" disabled={navigation.state === "submitting"}>Signup</button>
                 <button className="text-button" onClick={onLogin}>or login</button>

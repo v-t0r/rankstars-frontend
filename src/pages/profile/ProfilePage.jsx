@@ -40,9 +40,9 @@ export default function ProfilePage(){
     let followingLoggedUser = false
     
     if(loggedUserInfo){
-        loggedUserProfile = id === loggedUserInfo._id //This profile is from the logged user?
-        loggedUserFollows = loggedUserInfo.following.filter(user => user._id === id).length === 1
-        followingLoggedUser = loggedUserInfo.followers.filter(user => user._id === id ).length === 1
+        loggedUserProfile = id == loggedUserInfo._id //This profile is from the logged user?
+        loggedUserFollows = loggedUserInfo.following.includes(id)
+        followingLoggedUser = loggedUserInfo.followers.includes(id)
     }
     
     //query para recupear informações do user
@@ -66,23 +66,17 @@ export default function ProfilePage(){
     }) 
 
     function updateUserContext(operation){
-        const userInfo = {
-            username: data.user.username,
-            profilePicUrl: data.user.profilePicUrl,
-            _id: data.user._id,
-            status: data.user.status
-        }
         let newLoggedUserInfo = structuredClone(loggedUserInfo)
 
         if(operation == "follow"){
-            newLoggedUserInfo.following = [...loggedUserInfo.following, userInfo]
+            newLoggedUserInfo.following = [...loggedUserInfo.following, data.user._id]
         }
         if(operation == "unfollow"){
-            newLoggedUserInfo.following = loggedUserInfo.following.filter(user => user._id !== userInfo._id)
+            newLoggedUserInfo.following = loggedUserInfo.following.filter(user => user !== data.user._id)
         }
         
         queryClient.invalidateQueries({
-            queryKey: ["users", "profile", `${userInfo._id}`],
+            queryKey: ["users", "profile", `${data.user._id}`],
             refetchType: "active"
         })
 
