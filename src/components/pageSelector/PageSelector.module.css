@@ -1,0 +1,33 @@
+.buttons-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.button{
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+
+    border: none;
+    background-color: var(--input-background-color);
+    color: white;
+    cursor: pointer;
+    border-radius: 3px;
+
+    font-size: 1rem;
+}
+
+.button:hover{
+    background-color: rgb(60, 74, 90);
+}
+
+.current-page {
+    background-color: var(--button-color) !important
+}
