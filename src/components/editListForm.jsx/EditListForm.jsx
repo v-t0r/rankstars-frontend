@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import classes from "./EditListForm.module.css"
 
 import { DndContext, PointerSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core"
@@ -6,23 +6,42 @@ import { SortableContext, arrayMove } from "@dnd-kit/sortable"
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers"
 
 import DndListItem from "../dndList/dndListItem/DndListItem"
-import { useMutation } from "@tanstack/react-query"
-import { patchPost } from "../../services/posts"
+import { useMutation, useQuery } from "@tanstack/react-query"
+import { getPost, patchPost } from "../../services/posts"
 import { queryClient } from "../../services/queryClient"
+import LoaderDots from "../loaderDots/LoaderDots"
+import ErrorCard from "../errorCard/ErrorCard"
 
-export default function EditListForm({list, onClose}){
+export default function EditListForm({listId, onClose}){
     const  [listForm, setListForm] = useState({
-        title: list.title,
-        description: list.description,
-        reviews: list.reviews
+        title: "",
+        description: "",
+        reviews: []
     })
+
+    const {data, isPending, isError} = useQuery({
+        queryKey: ["list", `${listId}`],
+        queryFn: ({signal}) => getPost({postId: listId, type: "lists", signal})
+    })
+
+    useEffect(() => {
+        if(data){
+            const list = data.list
+            setListForm({
+                title: list.title,
+                description: list.description,
+                reviews: list.reviews
+            })
+        }
+    }, [data])
+
 
     const [validationErrors, setValidationErrors] = useState([])
 
     const {mutate: patchListMutate} = useMutation({
         mutationFn: patchPost,
         onSuccess: () => {
-            queryClient.invalidateQueries({queryKey: ["list", `${list._id}`]})
+            queryClient.invalidateQueries({queryKey: ["list", `${listId}`]})
             onClose()
         }
     })
@@ -48,7 +67,7 @@ export default function EditListForm({list, onClose}){
             formData.append("reviews", review._id)
         })
 
-        patchListMutate({id: list._id, data: formData, type: "lists"})
+        patchListMutate({id: listId, data: formData, type: "lists"})
     }
 
     function getReviewPosition(id){
@@ -83,7 +102,15 @@ export default function EditListForm({list, onClose}){
 
     const sensors = useSensors(useSensor(PointerSensor), useSensor(TouchSensor))
 
-    return <>
+    let content
+    if(isPending){
+        content = <LoaderDots />
+    }
+    if(isError){{
+        content = <ErrorCard />
+    }}
+    if(data){
+        content = <>
         <form className={classes["form-div"]} onSubmit={handleSubmit}>
             <div className={classes["header-div"]}>
                 <h1>Edit List</h1>
@@ -126,5 +153,11 @@ export default function EditListForm({list, onClose}){
             </div>
         </form>
 
+    </>
+    }
+
+
+    return <>
+        {content}
     </>
 }

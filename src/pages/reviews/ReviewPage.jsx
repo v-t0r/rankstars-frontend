@@ -11,7 +11,7 @@ import ErrorCard from "../../components/errorCard/ErrorCard"
  
 export default function ReviewPage(){
     const {id: reviewId} = useParams()
-
+    console.log("Estou aqui")
     const location = useLocation()
 
     const {data, isPending, isError} = useQuery({

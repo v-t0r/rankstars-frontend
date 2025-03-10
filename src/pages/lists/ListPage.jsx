@@ -1,8 +1,8 @@
 import classes from "./ListPage.module.css"
  
-import { useState } from "react"
+import { useEffect } from "react"
 
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams, useSearchParams } from "react-router-dom"
 import { useQuery} from "@tanstack/react-query"
 
 import { getPost } from "../../services/posts.js"
@@ -12,16 +12,57 @@ import OptionsBar from "../../components/optionsBar/OptionsBar.jsx"
 import CommentContainer from "../../components/comments/CommentContainer.jsx"
 import LoaderDots from "../../components/loaderDots/LoaderDots.jsx"
 import ErrorCard from "../../components/errorCard/ErrorCard.jsx"
+import PageSelector from "../../components/pageSelector/pageSelector.jsx"
+import { ITEMS_PER_PAGE } from "../../utils/constants.js"
 
 export default function ListPage(){
     const {id: listId} = useParams()
 
-    const [sortBy, setSortBy] = useState({sortBy: 'userOrder', order: null})
+    const [searchParams, setSearchParams] = useSearchParams()
+    const paramsObject = Object.fromEntries(searchParams.entries())
 
     const {data, isPending, isError} = useQuery({
-        queryKey: ["list", `${listId}`, `${sortBy.sortBy}`, `${sortBy.order}`],
-        queryFn: ({signal}) => getPost({postId: listId, type: "lists", signal, sortBy: sortBy})
+        queryKey: ["list", `${listId}`, `${paramsObject.sortBy}`, `${paramsObject.order}`, `${paramsObject.page}`],
+        queryFn: ({signal}) => getPost({postId: listId, type: "lists", signal, sortBy: {sortBy: paramsObject.sortBy, order: +paramsObject.order}, page: +paramsObject.page})
     })
+
+    useEffect(() => {
+        const params = new URLSearchParams(searchParams)
+        
+        if(!searchParams.get("page")){
+            params.set("page", 1)
+        }
+        if(!searchParams.get("sortBy")){
+            params.set("sortBy", "userOrder")
+        }
+        if(!searchParams.get("order")){
+            params.set("order", 1)
+        }
+
+        //página maior que o máximo
+        if(data){
+            if( +searchParams.get("page") >  Math.ceil(data.list.reviewsCount/ITEMS_PER_PAGE)){
+                params.set("page", 1)
+            } 
+        }
+
+        setSearchParams(params)
+    }, [searchParams, setSearchParams, data])
+
+    function handleSortBy({sortBy, order}){
+        const params = new URLSearchParams(searchParams)
+
+        params.set("sortBy", sortBy)
+        params.set("order", order)
+
+        setSearchParams(params)
+    }
+
+    function handlePageChange(newPageNumber){
+        const params = new URLSearchParams(searchParams)
+        params.set("page", newPageNumber)
+        setSearchParams(params)
+    }
 
     let content
     if(isPending){
@@ -34,7 +75,8 @@ export default function ListPage(){
 
     if(data){
         const list = data.list
-
+        const totalPages = Math.ceil(list.reviewsCount / ITEMS_PER_PAGE)
+        
         content = <div className={classes["main-container"]}>
             
             <div className={classes["header-div"]}>
@@ -44,9 +86,9 @@ export default function ListPage(){
                 </div>
                 <div className={classes["select-div"]} >
                     <label htmlFor="type"hidden>Sort by</label>
-                    <select id="type" value={JSON.stringify(sortBy)} onChange={(e) => setSortBy(JSON.parse(e.target.value))} >
+                    <select id="type" value={JSON.stringify({sortBy: paramsObject.sortBy, order: +paramsObject.order})} onChange={(e) => handleSortBy(JSON.parse(e.target.value))} >
                         
-                        <option value={JSON.stringify({sortBy: 'userOrder', order: null})}>User Order</option>
+                        <option value={JSON.stringify({sortBy: 'userOrder', order: 1})}>User Order</option>
                         <option value={JSON.stringify({sortBy: 'createdAt', order: -1})}>Newest Posts</option>
                         <option value={JSON.stringify({sortBy: 'createdAt', order: 1})}>Earliest Posts</option>
                         <option value={JSON.stringify({sortBy: 'rating', order: -1})}>Highest Ratings</option>
@@ -55,7 +97,6 @@ export default function ListPage(){
                     </select>
                 </div>
             </div>
-            
             
             <div className={classes["reviews-div"]}>
                 {list.reviews.length === 0 && 
@@ -70,6 +111,17 @@ export default function ListPage(){
                         return <li key={review._id} ><DetailedReviewCard review={review}/></li>
                     })}
                 </ul>
+
+                {list.reviewsCount > ITEMS_PER_PAGE && 
+                    <div className={classes["page-buttons-div"]}>
+                        <PageSelector 
+                            currentPage={+paramsObject.page} 
+                            totalPages={totalPages} 
+                            onPageChange={handlePageChange} 
+                        />
+                    </div>
+                }
+                
             </div>
             
             <div className={classes["options-bar-div"]}>

@@ -1,4 +1,4 @@
-import { backendUrl } from "../utils/constants";
+import { backendUrl, ITEMS_PER_PAGE } from "../utils/constants";
 
 export async function fetchReviewInfo({signal, reviewId}) {
 
@@ -19,14 +19,23 @@ export async function fetchReviewInfo({signal, reviewId}) {
     return review
 }
 
-export async function getPost({signal, postId, type, sortBy = {sortBy: "userOrder", order: null}}) {
+export async function getPost({signal, postId, type, sortBy = {sortBy: "userOrder", order: null}, page = null}) {
+
+    sortBy.sortBy = sortBy.sortBy || "userOrder"
+    sortBy.order = sortBy.order || 1
 
     let sortQuery = ""
     if(type === "lists" && sortBy.sortBy !=="userOrder"){
         sortQuery = `?sortBy=${sortBy.sortBy}&order=${sortBy.order}`
     }
 
-    const response = await fetch(`${backendUrl}/${type}/${postId}${sortQuery}`, {
+    let pageQuery = ""
+    if(page){
+        pageQuery = sortBy.sortBy !== "userOrder" ? "&" : "?"
+        pageQuery = pageQuery + `quantity=${ITEMS_PER_PAGE}&offset=${ITEMS_PER_PAGE*(page-1)}`
+    }
+    
+    const response = await fetch(`${backendUrl}/${type}/${postId}${sortQuery}${pageQuery}`, {
         signal: signal,
         method: "GET",
         credentials: "include",

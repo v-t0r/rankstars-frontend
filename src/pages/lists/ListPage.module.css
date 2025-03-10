@@ -95,6 +95,10 @@
     border-radius: 8px;
 }
 
+.page-buttons-div {
+    margin-top: 16px;
+}
+
 .options-bar-div {
     border-top: solid var(--blue-gray);
     border-bottom: solid var(--blue-gray);

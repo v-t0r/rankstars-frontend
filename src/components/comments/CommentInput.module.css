@@ -29,6 +29,8 @@ form {
     color: var(--light-gray);
     scrollbar-width: thin;
     scrollbar-color: var(--background-color) var(--input-background-color);
+    border: none;
+    scrollbar-width: none;
 }
 
 .comment-div textarea:focus {

@@ -188,7 +188,7 @@ export default function OptionsBar({post, type}){
 
             {modalsVisibility.editListModal && <Modal onEscape={() => setModalsVisibility(prevState => ({...prevState, editListModal: false}))}>
                 <EditListForm 
-                    list={post}
+                    listId={post._id}
                     onClose={() => setModalsVisibility(prevState => ({...prevState, editListModal: false}))} 
                 />
             </Modal>}
