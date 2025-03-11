@@ -4,10 +4,41 @@ import { useParams } from "react-router-dom"
 import { useState } from "react"
 
 import PostList from "../../components/postList/PostList"
+import { fetchUserReviews } from "../../services/users"
+import { useInfiniteQuery } from "@tanstack/react-query"
+import LoaderDots from "../../components/loaderDots/LoaderDots"
 
 export default function ReviewsPage() {
     const [sortBy, setSortBy] = useState({sortBy: 'createdAt', order: -1})
     const {id} = useParams()
+
+    const { data, isPending, isError, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
+        queryKey: [ "reviews", "user", `${id}`, `${sortBy.sortBy}`, `${sortBy.order}`],
+        queryFn: ({ signal, pageParam=1 }) => fetchUserReviews(signal, id, sortBy, pageParam),
+        getNextPageParam: (lastPage, allPages) => {
+            console.log(lastPage)
+            return lastPage.reviews.length == 0 ? undefined : allPages.length + 1
+        }
+    })
+
+    let content
+    if(isPending) {
+        content = <>
+            <LoaderDots />
+        </>
+    }
+        
+    if(isError) {
+        content = <>
+            <h2>Error while fetching this user reviews. Please, try again later.</h2>
+        </>
+    }
+
+    if(data) { 
+        const reviews = data.pages.map(page => page.reviews).flat(1)
+        
+        content = <PostList type="reviews" posts={reviews} />
+    }
 
     return <div className={classes["general-container"]}>
         <div className={classes["header-section"]}>   
@@ -23,7 +54,13 @@ export default function ReviewsPage() {
             </div>
         </div>
         
-        <PostList sortBy={sortBy} type="reviews" />
-        
+        {content}
+
+        {isFetchingNextPage && <LoaderDots/>}
+
+        {hasNextPage &&
+            <button onClick={(() => fetchNextPage())} disabled={isFetchingNextPage}>Load more!</button>
+        }
+
     </div>
 }

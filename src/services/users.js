@@ -1,4 +1,4 @@
-import { backendUrl } from "../utils/constants";
+import { backendUrl, ITEMS_PER_PAGE } from "../utils/constants";
 
 export async function fetchUserInfo({signal, id}) {
 
@@ -49,9 +49,11 @@ export async function unfollowUser(userId) {
     return await response.json()
 }
 
-export async function fetchUserReviews(signal, userId, sortBy = {sortBy: 'createdAt', order: -1}) {
+export async function fetchUserReviews(signal, userId, sortBy = {sortBy: 'createdAt', order: -1}, page = null) {
 
-    const response = await fetch(`${backendUrl}/users/${userId}/reviews?sortBy=${sortBy.sortBy}&order=${sortBy.order}`, {
+    const pageQuery = page ? `&skip=${ITEMS_PER_PAGE*(page-1)}&limit=${ITEMS_PER_PAGE}` : ""
+
+    const response = await fetch(`${backendUrl}/users/${userId}/reviews?sortBy=${sortBy.sortBy}&order=${sortBy.order}${pageQuery}`, {
         signal: signal,
         method: "GET",
         credentials: "include",
