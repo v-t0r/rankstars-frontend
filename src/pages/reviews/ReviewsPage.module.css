@@ -35,3 +35,9 @@
     font-weight: 400;
     line-height: 1rem;
 }
+
+.no-more-reviews-message {
+    margin: 30px auto;
+    color: var(--light-gray);
+    font-weight: 400;
+}
