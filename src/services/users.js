@@ -70,9 +70,11 @@ export async function fetchUserReviews(signal, userId, sortBy = {sortBy: 'create
     return reviews
 }
 
-export async function fetchUserLists(signal, userId, sortBy = {sortBy: 'createdAt', order: -1}) {
+export async function fetchUserLists(signal, userId, sortBy = {sortBy: 'createdAt', order: -1}, page = null) {
 
-    const response = await fetch (`${backendUrl}/users/${userId}/lists?sortBy=${sortBy.sortBy}&order=${sortBy.order}`, {
+    const pageQuery = page ? `&skip=${ITEMS_PER_PAGE*(page-1)}&limit=${ITEMS_PER_PAGE}` : ""
+
+    const response = await fetch (`${backendUrl}/users/${userId}/lists?sortBy=${sortBy.sortBy}&order=${sortBy.order}${pageQuery}`, {
         signal: signal,
         method: "GET",
         credentials: "include",

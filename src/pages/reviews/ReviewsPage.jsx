@@ -56,9 +56,10 @@ export default function ReviewsPage() {
         {content}
 
         {isFetchingNextPage && <LoaderDots/>}
+
         <LoadMoreSensor fetchNextPage={fetchNextPage} hasNextPage={hasNextPage}/>
         
-        {!hasNextPage &&
+        {(!hasNextPage && data?.pages.length > 1) &&
             <h3 className={classes["no-more-reviews-message"]}>It&apos;s a dead end! No more reviews to load.</h3>
         }
 

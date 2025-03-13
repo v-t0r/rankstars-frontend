@@ -4,10 +4,41 @@ import { useState } from "react"
 import { useParams } from "react-router-dom"
 
 import PostList from "../../components/postList/PostList"
+import { fetchUserLists } from "../../services/users"
+import { useInfiniteQuery } from "@tanstack/react-query"
+import LoaderDots from "../../components/loaderDots/LoaderDots"
+import LoadMoreSensor from "../../components/loadMoreObserver/LoadMoreObserver"
+import { ITEMS_PER_PAGE } from "../../utils/constants"
 
 export default function ListsPage(){
     const [sortBy, setSortBy] = useState({sortBy: 'createdAt', order: -1})
     const {id} = useParams()
+    
+    const { data, isPending, isError, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
+        queryKey: [ "lists", "user", `${id}`, `${sortBy.sortBy}`, `${sortBy.order}`],
+        queryFn: ({ signal, pageParam=1 }) => fetchUserLists(signal, id, sortBy, pageParam),
+        getNextPageParam: (lastPage, allPages) => {
+            return (lastPage.lists.length != ITEMS_PER_PAGE) ? undefined : allPages.length + 1
+        }
+    })
+
+    let content
+    if(isPending) {
+        content = <>
+            <LoaderDots />
+        </>
+    }
+        
+    if(isError) {
+        content = <>
+            <h2>Error while fetching this user lists. Please, try again later.</h2>
+        </>
+    }
+
+    if(data) { 
+        const lists = data.pages.map(page => page.lists).flat(1) 
+        content = <PostList type="lists" posts={lists} />
+    }
 
     return <div className={classes["general-container"]}>
         <div className={classes["header-section"]}>   
@@ -21,6 +52,15 @@ export default function ListsPage(){
                 </div>
             </div>
         
-        <PostList sortBy={sortBy} type="lists" />
+        {content}
+
+        {isFetchingNextPage && <LoaderDots/>}
+
+        <LoadMoreSensor fetchNextPage={fetchNextPage} hasNextPage={hasNextPage}/>
+
+        {(!hasNextPage && data?.pages.length > 1) &&
+            <h3 className={classes["no-more-lists-message"]}>It&apos;s a dead end! No more lists to load.</h3>
+        }
+
     </div>
 }

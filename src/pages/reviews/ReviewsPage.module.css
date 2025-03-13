@@ -12,22 +12,6 @@
     align-items: center;
 }
 
-.header-section select {
-    font-size: large;
-    text-align: center;
-    background-color: var(--secondary-background-color);
-    color: white;
-    padding: 6px;
-    border-radius: 8px;
-    min-width: 16px;
-    border: none;
-}
-
-.header-section select:focus {
-    border: none;
-    outline: none;
-}
-
 .header-section h1 {
     font-family: "Inknut Antiqua";
     margin: 24px 0;

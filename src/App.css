@@ -67,6 +67,22 @@ form {
     gap: 16px;
 }
 
+select {
+    font-size: large;
+    text-align: center;
+    background-color: var(--secondary-background-color);
+    color: white;
+    padding: 6px;
+    border-radius: 8px;
+    min-width: 16px;
+    border: none;
+}
+
+select:focus {
+    border: none;
+    outline: none;
+}
+
 footer {
     text-align: center;
 }
