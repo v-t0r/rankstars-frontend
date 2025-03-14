@@ -12,6 +12,8 @@ import { AnimatePresence } from "framer-motion";
 import LoaderDots from "../../components/loaderDots/LoaderDots";
 import ErrorCard from "../../components/errorCard/ErrorCard"
 
+import { INTERESTS_LIST } from "../../utils/constants";
+
 export default function NewReviewForm({reviewId = undefined, onCancel}){
     const [validationErrors, setValidationErrors] = useState([])
     const [modal, setModal] = useState(false) //false is closed, true is opened
@@ -19,7 +21,7 @@ export default function NewReviewForm({reviewId = undefined, onCancel}){
         title: "",
         rating: "",
         review: "",
-        type: "movie",
+        type: INTERESTS_LIST[0][0],
         images: []
     })
 
@@ -145,9 +147,9 @@ export default function NewReviewForm({reviewId = undefined, onCancel}){
                 <div className={classes["select-div"]} >
                     <label htmlFor="type">Category</label>
                     <select name="type" id="type" value={form.type} onChange={(e) => setForm(state => ({...state, type: e.target.value}))} >
-                        <option value="movie">Movie</option>
-                        <option value="tvshow">Video Game</option>
-                        <option value="videogame">TV Show</option>
+                        {INTERESTS_LIST.map(([db_name, name], index) => {
+                            return <option key={index} value={db_name}>{name}</option>
+                        })}
                     </select>
                 </div>
 
