@@ -17,6 +17,7 @@
 
 .checked {
     background-color: var(--positive-color);
+    color: white;
     padding: 3px;
 }
 

@@ -1,0 +1,52 @@
+.image-and-inputs{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.inputs-div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.label-input {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.label-input label {
+    font-size: medium;
+    color: var(--light-gray);
+}
+
+.label-input input {
+    background-color: var(--background-color);
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    color: white;
+    font-size: large;
+}
+
+.label-input textarea {
+    background-color: var(--background-color);
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    color: white;
+    font-size: large;
+    resize: none;
+    height: 80px;
+}
+
+.action-buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: end;
+}

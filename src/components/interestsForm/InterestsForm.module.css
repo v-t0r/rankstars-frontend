@@ -1,0 +1,17 @@
+.form {
+    width: 400px;
+}
+
+.form h2{
+    color: white;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: end;
+    gap: 10px;
+}
+

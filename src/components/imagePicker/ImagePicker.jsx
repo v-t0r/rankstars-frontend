@@ -1,17 +1,9 @@
 import { useRef } from "react"
-import { imageBackendUrl } from "../../utils/constants"
+import { backendUrl, imageBackendUrl } from "../../utils/constants"
 import classes from "./ImagePicker.module.css"
 
-export default function ImagePicker({inputName = undefined, inputId = "image", selectedImages, onChange, onRemove, multiple = true, maxImages = 10}){
+export default function ImagePicker({inputName = undefined, inputId = "image", selectedImage, onChange, onRemove}){
     const fileInputRef = useRef(null)
-
-    const totalImages = selectedImages.length
-
-    //um array de undefined, apenas para fazer um map com containers vazios
-    let undefinedArray
-    if(totalImages < 4){
-        undefinedArray = [ ...Array(4-totalImages)]
-    }
 
     return <div className={classes["main-container"]}>
         <input 
@@ -21,30 +13,20 @@ export default function ImagePicker({inputName = undefined, inputId = "image", s
             id={inputId} 
             name={inputName} 
             onChange={onChange} 
-            multiple = {multiple}
         ></input>
 
         <div className={classes["image-section"]}>
-            {!(selectedImages.length >= maxImages) && <div className={classes["image-container"]}>
-                <button 
+
+            <div className={classes["image-container"]}>
+                <button
                     type="button" 
                     onClick={() => fileInputRef.current.click()} 
-                    className={classes["add-image-button"]}
-                >+</button>
-            </div>}
-
-            {selectedImages.map((image, index) => {
-                return <div key={index} className={classes["image-container"]}>
-                    <button type="button" onClick={() => onRemove({image, index})} className={classes["delete-button"]}>X</button>
-                    <img src={typeof image === "string" ? `${imageBackendUrl}/${image}` : URL.createObjectURL(image)} alt="image preview" />
-                </div>
-            })}
-            {/* Containers vazios para preencher o espaço restante */}
-            {(totalImages < 4) && <> {undefinedArray.map((empty, index) => {
-                    return <div key={index} className={classes["image-container"]}></div>
-                })}
-                </>
-            }
+                >
+                    <span className={`material-symbols-outlined ${classes["edit-icon"]}`}>edit_square</span>
+                </button>
+                {!selectedImage && <img src={`${imageBackendUrl}/images/default-profile-pic.jpg`} />}
+                {selectedImage && <img src={typeof selectedImage === "string" ? `${imageBackendUrl}/${selectedImage}` : URL.createObjectURL(selectedImage)} alt="image preview" />}
+            </div>
 
         </div>
             

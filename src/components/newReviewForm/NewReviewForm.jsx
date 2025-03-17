@@ -7,7 +7,7 @@ import { getPost, postReview, patchPost } from "../../services/posts";
 import { queryClient } from "../../services/queryClient";
 import { useEffect, useState } from "react";
 import ConfirmationModal from "../../components/modal/ConfirmationModal";
-import ImagePicker from "../../components/imagePicker/ImagePicker";
+import ImagesPicker from "../../components/imagesPicker/ImagesPicker";
 import { AnimatePresence } from "framer-motion";
 import LoaderDots from "../../components/loaderDots/LoaderDots";
 import ErrorCard from "../../components/errorCard/ErrorCard"
@@ -155,7 +155,7 @@ export default function NewReviewForm({reviewId = undefined, onCancel}){
 
                 <div className={classes["image-picker-div"]}>
                     <label>IMAGES</label>
-                    <ImagePicker inputId={"image"} onChange={handleImageChange} onRemove={handleImageRemove} selectedImages={form.images}/>
+                    <ImagesPicker inputId={"image"} onChange={handleImageChange} onRemove={handleImageRemove} selectedImages={form.images}/>
                 </div>
 
                 <div className={classes["buttons"]}>

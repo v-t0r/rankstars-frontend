@@ -15,6 +15,10 @@ const userSlice = createSlice({
         createUserContext(state, action){
             state.user = action.payload.user
             state.expDate = action.payload.expDate
+        },
+
+        updateProfilePicture(state, action){
+            state.user.profilePicUrl = action.payload.profilePicUrl
         }
     }
 })

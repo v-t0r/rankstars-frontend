@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import classes from "./ListList.module.css"
+import classes from "./AddToListForm.module.css"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { fetchUserLists } from "../../services/users"
 import CheckBoxInput from "../checkBoxInput.jsx/CheckBoxInput"
@@ -8,7 +8,7 @@ import { queryClient } from "../../services/queryClient"
 import { useEffect } from "react"
 import LoaderDots from "../loaderDots/LoaderDots"
 
-export default function ListList({review, onClose, onNewList=null}){
+export default function AddToListForm({review, onClose, onNewList=null}){
     const userId = useSelector(state => state.user.user._id)
 
     const {data, isPending, isError} = useQuery({

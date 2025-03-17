@@ -39,8 +39,8 @@ export default function RootLayout(){
                     <Modal onEscape={() => dispatch(loginModalActions.setLoginModalVisibility(false))}>
                         { signupMode ? 
                             <SignupForm 
-                            onClose={() => dispatch(loginModalActions.setLoginModalVisibility(false))}
-                            onLogin={() => dispatch(loginModalActions.setSignupMode(false))}
+                                onClose={() => dispatch(loginModalActions.setLoginModalVisibility(false))}
+                                onLogin={() => dispatch(loginModalActions.setSignupMode(false))}
                             />
                             : 
                             <LoginForm 

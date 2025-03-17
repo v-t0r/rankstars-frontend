@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import classes from "./CheckBoxInput.module.css"
 
-export default function CheckBoxInput({name, value, id=value, label=value, checked=false, size="2rem", fontSize=size}){
+export default function CheckBoxInput({name, value, id=value, label=value, checked=false, onCheck=null, size="2rem", fontSize=size}){
     const [isChecked, setIsChecked] = useState()
 
     useEffect(() => {
@@ -13,7 +13,7 @@ export default function CheckBoxInput({name, value, id=value, label=value, check
         <input type="checkbox" name={name} id={id} value={value}  checked={isChecked} hidden/>
         <span 
             className={`${classes["span-box"]} ${isChecked ? classes["checked"] : undefined }`} 
-            onClick={() => setIsChecked(prevValue => !prevValue)}
+            onClick={() => onCheck ? onCheck(!isChecked) : setIsChecked(prevValue => !prevValue)}
             style={{width: size, height: size }}
         >
             {isChecked && 

@@ -1,6 +1,6 @@
 :root {
-    --image-preview-width: 87px;
-    --image-preview-height: 87px;
+    --image-preview-width: 172px;
+    --image-preview-height: 172px;
 }
 
 .main-container {
@@ -27,7 +27,7 @@
     width: var(--image-preview-width);
     height: var(--image-preview-height);
     overflow: hidden;
-    border-radius: 16px;
+    border-radius: 4px;
     flex-shrink: 0;
 
     background-color: var(--input-background-color);
@@ -43,48 +43,21 @@
     aspect-ratio: 1/1;
 }
 
-.image-container .delete-button {
+.image-container button {
     position: absolute;
-    top: 0;
-    right: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    line-height: 1rem;
-
-    width: 24px;
-    height: 24px;
-    margin: 8px;
-    border-radius: 16px;
-
-    cursor: pointer;
-    border: none;
-    background-color: rgba(0, 0, 0, 0.733);
-    color: white;
-}
-
-.image-container .delete-button:hover {
-    color: var(--error-color);
-}
-
-.add-image-button {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 100%;
     height: 100%;
-    font-size: 128px;
-
-    background-color: var(--input-background-color);
-    color: var(--dark-gray);
     border: none;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(0, 0, 0, 0);
 }
 
-.add-image-button:hover {
-    /* background-color: var(--blue-gray); */
+.image-container button:hover {
+    background-color: rgba(0, 0, 0, 0.400);
     color: var(--light-gray);
-    /* color: var(--positive-color); */
-} 
+}
+
+.edit-icon {    
+    font-size: 2rem;
+}

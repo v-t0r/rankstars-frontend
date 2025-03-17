@@ -16,7 +16,7 @@ import OverflowMenu from "../overflowMenu/overflowMenu"
 import CommentInput from "../comments/CommentInput"
 import ConfirmationModal from "../modal/ConfirmationModal"
 import Modal from "../modal/Modal"
-import ListList from "../listList/ListList"
+import AddToListForm from "../addToListForm/AddToListForm"
 import NewListForm from "../newListForm/newListForm"
 import EditListForm from "../editListForm.jsx/EditListForm"
 import NewReviewForm from "../newReviewForm/NewReviewForm"
@@ -171,7 +171,7 @@ export default function OptionsBar({post, type}){
             />}
 
             {(modalsVisibility.listsModal || modalsVisibility.newListModal) && <Modal onEscape={() => setModalsVisibility(prevState => ({...prevState, listsModal: false, newListModal: false}))}>
-                {modalsVisibility.listsModal && <ListList 
+                {modalsVisibility.listsModal && <AddToListForm 
                     review={post} 
                     onClose={() => setModalsVisibility(prevState => ({...prevState, listsModal: false}))}
                     onNewList={() => {

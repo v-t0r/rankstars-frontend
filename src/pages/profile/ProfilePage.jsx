@@ -19,6 +19,7 @@ import UserList from "../../components/userList/UserList"
 import { AnimatePresence } from "framer-motion"
 import LoaderDots from "../../components/loaderDots/LoaderDots"
 import ErrorCard from "../../components/errorCard/ErrorCard"
+import EditUserForm from "../../components/editUserForm/EditUserForm"
 
 export default function ProfilePage(){
     const {id} = useParams()
@@ -27,12 +28,18 @@ export default function ProfilePage(){
     const location = useLocation()
     const dispatch = useDispatch()
 
-    const [followersModalOpen, setFollowersModalOpen] = useState(false)
-    const [followingModalOpen, setFollowingModalOpen] = useState(false)
+    const [modalVisibility, setModalVisibility] = useState({
+        followersModal: false,
+        followingModal: false,
+        editProfileModal: false
+    })
 
     useEffect(()=> {
-        setFollowersModalOpen(false)
-        setFollowingModalOpen(false)
+        setModalVisibility({
+            followersModal: false,
+            followingModal: false,
+            editProfileModal: false
+        })
     }, [location])
 
     let loggedUserProfile = false
@@ -86,11 +93,13 @@ export default function ProfilePage(){
     function handleModal(type){
         switch(type) {
             case "followers":
-                setFollowersModalOpen(state => !state)
+                setModalVisibility(prev => ({...prev, followersModal: !prev.followersModal}))
                 break;
             case "following":
-                setFollowingModalOpen(state => !state)
+                setModalVisibility(prev => ({...prev, followingModal: !prev.followingModal}))
                 break;
+            case "editProfile":
+                setModalVisibility(prev => ({...prev, editProfileModal: !prev.editProfileModal}))
         }
     }
 
@@ -130,10 +139,16 @@ export default function ProfilePage(){
                     <div className={classes["followers-following"]}>
                         <p onClick={() => handleModal("following")}>{totalFollowing} Following</p>
                         <p onClick={() => handleModal("followers")} >{totalFollowers} {totalFollowers === 1? "Follower" : "Followers"}</p>
-                        {!loggedUserProfile && 
+                        {!loggedUserProfile ? 
                             <button 
                                 className={followOp == "follow" ? classes["follow-button"] : classes["unfollow-button"]} 
                                 onClick={() => loggedUserInfo ? mutate(id) : dispatch(loginModalActions.setLoginModalVisibility(true))}>{buttonText}
+                            </button>
+                            :
+                            <button 
+                                onClick={() => handleModal("editProfile")}
+                            >
+                                Edit Profile
                             </button>
                         }
                     </div>
@@ -155,12 +170,16 @@ export default function ProfilePage(){
             </section>
 
             <AnimatePresence>
-                {followersModalOpen && <Modal onClose={() => handleModal("followers")}>
+                {modalVisibility.followersModal && <Modal onEscape={() => handleModal("followers")}>
                         <UserList username={data.user.username} profileUserId={data.user._id} type="followers" users={followers} onClose={() => handleModal("followers")}/>
                     </Modal>
                 }
-                {followingModalOpen && <Modal onClose={() => handleModal("following")}>
+                {modalVisibility.followingModal && <Modal onEscape={() => handleModal("following")}>
                         <UserList username={data.user.username} profileUserId={data.user._id} type="following" users={following} onClose={() => handleModal("following")}/>
+                    </Modal>
+                }
+                {modalVisibility.editProfileModal && <Modal onEscape={() => handleModal("editProfile")} >
+                        <EditUserForm user={data.user} onClose={() => handleModal("editProfile")} />
                     </Modal>
                 }
             </AnimatePresence>
