@@ -29,7 +29,10 @@ export default function CommentCore({comment, type = "comment", onReplyClick}){
     return <div className={classes["comment-card"]}>
         <div>
             <div className={classes["author-div"]}>
-                <img src={`${imageBackendUrl}/${comment.author.profilePicUrl}`} alt={`${comment.author.username}'s profile picture`}></img>
+                <div className={classes["image-container"]}>
+                    <img src={`${imageBackendUrl}/${comment.author.profilePicUrl}`} alt={`${comment.author.username}'s profile picture`}></img>
+                </div>
+                
                 <Link to={`/profile/${comment.author._id}`}>{comment.author.username}</Link>
                 <p>at {new Date(comment.createdAt).toLocaleString("en-US", {
                     year: "numeric",

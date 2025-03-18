@@ -87,7 +87,9 @@ export default function UsersList({username, profileUserId, users, type, onClose
             {users.map((user, index) => {
                 return <li key={user._id}>
                     <div className={classes["img-and-username"]}>
-                        <img src={`${imageBackendUrl}/${user.profilePicUrl}`} alt={`${user.username}'s profile picture`} onClick={() => navigate(`/profile/${user._id}`)}></img>
+                        <div className={classes["image-container"]}>
+                            <img src={`${imageBackendUrl}/${user.profilePicUrl}`} alt={`${user.username}'s profile picture`} onClick={() => navigate(`/profile/${user._id}`)}></img>
+                        </div>
                         <div className={classes["username-status"]}>
                             <p id={classes["username"]} onClick={() => navigate(`/profile/${user._id}`)}>{user.username}</p>
                             <p id={classes["status"]}>{user.status}</p>

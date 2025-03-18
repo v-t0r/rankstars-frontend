@@ -7,7 +7,7 @@ import { getPost, postReview, patchPost } from "../../services/posts";
 import { queryClient } from "../../services/queryClient";
 import { useEffect, useState } from "react";
 import ConfirmationModal from "../../components/modal/ConfirmationModal";
-import ImagesPicker from "../../components/imagesPicker/ImagesPicker";
+import ImagesPicker from "../imagesPicker/ImagesPicker";
 import { AnimatePresence } from "framer-motion";
 import LoaderDots from "../../components/loaderDots/LoaderDots";
 import ErrorCard from "../../components/errorCard/ErrorCard"
@@ -173,7 +173,6 @@ export default function NewReviewForm({reviewId = undefined, onCancel}){
             {modal && <ConfirmationModal onEscape={() => setModal(false)}
                 onConfirm={() => {setModal(false), onCancel()}}
                 onCancel={() => setModal(false)}
-                onClose={() => setModal(false)}
                 title={"Cancel Review"}
                 message={"Are you shure you want cancel this review?"}
             />}

@@ -129,7 +129,10 @@ export default function ProfilePage(){
                 </div>
                 <div className={classes["user-info"]}>
                     <div className={classes["pic-username"]}>
-                        <img src={`${imageBackendUrl}/${data.user.profilePicUrl}`} alt="profile picture" />
+                        <div className={classes["image-container"]}>
+                            <img src={`${imageBackendUrl}/${data.user.profilePicUrl}`} alt="profile picture" />
+                        </div>
+                        
                         <div className={classes["username-status"]}>
                             <h2>{data.user.username}</h2>
                             <p>{data.user.status}</p>

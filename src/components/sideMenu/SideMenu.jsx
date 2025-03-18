@@ -31,8 +31,8 @@ export default function SideMenu(){
 
     return(
         <>
-            <div className={classes["img-container"]}>
-                <img className={classes["profile-img"]} src={`${imageBackendUrl}/${profilePicUrl}`} alt="Profile Picture" onClick={handleOpenMenu}/>
+            <div className={classes["image-container"]}>
+                <img src={`${imageBackendUrl}/${profilePicUrl}`} alt="Profile Picture" onClick={handleOpenMenu}/>
             </div>
             
             <AnimatePresence>

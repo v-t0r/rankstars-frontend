@@ -1,8 +1,8 @@
 import { useRef } from "react"
-import { backendUrl, imageBackendUrl } from "../../utils/constants"
+import { imageBackendUrl } from "../../utils/constants"
 import classes from "./ImagePicker.module.css"
 
-export default function ImagePicker({inputName = undefined, inputId = "image", selectedImage, onChange, onRemove}){
+export default function ImagePicker({inputName = undefined, inputId = "image", selectedImage, onChange}){
     const fileInputRef = useRef(null)
 
     return <div className={classes["main-container"]}>
@@ -12,7 +12,8 @@ export default function ImagePicker({inputName = undefined, inputId = "image", s
             accept="image/*" 
             id={inputId} 
             name={inputName} 
-            onChange={onChange} 
+            onChange={onChange}
+
         ></input>
 
         <div className={classes["image-section"]}>

@@ -1,8 +1,3 @@
-:root {
-    --image-preview-width: 87px;
-    --image-preview-height: 87px;
-}
-
 .main-container {
     height: fit-content;
 }
@@ -24,8 +19,8 @@
 .image-container{
     position: relative;
     display: flex;
-    width: var(--image-preview-width);
-    height: var(--image-preview-height);
+    width: 87px;
+    height: 87px;
     overflow: hidden;
     border-radius: 16px;
     flex-shrink: 0;

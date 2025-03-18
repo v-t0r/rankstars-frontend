@@ -19,18 +19,18 @@ export default function Modal({ children, onEscape }){
     }, [])
 
     function handleEscape(e){
-        // a ação de escape só afeta essa modal
+        if(e.target.type === "file") return // trigged by the file select window
+
         e.stopPropagation()
         onEscape()
     }
 
     return createPortal(
         <motion.dialog 
-            ref={dialog} 
+            ref={dialog}
             className={classes["modal"]}
+            style={{zIndex: "500"}}
             onCancel={handleEscape}
-            // initial={{opacity: 0, y: 30
-            // animate={{opacity: 1, y: 0}}
             initial={{opacity: 0, scale: 0.9}}
             animate={{opacity: 1, scale: 1}}
             exit={{opacity: 0, y: -30}}
