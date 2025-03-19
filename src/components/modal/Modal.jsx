@@ -19,7 +19,7 @@ export default function Modal({ children, onEscape }){
     }, [])
 
     function handleEscape(e){
-        if(e.target.type === "file") return // trigged by the file select window
+        if(e.target.type === "file") return // triggered by the file select window
 
         e.stopPropagation()
         onEscape()

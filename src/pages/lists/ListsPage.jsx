@@ -1,11 +1,11 @@
 import classes from "./ListsPage.module.css"
 import { useState } from "react"
 
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 import PostList from "../../components/postList/PostList"
-import { fetchUserLists } from "../../services/users"
-import { useInfiniteQuery } from "@tanstack/react-query"
+import { fetchUserInfo, fetchUserLists } from "../../services/users"
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import LoaderDots from "../../components/loaderDots/LoaderDots"
 import LoadMoreSensor from "../../components/loadMoreObserver/LoadMoreObserver"
 import { ITEMS_PER_PAGE } from "../../utils/constants"
@@ -20,6 +20,11 @@ export default function ListsPage(){
         getNextPageParam: (lastPage, allPages) => {
             return (lastPage.lists.length != ITEMS_PER_PAGE) ? undefined : allPages.length + 1
         }
+    })
+
+    const { data: userData } =  useQuery({
+        queryKey: ["username", `${id}`],
+        queryFn: ({signal}) => fetchUserInfo({signal, id, basicOnly: true})
     })
 
     let content
@@ -42,7 +47,7 @@ export default function ListsPage(){
 
     return <div className={classes["general-container"]}>
         <div className={classes["header-section"]}>   
-                <h1>{"por nome aqui"}&apos;s lists</h1>
+                <h1><Link className="inverted" to={`/profile/${id}`} >{userData?.user?.username ?? "user"}</Link>&apos;s lists</h1>
                 <div className={classes["select-div"]} >
                     <label htmlFor="type"hidden>Sort by</label>
                     <select id="type" value={JSON.stringify(sortBy)} onChange={(e) => setSortBy(JSON.parse(e.target.value))} >

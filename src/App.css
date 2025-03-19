@@ -61,6 +61,14 @@ a:hover {
     color: white;
 }
 
+a.inverted {
+    color: white;
+}
+
+a.inverted:hover {
+    color: var(--light-gray);
+}
+
 form {
     display: flex;
     flex-direction: column;

@@ -1,11 +1,11 @@
 import classes from "./ReviewsPage.module.css"
 
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { useState } from "react"
 
 import PostList from "../../components/postList/PostList"
-import { fetchUserReviews } from "../../services/users"
-import { useInfiniteQuery } from "@tanstack/react-query"
+import { fetchUserInfo, fetchUserReviews } from "../../services/users"
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import LoaderDots from "../../components/loaderDots/LoaderDots"
 import LoadMoreSensor from "../../components/loadMoreObserver/LoadMoreObserver"
 
@@ -19,6 +19,11 @@ export default function ReviewsPage() {
         getNextPageParam: (lastPage, allPages) => {
             return lastPage.reviews.length == 0 ? undefined : allPages.length + 1
         }
+    })
+
+    const { data: userData } =  useQuery({
+        queryKey: ["username", `${id}`],
+        queryFn: ({signal}) => fetchUserInfo({signal, id, basicOnly: true})
     })
 
     let content
@@ -41,7 +46,7 @@ export default function ReviewsPage() {
 
     return <div className={classes["general-container"]}>
         <div className={classes["header-section"]}>   
-            <h1>{"por nome aqui"}&apos;s reviews</h1>
+            <h1><Link className="inverted" to={`/profile/${id}`}>{userData?.user?.username ?? "user"}</Link>&apos;s reviews</h1>
             <div className={classes["select-div"]} >
                 <label htmlFor="type"hidden>Sort by</label>
                 <select id="type" value={JSON.stringify(sortBy)} onChange={(e) => setSortBy(JSON.parse(e.target.value))} >

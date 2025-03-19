@@ -1,8 +1,10 @@
 import { backendUrl, ITEMS_PER_PAGE } from "../utils/constants";
 
-export async function fetchUserInfo({signal, id}) {
+export async function fetchUserInfo({signal, id, basicOnly = false}) {
 
-    const response = await fetch(`${backendUrl}/users/${id}`, {signal: signal})
+    let query = basicOnly ? "?basicOnly=true" : ""
+
+    const response = await fetch(`${backendUrl}/users/${id}${query}`, {signal: signal})
 
     if(!response.ok){
         const error = new Error("Could not fetch the user info.")
