@@ -93,7 +93,7 @@ export async function fetchUserLists(signal, userId, sortBy = {sortBy: 'createdA
     return lists
 }
 
-export async function pacthUser(form){
+export async function patchUser(form){
     const response = await fetch(`${backendUrl}/users`, {
         method: "PATCH",
         credentials: "include",

@@ -93,6 +93,8 @@ select:focus {
 
 textarea {
     font-family: "Roboto";
+
+    scrollbar-color: var(--input-background-color) var(--background-color);
 }
 
 footer {

@@ -12,6 +12,22 @@
     gap: 10px;
 }
 
+.buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.buttons button {
+    
+    background-color: var(--background-color);
+}
+
+.buttons button:hover {
+    background-color: var(--background-color);
+    outline: solid 2px var(--positive-color);
+}
+
 .label-input {
     display: flex;
     flex-direction: column;
