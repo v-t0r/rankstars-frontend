@@ -40,6 +40,30 @@ export async function postComment({id, type, comment}) {
     return await response.json()
 }
 
+export async function patchComment({id, form}) {
+    try{
+        const response = await fetch((`${backendUrl}/comments/${id}`),{
+            method: "PATCH",
+            credentials: "include",
+            body: form
+        })
+    
+        if(!response.ok){
+            const error = new Error("Error while patching comment")
+            error.status = response.status
+            error.info = response.json()
+            throw error
+        }
+    
+        return await response.json()
+    }catch(error){
+        if(!error.status){
+            error.status == 500
+        }
+        throw error
+    }
+}
+
 export async function deleteComment({id}) {
     const response = await fetch((`${backendUrl}/comments/${id}`),{
         method: "DELETE",

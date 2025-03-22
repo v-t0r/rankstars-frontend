@@ -15,6 +15,27 @@ const commentsSlice = createSlice({
             state.splice(0, 0, action.payload)
         },
 
+        editComment(state, action){
+            const comment = action.payload.comment
+
+            console.log(comment)
+
+            //comment or answer
+            let index = state.findIndex(cmt => cmt._id === comment.whereType == "Comment" ? comment.where : comment._id)
+            
+            if(comment.whereType !== "Comment"){
+                state[index].content = action.payload.newContent
+                state[index].isEdited = true
+                return
+            }
+            
+            const parentIndex = index
+            index = state[parentIndex].comments.findIndex(cmt => cmt._id === comment._id )
+
+            state[parentIndex].comments[index].content = action.payload.newContent
+            state[parentIndex].comments[index].isEdited = true
+        },
+
         deleteComment(state, action){
             return state.filter(comment => comment._id !== action.payload._id)
         },

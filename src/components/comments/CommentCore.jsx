@@ -7,12 +7,18 @@ import { useDispatch, useSelector } from "react-redux"
 import { useMutation } from "@tanstack/react-query"
 import { deleteComment } from "../../services/comments"
 import { commentsAction } from "../../store"
+import Modal from "../modal/Modal"
+import EditCommentForm from "./editCommentForm/editCommentForm"
+import { AnimatePresence } from "framer-motion"
 
 export default function CommentCore({comment, type = "comment", onReplyClick}){
     const loggedUserInfo = useSelector(state => state.user.user)
     const dispatch = useDispatch()
 
-    const [overflowMenuVisibility, setOverflowMenuVisibility] = useState(false)
+    const [modalsVisibility, setModalsVisibility] = useState({
+        overflowMenu: false,
+        editModal: false
+    })
 
     const {mutate: deleteMutate} = useMutation({
         mutationFn: deleteComment,
@@ -27,7 +33,7 @@ export default function CommentCore({comment, type = "comment", onReplyClick}){
     })
     
     return <div className={classes["comment-card"]}>
-        <div>
+        <div className={classes["content-div"]}>
             <div className={classes["author-div"]}>
                 <div className={classes["image-container"]}>
                     <img src={`${imageBackendUrl}/${comment.author.profilePicUrl}`} alt={`${comment.author.username}'s profile picture`}></img>
@@ -40,32 +46,48 @@ export default function CommentCore({comment, type = "comment", onReplyClick}){
                     day: "2-digit",
                     hour: "2-digit",
                     minute: "2-digit"
-                    })}
+                    })} {comment.isEdited && " - edited"}
                 </p>
             </div>
             <div className={classes["comment-div"]}>
                 <p>{comment.content}</p>
+
             </div>
         </div>
         
         <div className={classes["options-column"]}>
-            {loggedUserInfo?._id === comment.author._id && <button onClick={() => setOverflowMenuVisibility(state => !state) }><span className={`material-symbols-outlined`}>more_vert</span></button>}
+            {loggedUserInfo?._id === comment.author._id && <button onClick={() => setModalsVisibility(prev => ({...prev, overflowMenu: !prev.overflowMenu}))}><span className={`material-symbols-outlined`}>more_vert</span></button>}
             <button><span className={`material-symbols-outlined`}>keyboard_arrow_up</span></button>
             <p>0</p>
             <button><span className={`material-symbols-outlined`}>keyboard_arrow_down</span></button>
             {type === "comment" && <button onClick={onReplyClick}><span className={`material-symbols-outlined`}>comment</span></button>}
         </div>
 
-        {overflowMenuVisibility && <OverflowMenu right={"0"} bottom={"50px"} handleCloseMenu={() => setOverflowMenuVisibility(false)}>
+        <AnimatePresence>
+            {modalsVisibility.overflowMenu && <OverflowMenu right={"0"} top={"25px"} handleCloseMenu={() => setModalsVisibility(prev => ({...prev, overflowMenu: !prev.overflowMenu}))}>
                 <ul className={classes["overflow-menu-list"]}>
-                    {loggedUserInfo?._id === comment.author._id && 
+                    {loggedUserInfo?._id === comment.author._id && <>
+                        <li>
+                            <button onClick={() => {setModalsVisibility(prev => ({...prev, overflowMenu: false, editModal: true}))}} className="text-button">
+                                <span className= {`material-symbols-outlined ${classes["delete-icon"]}`}>edit</span>Edit
+                            </button>
+                        </li>
+
                         <li>
                             <button onClick={() => deleteMutate({id: comment._id})} className="negative-button">
                                 <span className= {`material-symbols-outlined ${classes["delete-icon"]}`}>delete</span>Delete
                             </button>
                         </li>
-                    } 
+                    </>} 
                 </ul>
             </OverflowMenu>}
+
+            {modalsVisibility.editModal && <Modal onEscape={() => setModalsVisibility(prev => ({...prev, editModal: false}))}>
+                <EditCommentForm 
+                    comment={comment}
+                    onCancel={() => setModalsVisibility(prev => ({...prev, editModal: false}))}
+                />
+            </Modal>}
+        </AnimatePresence>
     </div>
 }

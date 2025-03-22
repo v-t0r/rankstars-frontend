@@ -13,6 +13,10 @@
     position: relative;
 }
 
+.content-div {
+    width: 100%;
+}
+
 .author-div {
     display: flex;
     flex-direction: row;
