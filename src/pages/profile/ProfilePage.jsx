@@ -123,54 +123,42 @@ export default function ProfilePage(){
         const totalFollowing = following.length
 
         content = <>
-            <div className={classes["profile-banner"]}>
-                <div className={classes["banner"]}>
-                    {/* <img src="https://play-lh.googleusercontent.com/proxy/yJkNj-NHyg85380cJwG3EGnvYnUh_ySQ8U0nUFCYtM25bgaOfBA6mp62pu7vbXrRD8U1m-xsbWJUm5GXHKzJUJa9y04f0Nzl2f1Gg2DbTmihM4Y0apzhkZSi=s3840-w3840-h2160" alt="" /> */}
-                </div>
-                <div className={classes["user-info"]}>
-                    <div className={classes["pic-username"]}>
-                        <div className={classes["image-container"]}>
-                            <img src={`${imageBackendUrl}/${data.user.profilePicUrl}`} alt="profile picture" />
-                        </div>
-                        
-                        <div className={classes["username-status"]}>
-                            <h2>{data.user.username}</h2>
-                            <p>{data.user.status}</p>
-                        </div>
+            <div className={classes["profile-div"]}>
+                <div className={classes["profile-info"]}>
+                    <div className={classes["image-container"]}>
+                        <img src={`${imageBackendUrl}/${data.user.profilePicUrl}`} alt="profile picture" />
                     </div>
-
-                    <div className={classes["followers-following"]}>
-                        <p onClick={() => handleModal("following")}>{totalFollowing} Following</p>
-                        <p onClick={() => handleModal("followers")} >{totalFollowers} {totalFollowers === 1? "Follower" : "Followers"}</p>
-                        {!loggedUserProfile ? 
-                            <button 
-                                className={followOp == "follow" ? classes["follow-button"] : classes["unfollow-button"]} 
-                                onClick={() => loggedUserInfo ? mutate(id) : dispatch(loginModalActions.setLoginModalVisibility(true))}>{buttonText}
-                            </button>
-                            :
-                            <button 
-                                onClick={() => handleModal("editProfile")}
-                            >
-                                Edit Profile
-                            </button>
-                        }
+                    <div className={classes["username-div"]}>
+                        <h2>{data.user.username}</h2>
+                        <p>{data.user.status}</p>
                     </div>
-
                 </div>
-                
+                <div className={classes["social-info"]}>
+                    <p onClick={() => handleModal("following")}>{totalFollowing} Following</p>
+                    <p onClick={() => handleModal("followers")} >{totalFollowers} {totalFollowers === 1? "Follower" : "Followers"}</p>
+                    {!loggedUserProfile ? 
+                        <button 
+                            className={followOp == "follow" ? classes["follow-button"] : classes["unfollow-button"]} 
+                            onClick={() => loggedUserInfo ? mutate(id) : dispatch(loginModalActions.setLoginModalVisibility(true))}
+                        >
+                            {buttonText}
+                        </button>
+                        :
+                        <button onClick={() => handleModal("editProfile")}>Edit Profile</button>
+                    }
+                </div>
             </div>
 
-            <section className={classes["review-section"]}>
-                <div className={classes["review-container"]}>
-                    <CardContainer userId={id} type="reviews"/>
-                </div>
-            </section>
+            <div className={classes["post-container"]}>
+                <CardContainer userId={id} type="reviews"/>
+            </div>
 
-            <section className={classes["list-section"]}>
-                <div className={classes["list-container"]}>
-                    <CardContainer userId={id} type="lists"/>
-                </div>
-            </section>
+
+            
+            <div className={classes["post-container"]}>
+                <CardContainer userId={id} type="lists"/>
+            </div>
+
 
             <AnimatePresence>
                 {modalVisibility.followersModal && <Modal onEscape={() => handleModal("followers")}>

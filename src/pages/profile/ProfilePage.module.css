@@ -1,33 +1,77 @@
-.profile-banner{
-    position: relative;
-}
-
-.banner {
-    background-color: blueviolet;
-    width: 100%;
-    height: 224px;
-    overflow: hidden;
-}
-
-.banner img {
+.profile-div {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;    
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+    margin-top: 32px;
+
+
+    /* border-bottom: solid var(--blue-gray) 1.5px; */
+    padding: 16px;
+    background-color: var(--secondary-background-color);
+    border-radius: 8px;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.13);
 }
 
-.pic-username{
-    position: absolute;
-    display: grid;
-    grid-auto-flow: column;
-    align-items: center;
-    justify-content: start;
+.profile-info {
+    display: flex;
+    flex-direction: row;
     gap: 16px;
+    align-items: start;
+}
 
-    top: 152px;
-    left: 16px;
+.username-div {
+    display: grid;
+    gap: 10px;
+}
+
+.username-div h2{
+    font-family: "Inknut Antiqua";
+    line-height: 1.3rem;
+}
+
+.username-div p {
+    width: 480px;
+    color: var(--light-gray);
+}
+
+.social-info {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+}
+
+.social-info p {
+    cursor: pointer;
+    color: var(--blue-gray);
+}
+.social-info p:hover {
+    cursor: pointer;
+    color: var(--light-gray);
+}
+
+.social-info button {
+    cursor: pointer;
+    background: none;
+    width: 90px;
+    padding: 5px;
+    border-radius: 8px;
+    border: solid var(--blue-gray) 2px; 
+    color: var(--light-gray);
+}
+
+.social-info button:hover {
+    color: white;  
+    border: solid var(--light-gray) 2px;
+}
+
+.social-info .follow-button:hover {
+    border: solid var(--positive-color) 2px;
+}
+
+.social-info .unfollow-button:hover{
+    border: solid var(--error-color) 2px;
 }
 
 .image-container{
@@ -36,8 +80,8 @@
     overflow: hidden;
     flex-shrink: 0;
 
-    width: 128px;
-    height: 128px;
+    width: 192px;
+    height: 192px;
     background-color: var(--input-background-color);
     box-shadow: rgb(0, 0, 0, 0.281) 0px 0px 32px;
     border-radius: 5px;
@@ -52,72 +96,7 @@
     aspect-ratio: 1/1;
 }
 
-.username-status h2 {
-    position: absolute;
-    top: 24px;
-    font-family: "Inknut Antiqua";
-}
-
-.username-status p {
-    position: absolute;
-    top: 80px;
-    width: 480px;
-    color: var(--light-gray);
-}
-
-.user-info {
-    display: flex;
-    flex: row;
-    justify-content: end;
-    align-items: center;
-}
-
-.followers-following {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 24px;
-    margin: 12px;
-}
-
-.followers-following p {
-    cursor: pointer;
-    color: var(--blue-gray);
-}
-
-.followers-following p:hover {
-    cursor: pointer;
-    color: var(--light-gray);
-}
-
-.followers-following button {
-    cursor: pointer;
-    background: none;
-    padding: 5px;
-    border-radius: 8px;
-    border: solid var(--dark-gray) 2px; 
-    color: var(--light-gray);
-
-    width: 90px;
-}
-
-.followers-following button:hover {
-    color: white;   
-}
-
-.followers-following .follow-button:hover {
-    border: solid var(--positive-color) 2px;
-}
-
-.followers-following .unfollow-button:hover{
-    border: solid var(--error-color) 2px;
-}
-
-.review-section {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    gap: 20px;
-    margin: 80px 0px;
+.post-container {
+    margin-top: 64px;
 }
 
