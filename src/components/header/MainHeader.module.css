@@ -32,25 +32,30 @@
     cursor: pointer;
 }
 
-.search-bar{
-    width: 400px;
+.search-bar-form{
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
+    width: 500px;
     height: 32px;
-    
-    background-color: var(--input-background-color);
-    color: white;
-
-    border-radius: 8px;
-    border: none;
-    padding: 0 16px;
-    font-size: medium;
 
     position: absolute;
     left: 50%;
     translate: -50% 0%;
 }
 
+.search-bar {
+    background-color: var(--input-background-color);
+    color: white;
+    border-radius: 8px;
+    border: none;
+    padding: 0 16px;
+    font-size: medium;
+    width: 400px;
+}
+
 @media screen and (max-width: 1050px) {
-    .search-bar{
+    .search-bar-form{
         position: relative;
         translate: 0% 0%;
         width: 320px;
@@ -65,7 +70,7 @@
         font-size: smaller;
     }
 
-    .search-bar {
+    .search-bar-form {
         visibility: hidden;
     }
 }

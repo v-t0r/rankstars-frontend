@@ -9,6 +9,7 @@ import ListPage from '../pages/lists/ListPage.jsx'
 import ErrorPage from '../pages/errors/ErrorPage.jsx'
 import ListsPage from "../pages/lists/ListsPage.jsx"
 import { authenticationLoader } from "../services/auth.js"
+import SearchPage from "../pages/search/SearchPage.jsx"
 
 const router = createBrowserRouter([
     {path : "/", element: <RootLayout />, loader: authenticationLoader ,id: "root", errorElement: <ErrorPage />, children: [
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       {path: "/review/:id", element: <ReviewPage />},
       {path: "/list/:id", element: <ListPage />},
       {path: "/profile", element: <ProfilePage />},
+      {path: "/search", element: <SearchPage />}
     ]}
 ])
 

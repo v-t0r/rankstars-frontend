@@ -102,6 +102,9 @@ footer {
 }
 
 .button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: fit-content;
     padding: 12px 20px;
     color: white;
