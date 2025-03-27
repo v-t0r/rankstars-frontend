@@ -9,6 +9,7 @@ import { getPosts } from "../../services/posts"
 import PostList from "../../components/postList/PostList"
 import LoaderDots from "../../components/loaderDots/LoaderDots"
 import ErrorCard from "../../components/errorCard/ErrorCard"
+import { getUsers } from "../../services/users"
 
 export default function SearchPage(){
     const [searchParams] = useSearchParams()
@@ -24,8 +25,8 @@ export default function SearchPage(){
         case "lists":
             queryFn = () => getPosts({type: "lists", searchTerm: searchTerm})
             break
-        case "profiles": 
-            queryFn = () => getPosts({type: "lists", searchTerm: searchTerm})
+        case "users": 
+            queryFn = () => getUsers({searchTerm: searchTerm})
             break
     }
 
@@ -43,12 +44,11 @@ export default function SearchPage(){
         <div className={classes["tabs-div"]}>
             <TabButton onClick={() => setSearchPlace("reviews")} isActive={searchPlace == "reviews"}>Reviews</TabButton>
             <TabButton onClick={() => setSearchPlace("lists")} isActive={searchPlace == "lists"}>Lists</TabButton>
-            <TabButton onClick={() => setSearchPlace("profile")} isActive={searchPlace == "profile"}>Profiles</TabButton>
+            <TabButton onClick={() => setSearchPlace("users")} isActive={searchPlace == "users"}>Profiles</TabButton>
         </div>
         
         {isPending && <LoaderDots />}
         {isError && <ErrorCard />}
-
 
         {data && <PostList type={searchPlace} posts={data[searchPlace]}/>}
         {data && data[searchPlace].length === 0 && <h2>There is no results for this search...</h2>}

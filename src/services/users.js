@@ -110,3 +110,20 @@ export async function patchUser(form){
     const patchedUser = await response.json()
     return patchedUser
 }
+
+export async function getUsers({searchTerm}){
+    
+    const response = await fetch(`${backendUrl}/users?search=${searchTerm}`,{
+        method: "GET", 
+        credentials: "include"
+    })
+
+    if(!response.ok){
+        const error = new Error("Failed to retrive users")
+        error.status = response.status
+        error.info = await response.json()
+        throw error
+    }
+
+    return await response.json()
+}

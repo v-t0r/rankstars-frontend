@@ -31,8 +31,13 @@
 }
 
 .username-div p {
-    width: 480px;
+    width: fit-content;
+    max-width: 450px;
     color: var(--light-gray);
+
+    word-wrap: break-word;
+    white-space: pre-line;
+    line-height: 1.3rem;
 }
 
 .social-info {
