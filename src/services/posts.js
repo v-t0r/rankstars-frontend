@@ -169,3 +169,19 @@ async function addOrRemoverReviewFromList({reviewId, listId, operation}){
     return await response.json()
 }
 
+export async function getPosts({type, searchTerm}){
+    
+    const response = await fetch(`${backendUrl}/${type}?search=${searchTerm}`,{
+        method: "GET", 
+        credentials: "include"
+    })
+
+    if(!response.ok){
+        const error = new Error("Failed to retrive posts")
+        error.status = response.status
+        error.info = await response.json()
+        throw error
+    }
+
+    return await response.json()
+}
