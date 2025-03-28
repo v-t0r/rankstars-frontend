@@ -11,9 +11,9 @@ export default function DetailedListCard({list}){
     const images = list.reviews.map(review => review.imagesUrls[0])
 
     return <div className={classes["card"]}>
-            <div 
+            <div
                 className={classes["img-div"]}
-                onClick={() => navigate(`/list/${list._id}`, { state: { prevPage: location.pathname, linkText: "all lists" }})} 
+                onClick={() => navigate(`/list/${list._id}?page=1&sortBy=userOrder&order=1`, { state: { prevPage: location.pathname, linkText: "all lists" }})} 
             >
                 <ImageGrid images = {images} size="10rem"/>
             </div>
@@ -22,7 +22,7 @@ export default function DetailedListCard({list}){
                     <Link to= {`/list/${list._id}`} state={ {prevPage: location.pathname, linkText: "all lists"} }>
                         <h1>{list.title}</h1></Link>
                     <Link 
-                        to={`/list/${list._id}`}
+                        to={`/list/${list._id}?page=1&sortBy=userOrder&order=1`}
                         state={{prevPage: location.pathname, linkText: "back to lists"}}    
                     >
                         See more

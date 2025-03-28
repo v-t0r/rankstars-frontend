@@ -9,7 +9,7 @@ export default function ListCard({list}){
     const images = list.reviews.map(review => review.imagesUrls[0])
 
 
-    return <div onClick={()=> navigate(`/list/${list._id}`)} className={classes["card"]}>
+    return <div onClick={()=> navigate(`/list/${list._id}?page=1&sortBy=userOrder&order=1`)} className={classes["card"]}>
         <div className={classes["title-div"]}>
             <h3>{list.title}</h3>
         </div>

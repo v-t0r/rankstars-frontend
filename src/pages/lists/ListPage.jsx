@@ -27,26 +27,30 @@ export default function ListPage(){
     })
 
     useEffect(() => {
-        const params = new URLSearchParams(searchParams)
-        
-        if(!searchParams.get("page")){
-            params.set("page", 1)
-        }
-        if(!searchParams.get("sortBy")){
-            params.set("sortBy", "userOrder")
-        }
-        if(!searchParams.get("order")){
-            params.set("order", 1)
-        }
 
-        //página maior que o máximo
-        if(data){
-            if( +searchParams.get("page") >  Math.ceil(data.list.reviewsCount/ITEMS_PER_PAGE)){
+        setSearchParams((prev) => {
+            const params = new URLSearchParams(prev)
+
+            if(!searchParams.get("page")){
                 params.set("page", 1)
-            } 
-        }
+            }
+            if(!searchParams.get("sortBy")){
+                params.set("sortBy", "userOrder")
+            }
+            if(!searchParams.get("order")){
+                params.set("order", 1)
+            }
 
-        setSearchParams(params)
+            //página maior que o máximo
+            if(data){
+                if( +searchParams.get("page") >  Math.ceil(data.list.reviewsCount/ITEMS_PER_PAGE)){
+                    params.set("page", 1)
+                } 
+            }
+
+            return params
+        }, {replace: true})
+
     }, [searchParams, setSearchParams, data])
 
     function handleSortBy({sortBy, order}){
