@@ -73,7 +73,7 @@ export default function EditUserForm({user, onClose}){
 
     return <>
         {formPage === "principal" &&
-            <form onSubmit={handleSubmit} encType="multipart/form-data">
+            <form className={classes["form"]} onSubmit={handleSubmit} encType="multipart/form-data">
                 <h1>Edit Profile</h1>
                 <div className={classes["image-and-inputs"]}>
                     <ImagePicker inputId="image" onChange={handleImageChange} onRemove={handleImageRemove} selectedImage={userForm.image} />

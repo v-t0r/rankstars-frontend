@@ -46,7 +46,6 @@ export default function SideMenu(){
                             transition={{type: "spring", bounce: 0.3, duration: 0.4}}
                         >
                             <ul>
-                                {/* when redirected, its closes de side menu */}
 
                                 <li>
                                     <Link to={`/profile/${userId}`}>

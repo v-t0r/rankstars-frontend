@@ -61,3 +61,11 @@
 .edit-icon {    
     font-size: 2rem;
 }
+
+
+@media screen and (max-width: 750px) {
+    .image-container {
+        width: 128px;
+        height: 128px;
+    }
+}

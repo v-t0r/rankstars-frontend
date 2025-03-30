@@ -1,3 +1,8 @@
+.form {
+    width: fit-content;
+    max-width: 100%;
+}
+
 .image-and-inputs{
     display: flex;
     flex-direction: row;
@@ -65,4 +70,11 @@
     gap: 10px;
     align-items: center;
     justify-content: end;
+}
+
+@media screen and (max-width: 750px) {
+    .image-and-inputs {
+        flex-direction: column;
+    }
+
 }

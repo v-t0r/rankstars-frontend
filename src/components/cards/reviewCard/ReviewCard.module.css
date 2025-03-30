@@ -3,7 +3,6 @@
     flex-direction: column;
     position: relative;
     align-items: center;
-    /* width: 224px; */
     height: fit-content;
 
     overflow: hidden;
@@ -11,6 +10,11 @@
     border-radius: 8px;
     cursor: pointer;
     margin: 0px 2px;
+
+    flex-grow: 1;
+
+    max-width: 224px;
+    min-width: 64px;
 }
 
 .info {
@@ -37,8 +41,11 @@
 }
 
 .img-container {
+    display: flex;
     margin-top: 48px;
-    width: 224px;
+    /* width: 224px; */
+    width: 100%;
+
     height: 224px;
     overflow: hidden;
 }
@@ -46,7 +53,6 @@
 .img-container img {
     width: 100%;
     height: 100%;
-
     object-fit: cover;
 }
 
@@ -67,3 +73,17 @@
     font-family: "Roboto";
 }
 
+@media screen and (max-width: 750px) {
+    .title-container h3 {
+        font-size: smaller;
+
+    }
+
+}
+
+@media screen and (max-width: 450px) {
+    .title-container h3 {
+        font-size: medium;
+    }
+
+}

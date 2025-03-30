@@ -6,11 +6,9 @@
     
     background-color: var(--secondary-background-color);
     padding: 0 48px;
-    margin: 0 auto;
-    width: var(--header-width);
-    min-width: var(--header-min-width);
+/* 
+    min-width: var(--header-min-width); */
     height: var(--header-height);
-
 }
 
 .header-logo{
@@ -100,12 +98,23 @@
 
 @media screen and (max-width: 750px) {
     .header{
-        min-width: 100%;
-        margin: auto;
-        font-size: smaller;
+        width: 100%;
+        padding: 10px;
+        font-size: 0.6rem;
+        height: var(--header-height-mobile);
+        justify-content: space-between;
+    }
+
+    .header-logo {
+        gap: 5px;
+    }
+
+    .header-logo img {
+        width: 32px;
     }
 
     .search-bar-form {
-        visibility: hidden;
+        display: none;
     }
+
 }

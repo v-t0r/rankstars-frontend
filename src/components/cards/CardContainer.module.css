@@ -1,9 +1,11 @@
 .container {
     display: flex;
     flex-direction: column;
-    flex-wrap: nowrap;
     gap: 8px;
+
     min-height: 224px;
+    
+    flex-shrink: 1;
 }
 
 .container ul{
@@ -11,12 +13,21 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    max-width: 100%;
 }
 
-ul.less-than-four {
+.container li{
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    background-color: red;
+}
+
+/* ul.less-than-four {
     gap: 32px;
     justify-content: left;
-} 
+}  */
 
 .container h2{
     color: var(--blue-gray);
@@ -53,4 +64,19 @@ ul.less-than-four {
     height: 1px;
     width: 100%;
     background-color: var(--blue-gray);
+}
+
+@media screen and (max-width: 450px) {
+    .container ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .container li {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+    }
 }

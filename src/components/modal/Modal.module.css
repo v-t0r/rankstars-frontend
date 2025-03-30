@@ -6,9 +6,19 @@
     color: white;
     border: none;
     box-shadow:  rgba(0, 0, 0, 0.281) 0px 0px 32px;
+
+    max-width: 95vw;
 }
 
 .modal::backdrop{
     background-color: rgba(0, 0, 0, 0.358);
     backdrop-filter: blur(4px);
+}
+
+
+@media screen and (max-width: 750px) {
+    .modal {
+        padding: 20px
+    }
+
 }

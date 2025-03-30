@@ -1,5 +1,6 @@
 .container {
     width: 480px;
+    max-width: fit-content;
     min-height: 480px;
 }
 
@@ -103,10 +104,6 @@
     color: var(--blue-gray);
 }
 
-.container li img {
-
-}
-
 .button-container {
     display: flex;
     flex-direction: column;
@@ -139,4 +136,42 @@
 
 #close-button {
     font-size: 1.3rem;
+}
+
+
+@media screen and (max-width: 750px) {
+    .container ul {
+        gap: 10px;
+    }
+
+    .container li {
+        gap: 5px
+    }
+
+    .container h1 {
+        font-size: 1.5rem;
+    }
+
+    .img-and-username {
+        gap: 5px;
+    }
+
+    .image-container {
+        width: 38px;
+        height: 38px;
+    }
+
+    .username-status #username {
+        font-size: large;
+    }
+
+    .username-status #status {
+        font-size: small;
+    }
+
+    .button-container button {
+        font-size: 0.7rem;
+        width: fit-content;
+    }
+
 }

@@ -15,6 +15,10 @@
     align-items:start;
     gap: 15px;
     width: 100%;
+
+    flex-shrink: 1;
+
+    background-color: red;
 }
 
 .img-container {
@@ -121,4 +125,11 @@
 
 .review-text p{
     width: 100%;
+}
+
+@media screen and (max-width: 750px) {
+    .card {
+        
+    }
+
 }

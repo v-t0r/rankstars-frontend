@@ -29,27 +29,36 @@
     --blue-gray: rgb(128, 139, 152);
 
     /* Dimensions  */
-    --header-width: 100%;
-    --header-min-width: 900px;
+    --header-min-width: 450px;
 
     --header-height: 80px;
+    --header-height-mobile: 64px
 }
 
 body {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     background-color: var(--background-color);
     color: white;
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-style: normal;
+
 }
 
 main {
+    display: flex;
+    flex-direction: column;
+
     min-height: 90vh;
-    width: 40%;
-    min-width: 1000px;
+    max-width: 1000px;
+
     margin: auto;
+    padding: 10px;
     overflow: hidden;
+
+    background-color: blue;
 }
 
 a {
@@ -189,7 +198,7 @@ footer {
 @media screen and (max-width: 750px) {
     main{
         min-width: 100%;
-        margin: auto;
+        padding: 10px;
         font-size: smaller;
     }
     

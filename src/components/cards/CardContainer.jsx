@@ -52,7 +52,6 @@ export default function CardContainer({userId, type}) {
             {data && type=="lists" && data.lists.length !== 0 && <Link to={`lists`}>See All</Link>}
             
         </div>
-        {/* <span></span> */}
 
         {content}
     </div>

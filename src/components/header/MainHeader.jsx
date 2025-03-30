@@ -51,8 +51,11 @@ export default function MainHeader(){
                 <button><span className={`material-symbols-outlined ${classes["menu-icon"]}`}>search</span></button>
             </form>
 
-            {!user && <button className="text-button" onClick={() => dispatch(loginModalActions.setLoginModalVisibility(true))}>Login/Signup</button>}
-            {user && <SideMenu/>}
+            <div className={classes["profile-div"]}>
+                {!user && <button className="text-button" onClick={() => dispatch(loginModalActions.setLoginModalVisibility(true))}>Login/Signup</button>}
+                {user && <SideMenu/>}
+            </div>
+
             
         </header>
     </>

@@ -109,8 +109,6 @@ export default function UsersList({username, profileUserId, users, type, onClose
                             </button>
                         }
                     </div>
-                    
-
                 </li>                
             })}
 
