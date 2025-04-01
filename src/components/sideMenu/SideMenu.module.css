@@ -90,6 +90,22 @@
 }
 
 @media screen and (max-width: 750px) {
+    .side-menu a,
+    .side-menu p {
+        font-size: 1rem;
+    }
+
+    .side-menu .menu-icon {
+        font-size: 1.5rem;
+    }
+    
+    .image-container {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+@media screen and (max-width: 500px) {
     .side-menu {
         position: fixed;
         margin: 0px;
@@ -105,5 +121,10 @@
 
     .side-menu .menu-icon {
         font-size: 2rem;
+    }
+    
+    .image-container {
+        width: 48px;
+        height: 48px;
     }
 }

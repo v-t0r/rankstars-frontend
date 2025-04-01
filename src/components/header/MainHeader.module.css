@@ -103,6 +103,8 @@
         font-size: 0.6rem;
         height: var(--header-height-mobile);
         justify-content: space-between;
+
+        gap: 10px;
     }
 
     .header-logo {
@@ -110,11 +112,15 @@
     }
 
     .header-logo img {
-        width: 32px;
+        width: 48px;
     }
 
-    .search-bar-form {
+    .header-logo h1 {
         display: none;
+    }
+
+    .search-bar {
+        width: 100%;
     }
 
 }

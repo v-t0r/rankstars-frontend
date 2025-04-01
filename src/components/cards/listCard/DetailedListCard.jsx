@@ -15,7 +15,7 @@ export default function DetailedListCard({list}){
                 className={classes["img-div"]}
                 onClick={() => navigate(`/list/${list._id}?page=1&sortBy=userOrder&order=1`, { state: { prevPage: location.pathname, linkText: "all lists" }})} 
             >
-                <ImageGrid images = {images} size="10rem"/>
+                <ImageGrid images ={images} />
             </div>
             <div   className={classes["list-info-div"]}>
                 <div className={classes["title-div"]}>

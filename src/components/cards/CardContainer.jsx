@@ -33,7 +33,11 @@ export default function CardContainer({userId, type}) {
         
         const cardsInfo = type ==="reviews" ? data.reviews.slice(0, 4) : data.lists.slice(0,4)
         
-        content = <ul className={cardsInfo.length < 4 ? classes["less-than-four"] : undefined}>
+        const emptyCardsQty = [...Array(4 - cardsInfo.length)]
+
+        const emptyCard = {title: "", rating: "", imagesUrls: [""], reviews: []} 
+        
+        content = <ul>
 
             {cardsInfo.map(card => {
                 return <li key={card._id}>
@@ -41,7 +45,14 @@ export default function CardContainer({userId, type}) {
                 </li>
             })}
 
+            {cardsInfo.length > 0 && emptyCardsQty.map((_, index) => {
+                return <li key={index} style={{visibility: "hidden"}}>
+                     {type === "reviews" ? <ReviewCard review = {emptyCard} /> : <ListCard list = {emptyCard} />}
+                </li>
+            })}
+
             {!cardsInfo.length && <h2>This user has no {type} yet...</h2>}
+
         </ul> 
     }
 

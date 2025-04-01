@@ -1,17 +1,18 @@
 .card {
+    position: relative;
     display: flex;
     flex-direction: column;
-    position: relative;
+
     align-items: center;
     height: fit-content;
 
-    overflow: hidden;
-
     border-radius: 8px;
-    cursor: pointer;
     margin: 0px 2px;
+    cursor: pointer;
 
-    flex-grow: 1;
+    overflow: hidden;
+    
+    flex: 1;
 
     max-width: 224px;
     min-width: 64px;

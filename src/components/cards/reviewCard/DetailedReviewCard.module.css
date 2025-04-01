@@ -17,8 +17,6 @@
     width: 100%;
 
     flex-shrink: 1;
-
-    background-color: red;
 }
 
 .img-container {
@@ -128,8 +126,53 @@
 }
 
 @media screen and (max-width: 750px) {
+    .img-container {
+        width: 128px;
+        min-height: 128px;
+        max-height: 192px;
+    }
+
+    .rating-container p {
+        width: 48px;
+        height: 48px;
+        font-size: 1.8rem;
+    }
+
+    .rating-container a {
+        font-size: 0.9rem;
+    }
+
+}
+
+@media screen and (max-width: 450px) {
     .card {
-        
+        gap: 5px;
+    }
+
+    .img-and-info {
+        gap: 5px;
+    }
+
+    .img-container {
+        width: 60px;
+        min-height: 60px;
+        max-height: 100px;
+        border-radius: 5px;
+    }
+
+    .rating-container {
+        width: 48px;
+        gap: 5px;
+    }
+
+    .rating-container p {
+        width: 40px;
+        height: 40px;
+        font-size: 1.3rem;
+    }
+
+    .rating-container a {
+        font-size: 0.7rem;
     }
 
 }

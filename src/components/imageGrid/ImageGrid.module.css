@@ -1,19 +1,21 @@
 .image-rows {
     display: flex;
     flex-direction: column;
-    height: 224px;
     flex: 1;
+    min-width: 64px;
 }
 
 .image-columns {
     display: flex;
     flex-direction: row;
-    width: 224px;
     flex: 1;
 }
 
 .image-container {
+    display: flex;
     flex: 1;
+    min-width: 0px;
+    width: 100%;
     overflow: hidden;
 }
 

@@ -195,7 +195,7 @@ footer {
     outline: solid rgb(255, 77, 77) 2px;
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 450px) {
     main{
         min-width: 100%;
         padding: 10px;

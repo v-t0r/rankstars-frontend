@@ -47,7 +47,7 @@ export default function MainHeader(){
             </div>
 
             <form className={classes["search-bar-form"]} onSubmit={handleSearch}>
-                <input ref={inputRef} className={classes["search-bar"]} type="text"/>
+                <input ref={inputRef} className={classes["search-bar"]} type="text" placeholder="Search..." />
                 <button><span className={`material-symbols-outlined ${classes["menu-icon"]}`}>search</span></button>
             </form>
 

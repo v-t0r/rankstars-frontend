@@ -1,16 +1,24 @@
 .card {
+    position: relative;
     display: flex;
     flex-direction: column;
+
     align-items: center;
-    background-color: var(--secondary-background-color);
-    width: 224px;
     height: 272px;
+
+    background-color: var(--secondary-background-color);
     font-family: "Inknut Antiqua";
+    
     border-radius: 8px;
     margin: 0px 2px;
     cursor: pointer;
 
     overflow: hidden;
+
+    flex: 1;
+
+    max-width: 224px;
+    min-width: 64px;
 }
 
 .card:hover{
@@ -40,4 +48,19 @@
     font-family: "Inknut Antiqua";
     line-height: 1.2rem;
     text-align: center;
+}
+
+@media screen and (max-width: 750px) {
+    .title-div h3 {
+        font-size: smaller;
+
+    }
+
+}
+
+@media screen and (max-width: 450px) {
+    .title-div h3 {
+        font-size: medium;
+    }
+
 }

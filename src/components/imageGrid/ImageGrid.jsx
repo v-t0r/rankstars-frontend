@@ -2,21 +2,22 @@ import classes from "./ImageGrid.module.css"
 
 import { imageBackendUrl } from "../../utils/constants"
 
-export default function ImageGrid({images, size="14rem"}){
+export default function ImageGrid({images}){
 
     const imagesQnt = images.length
 
-    return <div className={classes["image-columns"]} style={{width: size}} >
-        <div className={classes["image-rows"]} style={{height: size}}>
+    return <div className={classes["image-columns"]} >
+
+        <div className={classes["image-rows"]} >
 
             {imagesQnt === 0 &&
-                <div className={classes["image-container"]}>
+                <div className={classes["image-container"]} >
                     <img src={`${imageBackendUrl}/images/empty-list-pic.jpg`} alt="Empty list picture"/>
                 </div>
             }
 
             {imagesQnt > 0 &&
-                <div className={classes["image-container"]}>
+                <div className={classes["image-container"]} >
                     <img src={`${imageBackendUrl}/${images[0]}`} alt="Review 1 image"/>
                 </div>
             }
@@ -28,7 +29,7 @@ export default function ImageGrid({images, size="14rem"}){
             }
         </div>
         {imagesQnt > 1 && 
-            <div className={classes["image-rows"]} style={{height: size}}>
+            <div className={classes["image-rows"]} >
                 {imagesQnt > 1 &&
                     <div className={classes["image-container"]}>
                         <img src={`${imageBackendUrl}/${images[1]}`} alt="Review 2 image"/>
@@ -43,4 +44,5 @@ export default function ImageGrid({images, size="14rem"}){
         }
                 
     </div> 
+
 }

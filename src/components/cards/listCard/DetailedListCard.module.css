@@ -3,17 +3,24 @@
     flex-direction: row;
     justify-content: left;
     gap: 16px;
+
+    flex: 1;
 }
 
 .img-div {
-    flex-grow: 0;
-    flex-shrink: 0;
+    display: flex;
+
     border-radius: 8px;
+    width: 172px;
+    height: 172px;
     overflow: hidden;
+
+    background-color: red;
 }
 
 .list-info-div {
     flex: 1;
+    background-color: green;
 }
 
 .title-div {

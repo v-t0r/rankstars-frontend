@@ -1,8 +1,9 @@
 .general-container {
     display: flex;
     flex-direction: column;
-    width: 800px;
-    margin: auto;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .header-section {

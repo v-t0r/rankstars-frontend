@@ -106,8 +106,22 @@
     margin-top: 64px;
 }
 
-
 @media screen and (max-width: 750px) {
+    .profile-div {
+        margin-top: 8px;
+    }
+
+    .image-container {
+        width: 128px;
+        height: 128px;
+    }
+
+    .post-container {
+        margin-top: 32px;
+    }
+}
+
+@media screen and (max-width: 500px) {
     .profile-div {
         margin-top: 8px;
     }
@@ -116,5 +130,6 @@
         width: 64px;
         height: 64px;
     }
+
 }
 
