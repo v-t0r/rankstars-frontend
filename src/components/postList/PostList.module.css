@@ -21,7 +21,11 @@
 }
 
 @media screen and (max-width: 450px) {
+    .posts-section ul {
+        gap: 10px;
+    }
+    
     .posts-section li {
-        padding: 6px;
+        padding: 10px;
     }
 }

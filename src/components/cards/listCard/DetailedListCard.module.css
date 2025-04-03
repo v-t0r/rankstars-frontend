@@ -14,13 +14,10 @@
     width: 172px;
     height: 172px;
     overflow: hidden;
-
-    background-color: red;
 }
 
 .list-info-div {
     flex: 1;
-    background-color: green;
 }
 
 .title-div {
@@ -39,6 +36,8 @@
     font-weight: 600;
     font-size: 1.3rem;
     color: white;
+
+    text-wrap: wrap;
 }
 
 .title-div h1:hover {
@@ -68,4 +67,38 @@
 .description-div p {
     margin-top: 3px;
     color: var(--light-gray);
+}
+
+@media screen and (max-width: 750px) {
+    .img-div {
+        width: 128px;
+        height: 128px;
+
+    }
+
+    .title-div h1 {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .card {
+        gap: 5px;
+    }
+
+    .img-div {
+        width: 90px;
+        height: 90px;
+
+    }
+
+    .title-div h1 {
+        font-size: 0.8rem;
+        line-height: 1.2rem;
+    }
+
+    .description-div a {
+        font-size: 0.9rem;
+    }
+
 }

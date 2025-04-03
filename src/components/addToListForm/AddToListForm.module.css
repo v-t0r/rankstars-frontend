@@ -1,5 +1,6 @@
 .main-container{
-    min-width: 480px;
+    width: 480px;
+    max-width: 100%;
 }
 
 .title-container {
@@ -71,4 +72,10 @@
 
 .new-list-div button:hover {
     color: white;
+}
+
+@media screen and (max-width: 450px) {
+    .lists-list {
+        height: 300px;
+    }
 }

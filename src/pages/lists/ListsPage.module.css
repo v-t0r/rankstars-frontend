@@ -4,8 +4,6 @@
     max-width: 800px;
     width: 100%;
     margin: 0 auto;
-
-    background-color: red;
 }
 
 .header-section {
@@ -27,4 +25,14 @@
     margin: 30px auto;
     color: var(--light-gray);
     font-weight: 400;
+}
+
+@media screen and (max-width: 450px) {
+    .header-section h1 {
+        font-size: 1.2rem;
+    }
+
+    .header-section select {
+        font-size: 0.8rem;
+    }
 }

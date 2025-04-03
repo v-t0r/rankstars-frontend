@@ -1,6 +1,9 @@
 .form {
+    display: flex;
+    flex-direction: column;
     background-color: var(--secondary-background-color);
     width: 500px;
+    max-width: 100%;
     height: fit-content;
 }
 
@@ -94,12 +97,7 @@ input[type="file"] button{
     gap: 15px
 }
 
-@media screen and (max-width: 750px) {
-    .form{
-        min-width: 0;
-        width: 90%;
-        padding: 16px;
-    }
+@media screen and (max-width: 450px) {
 
     .title-rating {
         display: flex;
@@ -110,8 +108,6 @@ input[type="file"] button{
         background: none;
         border: none;
         color: white;
-        font-size: x-large;
-        width: 100%;
     }
 
     .rating-input {
@@ -121,7 +117,7 @@ input[type="file"] button{
 
     .form textarea {
         height: 240px;
-        font-size: large;
+        font-size: medium;
     }
 }
 

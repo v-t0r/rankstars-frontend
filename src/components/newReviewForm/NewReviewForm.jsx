@@ -123,47 +123,45 @@ export default function NewReviewForm({reviewId = undefined, onCancel}){
 
     if(!reviewId || data){
     
-        content = <>
-            <form className={classes["form"]} onSubmit={handleSubmit} encType="multipart/form-data">
-                <div className={classes["title-rating"]}>
-                    <div className={classes["title-input"]}>
-                        <label htmlFor="title" hidden>Title</label>
-                        <input type="text" name="title" id="title" placeholder="TITLE" value={form.title} onChange={(e) => setForm(state => ({...state, title: e.target.value}))}/>
-                        {validationErrors.map((error, index) => error[0] === "title" && <p key={index} className="error-text">{error[1]}</p>)}
-                        {validationErrors.map((error, index) => error[0] === "rating" && <p key={index} className="error-text">{error[1]}</p>)}
-                    </div>
-
-                    <div className={classes["rating-input"]}>
-                        <label htmlFor="title" hidden>Rating (0-100)</label>
-                        <input type="text" name="rating" id="rating" placeholder="?" value={form.rating} maxLength="3" onChange={(e) => setForm(state => ({...state, rating: e.target.value}))}/>/100
-                    </div>
-                </div>
-                
-                <div className="label-input">
-                    <label htmlFor="review" hidden>Review</label>
-                    <textarea name="review" id="review" placeholder="(This part is optional, by the way...)" value={form.review} onChange={(e) => setForm(state => ({...state, review: e.target.value}))} ></textarea>
+        content = <form className={classes["form"]} onSubmit={handleSubmit} encType="multipart/form-data">
+            <div className={classes["title-rating"]}>
+                <div className={classes["title-input"]}>
+                    <label htmlFor="title" hidden>Title</label>
+                    <input type="text" name="title" id="title" placeholder="TITLE" value={form.title} onChange={(e) => setForm(state => ({...state, title: e.target.value}))}/>
+                    {validationErrors.map((error, index) => error[0] === "title" && <p key={index} className="error-text">{error[1]}</p>)}
+                    {validationErrors.map((error, index) => error[0] === "rating" && <p key={index} className="error-text">{error[1]}</p>)}
                 </div>
 
-                <div className={classes["select-div"]} >
-                    <label htmlFor="type">Category</label>
-                    <select name="type" id="type" value={form.type} onChange={(e) => setForm(state => ({...state, type: e.target.value}))} >
-                        {INTERESTS_LIST.map(([db_name, name], index) => {
-                            return <option key={index} value={db_name}>{name}</option>
-                        })}
-                    </select>
+                <div className={classes["rating-input"]}>
+                    <label htmlFor="title" hidden>Rating (0-100)</label>
+                    <input type="text" name="rating" id="rating" placeholder="?" value={form.rating} maxLength="3" onChange={(e) => setForm(state => ({...state, rating: e.target.value}))}/>/100
                 </div>
+            </div>
+            
+            <div className="label-input">
+                <label htmlFor="review" hidden>Review</label>
+                <textarea name="review" id="review" placeholder="(This part is optional, by the way...)" value={form.review} onChange={(e) => setForm(state => ({...state, review: e.target.value}))} ></textarea>
+            </div>
 
-                <div className={classes["image-picker-div"]}>
-                    <label>IMAGES</label>
-                    <ImagesPicker inputId={"image"} onChange={handleImageChange} onRemove={handleImageRemove} selectedImages={form.images}/>
-                </div>
+            <div className={classes["select-div"]} >
+                <label htmlFor="type">Category</label>
+                <select name="type" id="type" value={form.type} onChange={(e) => setForm(state => ({...state, type: e.target.value}))} >
+                    {INTERESTS_LIST.map(([db_name, name], index) => {
+                        return <option key={index} value={db_name}>{name}</option>
+                    })}
+                </select>
+            </div>
 
-                <div className={classes["buttons"]}>
-                    <button  type="button" className="negative-button" onClick={() => setModal(true)}>cancel</button>
-                    <button className="button secondary-button" type="submit">{reviewId ? "Save" : "Post"}</button>
-                </div>
-            </form>
-        </>
+            <div className={classes["image-picker-div"]}>
+                <label>IMAGES</label>
+                <ImagesPicker inputId={"image"} onChange={handleImageChange} onRemove={handleImageRemove} selectedImages={form.images}/>
+            </div>
+
+            <div className={classes["buttons"]}>
+                <button  type="button" className="negative-button" onClick={() => setModal(true)}>cancel</button>
+                <button className="button secondary-button" type="submit">{reviewId ? "Save" : "Post"}</button>
+            </div>
+        </form>
     }
 
     return <>

@@ -3,6 +3,7 @@
     flex-direction: column;
     margin-top: 10px;
     width: 400px;
+    max-width: 100%;
 }
 
 .form textarea {

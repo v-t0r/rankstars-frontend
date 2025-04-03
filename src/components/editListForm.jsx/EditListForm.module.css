@@ -1,5 +1,6 @@
 .form-div {
     width: 480px;
+    max-width: 100%;
 }
 
 .header-div {

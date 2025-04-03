@@ -1,125 +1,9 @@
-
-:root{
-    --img-width: 42px
-}
-
-.comment-card {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: fit-content;
-    border-left: solid var(--dark-gray) 32px;
-    padding-left: 16px;
-}
-
-.author-div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: start;
-    gap: 8px;
-}
-
-.author-div p {
-    color: var(--dark-gray);
-    margin-top: 80px;
-
-}
-
-.author-div img {
-    width: var(--img-width);
-    border-radius: 50%;
-}
-
-.author-div a {
-    font-family: "Inknut Antiqua";
-    font-size: 1.3rem;
-    font-weight: 500;
-    line-height: 1.0rem;
-    color: var(--light-gray);
-    text-decoration: none;
-
-    /* background-color: aqua; */
-}
-
-.author-div a:hover {
-    color: white;
-}
-
-.comment-div p{
-    overflow-wrap: anywhere;
-    margin-left: calc((var(--img-width) / 2) - 1px);
-    padding: 16px 16px 16px 28px;
-}
-
-.options-column{
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    align-items: center;
-    align-self: stretch;
-}
-
-.options-column button {
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: var(--light-gray);
-}
-
-.options-column button:hover {
-    color: white;
-}
-
-.text-area-div {
-    display: flex;
-    flex-direction: row;
-    margin-left: calc((var(--img-width) / 2) - 1px);
-}
-
-.text-area-div textarea {
-    --line-heigth: 1rem;
-    --vertical-padding: 8px;
-
-    width: 100%;
-    font-size: 0.9rem;
-    line-height: var(--line-heigth);
-    padding: var(--vertical-padding) 8px;
-    height: calc(var(--line-heigth) + (2 * var(--vertical-padding)) + 1px);
-    resize: none;
-    border-radius: 8px 0 0 8px;
-    background-color: var(--input-background-color);
-    color: var(--light-gray);
-}
-
-.text-area-div textarea:focus {
-    outline: none;
-    box-shadow: none;
-}
-
-.text-area-div button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    background-color: var(--input-background-color);
-    color: var(--dark-gray);
-    border: none;
-    border-radius: 0 8px 8px 0;
-    padding: 0 5px;
-}
-
-.text-area-div button:hover {
-    color: var(--light-gray);
-}
-
 .answers-div {
     display: flex;
     flex-direction: column;
 
     gap: 16px;
-    margin-left: calc(var(--img-width)/2  + 28px );
+    margin-left: calc(var(--img-width));
 }
 
 .answers-div > button {
@@ -133,4 +17,15 @@
 
 .answers-div > button:hover {
     color: white;
+}
+
+@media screen and (max-width: 450px) {
+    .answers-div {
+        margin-left: calc(var(--img-width-mobile));
+    }
+
+    .answers-div > button {
+        font-size: 0.8rem;
+    }
+
 }

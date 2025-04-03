@@ -1,5 +1,6 @@
 :root{
-    --img-width: 42px
+    --img-width: 42px;
+    --img-width-mobile: 32px
 }
 
 .comment-card {
@@ -67,7 +68,7 @@
 .comment-div p{
     overflow-wrap: anywhere;
     margin-left: calc((var(--img-width) / 2) - 1px);
-    padding: 16px 16px 16px 28px;
+    padding: 16px 16px 16px 0px;
 }
 
 .options-column{
@@ -99,4 +100,27 @@
 
 .delete-icon {
     font-size: large;
+}
+
+@media screen and (max-width: 450px) {
+    .image-container {
+        width: var(--img-width-mobile);
+        height: var(--img-width-mobile);
+    }
+
+    .comment-div p{
+        margin-left: calc((var(--img-width-mobile) / 2) - 1px);
+    }
+
+    .comment-card {
+        padding-left: 6px;
+    }
+
+    .author-div a {
+        font-size: 1rem;
+    }
+
+    .author-div p {
+        font-size: 0.7rem;
+    }
 }
