@@ -20,3 +20,47 @@ export function getRatingColorClass(rating){
 export function calcRemainingTime(date){
     return  date - Date.now()
 }
+
+export function feedFormatedDate(rawDate){
+    const date = new Date(rawDate)
+    
+    const now = new Date()
+    const today = new Date( now.getFullYear(), now.getMonth(), now.getDate())
+
+    const oneDay = 1000*60*60*24
+    const yesterday = new Date( today.getTime() - oneDay)
+
+
+    console.log(today)
+    console.log(yesterday)
+    
+    if(date.getTime() >= today.getTime()){
+        return date.toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit"
+        })
+    }
+
+    if(date.getTime() >= yesterday.getTime() ){
+        return "yesterday"
+    }
+
+    //last year or older
+    if(date.getFullYear < new Date().getFullYear()){
+        return date.toLocaleString("en-US", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit"
+        })
+    }
+
+    //in this year but older than yesterday
+    return date.toLocaleString("en-US", {
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit"
+    })
+}

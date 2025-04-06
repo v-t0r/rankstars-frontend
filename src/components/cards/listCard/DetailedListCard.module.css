@@ -11,8 +11,8 @@
     display: flex;
 
     border-radius: 8px;
-    width: 172px;
-    height: 172px;
+    width: 160px;
+    height: 160px;
     overflow: hidden;
 }
 
@@ -83,18 +83,22 @@
 
 @media screen and (max-width: 450px) {
     .card {
-        gap: 5px;
+        gap: 8px;
     }
 
     .img-div {
-        width: 90px;
-        height: 90px;
+        width: 60px;
+        height: 60px;
 
     }
 
     .title-div h1 {
         font-size: 0.8rem;
         line-height: 1.2rem;
+    }
+
+    .title-div a {
+        font-size: 0.7rem;
     }
 
     .description-div a {

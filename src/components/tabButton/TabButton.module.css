@@ -1,0 +1,26 @@
+.tab-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    flex-grow: 1;
+    width: fit-content;
+}
+
+.tab-button button{
+    background: none;
+    color: white;
+    font-size: larger;
+    cursor: pointer;
+    height: 48px;
+    border: none;
+}
+
+.tab-button button:hover {
+    background-color: rgba(0, 0, 0, 0.178);
+}
+
+.tab-button .active-tab{
+    height: 4px;
+    background-color: var(--button-color);
+    border-radius: 2px;
+}

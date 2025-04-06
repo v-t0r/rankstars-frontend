@@ -4,6 +4,8 @@ export const imageBackendUrl = import.meta.env.VITE_IMG_URL
 
 export const ITEMS_PER_PAGE = 5
 
+export const ITEMS_PER_FEED_PAGE = 15
+
 export const INTERESTS_LIST = [
     ["art", "Art"],
     ["books", "Books"],

@@ -1,5 +1,4 @@
 import { useSearchParams } from "react-router-dom"
-import { motion } from "framer-motion"
 
 import classes from "./SearchPage.module.css"
 import { useEffect } from "react"
@@ -10,6 +9,7 @@ import PostList from "../../components/postList/PostList"
 import LoaderDots from "../../components/loaderDots/LoaderDots"
 import ErrorCard from "../../components/errorCard/ErrorCard"
 import { getUsers } from "../../services/users"
+import TabButton from "../../components/tabButton/TabButton"
 
 export default function SearchPage(){
     const [searchParams, setSearchParams] = useSearchParams()
@@ -70,9 +70,3 @@ export default function SearchPage(){
     </div>
 }
 
-function TabButton({onClick, isActive, children}){
-    return <div className={classes["tab-button"]}>
-        <button onClick={onClick}>{children}</button>
-        {isActive && <motion.div layoutId="active-tab" className={classes["active-tab"]}></motion.div>}
-    </div>
-}
