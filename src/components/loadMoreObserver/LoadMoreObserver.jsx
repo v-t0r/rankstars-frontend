@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 
 
-export default function LoadMoreSensor({fetchNextPage, hasNextPage}){
+export default function LoadMoreObserver({fetchNextPage, hasNextPage}){
     const ref = useRef()
     
     useEffect(() => {

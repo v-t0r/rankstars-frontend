@@ -29,10 +29,6 @@ export function feedFormatedDate(rawDate){
 
     const oneDay = 1000*60*60*24
     const yesterday = new Date( today.getTime() - oneDay)
-
-
-    console.log(today)
-    console.log(yesterday)
     
     if(date.getTime() >= today.getTime()){
         return date.toLocaleTimeString("en-US", {

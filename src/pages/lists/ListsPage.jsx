@@ -7,7 +7,7 @@ import PostList from "../../components/postList/PostList"
 import { fetchUserInfo, fetchUserLists } from "../../services/users"
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import LoaderDots from "../../components/loaderDots/LoaderDots"
-import LoadMoreSensor from "../../components/loadMoreObserver/LoadMoreObserver"
+import LoadMoreObserver from "../../components/loadMoreObserver/LoadMoreObserver"
 import { ITEMS_PER_PAGE } from "../../utils/constants"
 
 export default function ListsPage(){
@@ -61,7 +61,7 @@ export default function ListsPage(){
 
         {isFetchingNextPage && <LoaderDots/>}
 
-        <LoadMoreSensor fetchNextPage={fetchNextPage} hasNextPage={hasNextPage}/>
+        <LoadMoreObserver fetchNextPage={fetchNextPage} hasNextPage={hasNextPage}/>
 
         {(!hasNextPage && data?.pages.length > 1) &&
             <h3 className={classes["no-more-lists-message"]}>It&apos;s a dead end! No more lists to load.</h3>

@@ -12,9 +12,12 @@ export default function FeedPost({post}) {
         <div className={classes["post-header"]}>
             <div className={classes["author-div"]}>
                 <div className={classes["image-container"]}>
-                    <img src={`${imageBackendUrl}/${post.author.profilePicUrl}`} alt={`${post.author.username}' profile picture.`} />
+                    <Link to={`/profile/${post.author._id}`}>
+                        <img src={`${imageBackendUrl}/${post.author.profilePicUrl}`} alt={`${post.author.username}' profile picture.`} />
+                    </Link>
+                    
                 </div>
-                <p><Link>{post.author.username}</Link> {post.type == "review" ? "posted a new review"  : "created a new list"}</p>
+                <p><Link to={`/profile/${post.author._id}`}>{post.author.username}</Link> {post.type == "review" ? "posted a new review"  : "created a new list"}</p>
 
             </div>
             

@@ -7,10 +7,9 @@ import { fetchFeed } from "../../services/feed"
 import LoaderDots from "../../components/loaderDots/LoaderDots"
 import ErrorCard from "../../components/errorCard/ErrorCard"
 import { useDispatch, useSelector } from "react-redux"
-import DetailedReviewCard from "../../components/cards/reviewCard/DetailedReviewCard"
-import DetailedListCard from "../../components/cards/listCard/DetailedListCard"
 import { loginModalActions } from "../../store"
 import FeedPost from "../../components/feedPost/FeedPost"
+import LoadMoreObserver from "../../components/loadMoreObserver/LoadMoreObserver"
 
 export default function FeedPage() {
   const [ feedType, setFeedType ] = useState("following")
@@ -39,7 +38,7 @@ export default function FeedPage() {
 
   const {data, isPending, isError, fetchNextPage, hasNextPage, isFetchingNextPage} = useInfiniteQuery({
     queryKey: ["feed", `${feedType}`, `${loggedUserInfo?.id}`],
-    queryFn: ({signal, pageParam = 1}) => fetchFeed({signal, feedType: "following", page: pageParam}),
+    queryFn: ({signal, pageParam = 1}) => fetchFeed({signal, feedType: feedType, page: pageParam}),
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.posts.length == 0 ? undefined : allPages.length+1
     }
@@ -67,6 +66,10 @@ export default function FeedPage() {
     </div>
 
     {data && content}  
+
+    {isFetchingNextPage && <LoaderDots />}
+
+    <LoadMoreObserver fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} />
 
     {isPending && <LoaderDots />}
     {isError && <ErrorCard />}

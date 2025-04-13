@@ -7,7 +7,7 @@ import PostList from "../../components/postList/PostList"
 import { fetchUserInfo, fetchUserReviews } from "../../services/users"
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import LoaderDots from "../../components/loaderDots/LoaderDots"
-import LoadMoreSensor from "../../components/loadMoreObserver/LoadMoreObserver"
+import LoadMoreObserver from "../../components/loadMoreObserver/LoadMoreObserver"
 
 export default function ReviewsPage() {
     const [sortBy, setSortBy] = useState({sortBy: 'createdAt', order: -1})
@@ -62,7 +62,7 @@ export default function ReviewsPage() {
 
         {isFetchingNextPage && <LoaderDots/>}
 
-        <LoadMoreSensor fetchNextPage={fetchNextPage} hasNextPage={hasNextPage}/>
+        <LoadMoreObserver fetchNextPage={fetchNextPage} hasNextPage={hasNextPage}/>
         
         {(!hasNextPage && data?.pages.length > 1) &&
             <h3 className={classes["no-more-reviews-message"]}>It&apos;s a dead end! No more reviews to load.</h3>
