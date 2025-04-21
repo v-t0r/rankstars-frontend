@@ -1,0 +1,37 @@
+.card {
+    background-color: var(--secondary-background-color);
+    width: 200px;
+    min-width: 200px;
+    padding: 16px;
+    border-radius: 8px;
+    height: 80vh;
+}
+
+.filter-div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 6px;
+    margin-top: 16px;
+}
+
+.min-max-div {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.label-input{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.label-input input {
+    width: 100%;
+    background-color: var(--input-background-color);
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}

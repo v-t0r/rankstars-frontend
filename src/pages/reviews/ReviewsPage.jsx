@@ -15,7 +15,7 @@ export default function ReviewsPage() {
 
     const { data, isPending, isError, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
         queryKey: [ "reviews", "user", `${id}`, `${sortBy.sortBy}`, `${sortBy.order}`],
-        queryFn: ({ signal, pageParam=1 }) => fetchUserReviews(signal, id, sortBy, pageParam),
+        queryFn: ({ signal, pageParam = 1 }) => fetchUserReviews(signal, id, sortBy, pageParam),
         getNextPageParam: (lastPage, allPages) => {
             return lastPage.reviews.length == 0 ? undefined : allPages.length + 1
         }

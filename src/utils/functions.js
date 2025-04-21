@@ -60,3 +60,11 @@ export function feedFormatedDate(rawDate){
         minute: "2-digit"
     })
 }
+
+export function dateInputFormatedDate(rawDate){
+    // This function returns the date in the XXXX-XX-XX format
+    const date = new Date(rawDate)
+    const formatedDate = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`
+
+    return formatedDate
+}

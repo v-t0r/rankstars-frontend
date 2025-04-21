@@ -39,7 +39,7 @@ export default function SignupForm({onClose, onLogin}){
         }
 
         try{
-            const response = await fetch(`${backendUrl}/signup`, {
+            const response = await fetch(`${backendUrl}/users/`, {
                 method: "POST",
                 body: formData,
                 credentials: "include"

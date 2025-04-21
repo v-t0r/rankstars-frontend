@@ -10,6 +10,7 @@ import LoaderDots from "../../components/loaderDots/LoaderDots"
 import ErrorCard from "../../components/errorCard/ErrorCard"
 import { getUsers } from "../../services/users"
 import TabButton from "../../components/tabButton/TabButton"
+import FiltersForm from "../../components/filtersForm/FiltersForm"
 
 export default function SearchPage(){
     const [searchParams, setSearchParams] = useSearchParams()
@@ -61,11 +62,19 @@ export default function SearchPage(){
             <TabButton onClick={() => handleSearchPlace("users")} isActive={searchParams.get("where") == "users"}>Profiles</TabButton>
         </div>
         
-        {isPending && <LoaderDots />}
-        {isError && <ErrorCard />}
+        <div className={classes["filters-and-content"]}>
+            <FiltersForm type={searchParams.get("where")}/>
+            
+            <div className={classes["content-div"]}>
+                {isPending && <LoaderDots />}
+                {isError && <ErrorCard />}
 
-        {data && <PostList type={searchParams.get("where")} posts={data[searchParams.get("where")]}/>}
-        {data && data[searchParams.get("where")].length === 0 && <h2>There is no results for this search...</h2>}
+                {data && <PostList type={searchParams.get("where")} posts={data[searchParams.get("where")]}/>}
+                {data && data[searchParams.get("where")].length === 0 && <h2>There is no results for this search...</h2>}
+            </div>
+            
+        </div>
+
 
     </div>
 }

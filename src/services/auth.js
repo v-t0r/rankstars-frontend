@@ -45,7 +45,7 @@ export async function authenticationLoader(){
 export async function logout(){
     
     try{
-        const response = await fetch(`${backendUrl}/logout`, {
+        const response = await fetch(`${backendUrl}/users/logout`, {
             credentials: "include"
         })
 

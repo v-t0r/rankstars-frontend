@@ -37,10 +37,15 @@ export default function FeedPage() {
   }
 
   const {data, isPending, isError, fetchNextPage, hasNextPage, isFetchingNextPage} = useInfiniteQuery({
-    queryKey: ["feed", `${feedType}`, `${loggedUserInfo?.id}`],
-    queryFn: ({signal, pageParam = 1}) => fetchFeed({signal, feedType: feedType, page: pageParam}),
-    getNextPageParam: (lastPage, allPages) => {
-      return lastPage.posts.length == 0 ? undefined : allPages.length+1
+    queryKey: ["feed", `${feedType}`, `${loggedUserInfo?.id}`], 
+    queryFn: ({signal, pageParam = undefined}) => fetchFeed({
+        signal, 
+        feedType: feedType, 
+        olderThan: pageParam
+    }),
+    getNextPageParam: (lastPage) => {
+        const postQnty = lastPage.posts.length
+        return postQnty == 0 ? undefined : lastPage.posts[postQnty-1].createdAt
     }
   })
 
@@ -57,6 +62,8 @@ export default function FeedPage() {
       
     </>
   }
+
+  console.log(data)
 
   return <>
     <div className={classes["tabs-div"]}>

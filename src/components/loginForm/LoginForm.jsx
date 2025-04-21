@@ -26,7 +26,7 @@ export default function LoginForm({onClose, onSignup}){
             return
         }
 
-        const response = await fetch(`${backendUrl}/login`, {
+        const response = await fetch(`${backendUrl}/users/login`, {
             method: "POST",
             credentials: "include",
             body: formData

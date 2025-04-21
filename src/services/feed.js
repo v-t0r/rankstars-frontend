@@ -1,9 +1,8 @@
 import { backendUrl, ITEMS_PER_FEED_PAGE } from "../utils/constants";
 
-export async function fetchFeed({signal, feedType, page = 1}) {
-    const skip = ITEMS_PER_FEED_PAGE * (page - 1) 
+export async function fetchFeed({signal, feedType, olderThan = Date.now()}) {
     
-    const response = await fetch(`${backendUrl}/feed/${feedType}?limit=${ITEMS_PER_FEED_PAGE}&skip=${skip}`, {
+    const response = await fetch(`${backendUrl}/feed/${feedType}?limit=${ITEMS_PER_FEED_PAGE}&olderThan=${olderThan}`, {
         signal: signal,
         method: "GET",
         credentials: "include",
