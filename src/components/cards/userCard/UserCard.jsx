@@ -4,9 +4,7 @@ import classes from "./UserCard.module.css"
 import { Link } from "react-router-dom"
 
 export default function UserCard({user}){
-
-    console.log(user)
-
+    
     return <div className={classes["card"]}>
         <div className={classes["image-container"]}>
             <img src={`${imageBackendUrl}/${user.profilePicUrl}`} />

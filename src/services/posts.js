@@ -1,4 +1,4 @@
-import { backendUrl, ITEMS_PER_PAGE } from "../utils/constants";
+import { backendUrl, ITEMS_PER_FEED_PAGE, ITEMS_PER_PAGE } from "../utils/constants";
 
 export async function fetchReviewInfo({signal, reviewId}) {
 
@@ -169,9 +169,13 @@ async function addOrRemoverReviewFromList({reviewId, listId, operation}){
     return await response.json()
 }
 
-export async function getPosts({type, searchTerm}){
-    
-    const response = await fetch(`${backendUrl}/${type}?search=${searchTerm}`,{
+export async function getPosts( {signal, type, searchParams, page = 1} ){
+
+    searchParams.set("limit", ITEMS_PER_FEED_PAGE)
+    searchParams.set("skip", ITEMS_PER_FEED_PAGE * (page-1))
+
+    const response = await fetch(`${backendUrl}/${type}?${searchParams.toString()}`,{
+        signal: signal,
         method: "GET", 
         credentials: "include"
     })

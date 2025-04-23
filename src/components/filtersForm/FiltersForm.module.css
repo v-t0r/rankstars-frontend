@@ -1,10 +1,18 @@
 .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: var(--secondary-background-color);
     width: 200px;
     min-width: 200px;
     padding: 16px;
     border-radius: 8px;
-    height: 80vh;
+    min-height: 800px;
+    height: 100%;
+}
+
+.card h2 {
+    color: white;
 }
 
 .filter-div {
@@ -15,10 +23,16 @@
     margin-top: 16px;
 }
 
-.min-max-div {
+.row-flexbox-div {
     display: flex;
     flex-direction: row;
     gap: 5px;
+}
+
+.column-flexbox-div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; 
 }
 
 .label-input{
@@ -34,4 +48,9 @@
     border: none;
     border-radius: 5px;
     color: white;
+}
+
+.apply-button {
+    padding: 8px;
+    width: 100%;
 }

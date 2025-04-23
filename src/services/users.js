@@ -1,4 +1,4 @@
-import { backendUrl, ITEMS_PER_PAGE } from "../utils/constants";
+import { backendUrl, ITEMS_PER_FEED_PAGE, ITEMS_PER_PAGE } from "../utils/constants";
 
 export async function fetchUserInfo({signal, id, basicOnly = false}) {
 
@@ -111,9 +111,13 @@ export async function patchUser(form){
     return patchedUser
 }
 
-export async function getUsers({searchTerm}){
-    
-    const response = await fetch(`${backendUrl}/users?search=${searchTerm}`,{
+export async function getUsers({signal, searchParams, page = 1}){
+
+    searchParams.set("limit", ITEMS_PER_FEED_PAGE)
+    searchParams.set("skip", ITEMS_PER_FEED_PAGE * (page-1))
+
+    const response = await fetch(`${backendUrl}/users?${searchParams.toString()}`,{
+        signal: signal,
         method: "GET", 
         credentials: "include"
     })

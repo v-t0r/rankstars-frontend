@@ -10,12 +10,19 @@
     text-align: center;
 }
 
+.sort-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    margin-bottom: 16px;
+}
+
 .filters-and-content{
     display: flex;
     flex-direction: row;
     justify-content: start;
     align-items: start;
-    gap: 10px;
+    gap: 14px;
 }
 
 .content-div {

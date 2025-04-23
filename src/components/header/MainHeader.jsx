@@ -35,8 +35,12 @@ export default function MainHeader(){
         e.preventDefault()
 
         if(inputRef.current.value.trim() === "") { return }
+        
+        if(location.pathname !== "/search")
+            navigate(`/search?search=${encodeURIComponent(inputRef.current.value.trim())}`)
+    
+        navigate(`/search?search=${encodeURIComponent(inputRef.current.value.trim())}&where=${searchParams.get("where")}`)
 
-        navigate(`/search?search=${encodeURIComponent(inputRef.current.value.trim())}`)
     }
 
     return <>
