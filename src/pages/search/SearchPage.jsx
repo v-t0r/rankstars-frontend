@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom"
 
 import classes from "./SearchPage.module.css"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useInfiniteQuery } from "@tanstack/react-query"
 import { getPosts } from "../../services/posts"
 
@@ -15,6 +15,25 @@ import LoadMoreObserver from "../../components/loadMoreObserver/LoadMoreObserver
 
 export default function SearchPage(){
     const [searchParams, setSearchParams] = useSearchParams()
+    const [categories, setCategories] = useState([])
+
+    const queryFunction = searchParams.get("where") === "users" ? getUsers : getPosts
+
+    const {data, isPending, isError, fetchNextPage, hasNextPage, isFetchingNextPage} = useInfiniteQuery({
+        queryKey: [`${searchParams.toString()}`],
+        queryFn: ({signal, pageParam = 1}) => {
+            return queryFunction({
+                signal,
+                ...(searchParams.get("where") != "users" ? {type: searchParams.get("where")} : {}),
+                page: pageParam,
+                searchParams: searchParams,   
+            })
+        },
+        getNextPageParam: (lastPage, allPages) => {
+            return lastPage[searchParams.get("where")].length == 0 ? undefined : allPages.length + 1
+        }
+        
+    })
 
     useEffect(() => {
         setSearchParams(prev => {
@@ -80,27 +99,10 @@ export default function SearchPage(){
         }, {replace: true})
     }
 
-    const queryFunction = searchParams.get("where") === "users" ? getUsers : getPosts
-
-    const {data, isPending, isError, fetchNextPage, hasNextPage, isFetchingNextPage} = useInfiniteQuery({
-        queryKey: [`${searchParams.toString()}`],
-        queryFn: ({signal, pageParam = 1}) => {
-            return queryFunction({
-                signal,
-                ...(searchParams.get("where") != "users" ? {type: searchParams.get("where")} : {}),
-                page: pageParam,
-                searchParams: searchParams,   
-            })
-        },
-        getNextPageParam: (lastPage, allPages) => {
-            return lastPage[searchParams.get("where")].length == 0 ? undefined : allPages.length + 1
-        }
-        
-    })
-
     let content = <></>
     if(data){
         const posts = data.pages.map(page => page[searchParams.get("where")]).flat(1)
+        
         content = <PostList type={searchParams.get("where")} posts={posts}/>
         if(posts.length === 0) content = <h2>There is no results for this search...</h2>
     }
@@ -133,22 +135,25 @@ export default function SearchPage(){
                     maxRating: searchParams.get("maxRating"),
                     minDate: searchParams.get("minDate"),
                     maxDate: searchParams.get("maxDate"),
-                    categories: searchParams.get("categories")
+                    topCategories: categories
                 }}
                 onSetFilters={handleSetFilters}    
             />
             
             <div className={classes["content-div"]}>
-                {isPending && <LoaderDots />}
-                {isError && <ErrorCard />}
-
                 {content}
+
+                {isPending && <LoaderDots />}
+                {isFetchingNextPage && <LoaderDots />}
+                {isError && <ErrorCard />}
+                <LoadMoreObserver fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} />
             </div>
             
         </div>
 
-        {isFetchingNextPage && <LoaderDots />}
-        <LoadMoreObserver fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} />
+        
+        
+        
 
     </div>
 }

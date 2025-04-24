@@ -17,6 +17,19 @@ export default function FeedPage() {
   const loggedUserInfo = useSelector(state => state.user.user)
   const dispatch = useDispatch()
 
+  const {data, isPending, isError, fetchNextPage, hasNextPage, isFetchingNextPage} = useInfiniteQuery({
+    queryKey: ["feed", `${feedType}`, `${loggedUserInfo?.id}`], 
+    queryFn: ({signal, pageParam = undefined}) => fetchFeed({
+        signal, 
+        feedType: feedType, 
+        olderThan: pageParam
+    }),
+    getNextPageParam: (lastPage) => {
+        const postQnty = lastPage.posts.length
+        return postQnty == 0 ? undefined : lastPage.posts[postQnty-1].createdAt
+    }
+  })
+
   useEffect(() => {
     if(!loggedUserInfo){
       setFeedType("recent-posts")
@@ -36,18 +49,7 @@ export default function FeedPage() {
     setFeedType(newTab)
   }
 
-  const {data, isPending, isError, fetchNextPage, hasNextPage, isFetchingNextPage} = useInfiniteQuery({
-    queryKey: ["feed", `${feedType}`, `${loggedUserInfo?.id}`], 
-    queryFn: ({signal, pageParam = undefined}) => fetchFeed({
-        signal, 
-        feedType: feedType, 
-        olderThan: pageParam
-    }),
-    getNextPageParam: (lastPage) => {
-        const postQnty = lastPage.posts.length
-        return postQnty == 0 ? undefined : lastPage.posts[postQnty-1].createdAt
-    }
-  })
+ 
 
   let content = <></>
   if(data){

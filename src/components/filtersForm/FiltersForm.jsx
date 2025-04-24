@@ -4,13 +4,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import { dateInputFormatedDate } from "../../utils/functions";
 import { useEffect, useState } from "react";
 
-export default function FiltersForm({type, categories, inicialFilterValues, onSetFilters}){
+export default function FiltersForm({type, topCategories, inicialFilterValues, onSetFilters}){
     const [filters, setFilters] = useState({
         minRating: "",
         maxRating: "",
         minDate: "",
         maxDate: "",
-        categories: []
+        selectedCategories: ""
     })
         
     useEffect(() => {
@@ -19,13 +19,15 @@ export default function FiltersForm({type, categories, inicialFilterValues, onSe
             maxRating: inicialFilterValues.maxRating ?? "",
             minDate: inicialFilterValues.minDate ?? "",
             maxDate: inicialFilterValues.maxDate ?? "",
-            categories: inicialFilterValues.categories ?? ""
+            selectedCategories: inicialFilterValues.categories ?? ""
         })
     }, [inicialFilterValues])
 
     function handleApply(){
         onSetFilters(Object.fromEntries(Object.entries(filters).filter(([_, value]) => (value != null && value != ""))))
     }
+
+    console.log(topCategories)
 
     return <div className={classes["card"]}>
         
@@ -83,6 +85,7 @@ export default function FiltersForm({type, categories, inicialFilterValues, onSe
 
             <div className={classes["filter-div"]}>
                 <h3>Category</h3>
+                {/* {filters.categories.map((category, index) => <p key={index}>{category}</p>)} */}
             </div>
         </div>
         

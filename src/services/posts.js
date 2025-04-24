@@ -171,10 +171,11 @@ async function addOrRemoverReviewFromList({reviewId, listId, operation}){
 
 export async function getPosts( {signal, type, searchParams, page = 1} ){
 
-    searchParams.set("limit", ITEMS_PER_FEED_PAGE)
-    searchParams.set("skip", ITEMS_PER_FEED_PAGE * (page-1))
+    const queryParameters = new URLSearchParams(searchParams)
+    queryParameters.set("limit", ITEMS_PER_FEED_PAGE)
+    queryParameters.set("skip", ITEMS_PER_FEED_PAGE * (page-1))
 
-    const response = await fetch(`${backendUrl}/${type}?${searchParams.toString()}`,{
+    const response = await fetch(`${backendUrl}/${type}?${queryParameters.toString()}`,{
         signal: signal,
         method: "GET", 
         credentials: "include"
