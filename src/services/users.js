@@ -132,3 +132,23 @@ export async function getUsers({signal, searchParams, page = 1}){
 
     return await response.json()
 }
+
+export async function getUsersInterests({signal, searchParams}) {
+
+    const queryParameters = new URLSearchParams(searchParams)
+
+    const response = await fetch(`${backendUrl}/users/interests/?${queryParameters.toString()}`,{
+        signal: signal,
+        method: "GET", 
+        credentials: "include"
+    })
+
+    if(!response.ok){
+        const error = new Error("Failed to retrive posts interests")
+        error.status = response.status
+        error.info = await response.json()
+        throw error
+    }
+
+    return await response.json()
+}

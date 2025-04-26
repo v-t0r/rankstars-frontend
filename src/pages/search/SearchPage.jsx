@@ -2,13 +2,13 @@ import { useSearchParams } from "react-router-dom"
 
 import classes from "./SearchPage.module.css"
 import { useEffect, useState } from "react"
-import { useInfiniteQuery } from "@tanstack/react-query"
-import { getPosts } from "../../services/posts"
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
+import { getPosts, getPostsCategories } from "../../services/posts"
 
 import PostList from "../../components/postList/PostList"
 import LoaderDots from "../../components/loaderDots/LoaderDots"
 import ErrorCard from "../../components/errorCard/ErrorCard"
-import { getUsers } from "../../services/users"
+import { getUsers, getUsersInterests } from "../../services/users"
 import TabButton from "../../components/tabButton/TabButton"
 import FiltersForm from "../../components/filtersForm/FiltersForm"
 import LoadMoreObserver from "../../components/loadMoreObserver/LoadMoreObserver"
@@ -17,8 +17,9 @@ export default function SearchPage(){
     const [searchParams, setSearchParams] = useSearchParams()
     const [categories, setCategories] = useState([])
 
-    const queryFunction = searchParams.get("where") === "users" ? getUsers : getPosts
+    const where = searchParams.get("where")
 
+    const queryFunction = searchParams.get("where") === "users" ? getUsers : getPosts
     const {data, isPending, isError, fetchNextPage, hasNextPage, isFetchingNextPage} = useInfiniteQuery({
         queryKey: [`${searchParams.toString()}`],
         queryFn: ({signal, pageParam = 1}) => {
@@ -33,6 +34,16 @@ export default function SearchPage(){
             return lastPage[searchParams.get("where")].length == 0 ? undefined : allPages.length + 1
         }
         
+    })
+
+    const categoriesQueryFunction = searchParams.get("where") === "users" ? 
+        ({signal}) => getUsersInterests({signal, searchParams})
+        : 
+        ({signal}) => getPostsCategories({signal, type: searchParams.get("where"), searchParams})
+
+    const {data: categoriesData} = useQuery({
+        queryKey: [`${searchParams.toString()}`, "categories"],
+        queryFn: categoriesQueryFunction
     })
 
     useEffect(() => {
@@ -53,6 +64,14 @@ export default function SearchPage(){
             return params
         }, {replace: true})
     }, [setSearchParams])
+
+    useEffect(() => {
+        if(categoriesData){
+            console.log(categoriesData)
+            setCategories(categoriesData[where === "users" ? "interests" : "categories"])
+        }
+    }, [categoriesData, where])
+
 
     function handleSearchPlace(place){
         setSearchParams(prev => {
@@ -82,8 +101,6 @@ export default function SearchPage(){
     }
 
     function handleSetFilters(filters){
-        console.log(filters)
-
         setSearchParams(prev => {
             const params = new URLSearchParams()
             params.set("search", prev.get("search"))
@@ -135,8 +152,8 @@ export default function SearchPage(){
                     maxRating: searchParams.get("maxRating"),
                     minDate: searchParams.get("minDate"),
                     maxDate: searchParams.get("maxDate"),
-                    topCategories: categories
                 }}
+                categoriesCount={categories}
                 onSetFilters={handleSetFilters}    
             />
             

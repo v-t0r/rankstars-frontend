@@ -3,31 +3,30 @@ import classes from "./FiltersForm.module.css"
 import "react-datepicker/dist/react-datepicker.css";
 import { dateInputFormatedDate } from "../../utils/functions";
 import { useEffect, useState } from "react";
+import CheckBoxInput from "../checkBoxInput.jsx/CheckBoxInput";
 
-export default function FiltersForm({type, topCategories, inicialFilterValues, onSetFilters}){
+export default function FiltersForm({type, categoriesCount, inicialFilterValues, onSetFilters}){
     const [filters, setFilters] = useState({
         minRating: "",
         maxRating: "",
         minDate: "",
         maxDate: "",
-        selectedCategories: ""
+        selectedCategories: "",
     })
-        
+       
     useEffect(() => {
         setFilters({
             minRating: inicialFilterValues.minRating ?? "",
             maxRating: inicialFilterValues.maxRating ?? "",
             minDate: inicialFilterValues.minDate ?? "",
             maxDate: inicialFilterValues.maxDate ?? "",
-            selectedCategories: inicialFilterValues.categories ?? ""
+            selectedCategories: inicialFilterValues.categories ?? "",
         })
     }, [inicialFilterValues])
 
     function handleApply(){
         onSetFilters(Object.fromEntries(Object.entries(filters).filter(([_, value]) => (value != null && value != ""))))
     }
-
-    console.log(topCategories)
 
     return <div className={classes["card"]}>
         
@@ -85,7 +84,17 @@ export default function FiltersForm({type, topCategories, inicialFilterValues, o
 
             <div className={classes["filter-div"]}>
                 <h3>Category</h3>
-                {/* {filters.categories.map((category, index) => <p key={index}>{category}</p>)} */}
+                {categoriesCount.map((category) => {
+                    return <div className={classes["category-checkbox-div"]} key={category}>
+                        <CheckBoxInput size="20px" />
+                        <div className={classes["category-text"]}>
+                            <p>{type === "users" ? category.interest : category.category}</p>
+                            <span>({category.count})</span>
+                        </div>
+                        
+                    </div>
+                    
+                })}
             </div>
         </div>
         

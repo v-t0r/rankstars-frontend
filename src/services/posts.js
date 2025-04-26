@@ -190,3 +190,23 @@ export async function getPosts( {signal, type, searchParams, page = 1} ){
 
     return await response.json()
 }
+
+export async function getPostsCategories({signal, type, searchParams}) {
+    
+    const queryParameters = new URLSearchParams(searchParams)
+
+    const response = await fetch(`${backendUrl}/${type}/categories/?${queryParameters.toString()}`,{
+        signal: signal,
+        method: "GET", 
+        credentials: "include"
+    })
+
+    if(!response.ok){
+        const error = new Error("Failed to retrive posts categories")
+        error.status = response.status
+        error.info = await response.json()
+        throw error
+    }
+
+    return await response.json()
+}
