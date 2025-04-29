@@ -33,7 +33,6 @@ export default function SearchPage(){
         getNextPageParam: (lastPage, allPages) => {
             return lastPage[searchParams.get("where")].length == 0 ? undefined : allPages.length + 1
         }
-        
     })
 
     const categoriesQueryFunction = searchParams.get("where") === "users" ? 
@@ -67,7 +66,6 @@ export default function SearchPage(){
 
     useEffect(() => {
         if(categoriesData){
-            console.log(categoriesData)
             setCategories(categoriesData[where === "users" ? "interests" : "categories"])
         }
     }, [categoriesData, where])
@@ -84,7 +82,7 @@ export default function SearchPage(){
             params.delete("maxRating")
             params.delete("minDate")
             params.delete("maxDate")
-            params.delete("categories")
+            params.delete("category")
 
             return params
         }, {replace: true})
@@ -152,6 +150,7 @@ export default function SearchPage(){
                     maxRating: searchParams.get("maxRating"),
                     minDate: searchParams.get("minDate"),
                     maxDate: searchParams.get("maxDate"),
+                    category: searchParams.get("category")
                 }}
                 categoriesCount={categories}
                 onSetFilters={handleSetFilters}    
@@ -167,11 +166,6 @@ export default function SearchPage(){
             </div>
             
         </div>
-
-        
-        
-        
-
     </div>
 }
 

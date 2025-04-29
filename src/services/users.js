@@ -116,6 +116,10 @@ export async function getUsers({signal, searchParams, page = 1}){
     const queryParameters = new URLSearchParams(searchParams)
     queryParameters.set("limit", ITEMS_PER_FEED_PAGE)
     queryParameters.set("skip", ITEMS_PER_FEED_PAGE * (page-1))
+    if(queryParameters.get("category")){
+        queryParameters.set("interests", queryParameters.get("category"))
+        queryParameters.delete("category")
+    }  
 
     const response = await fetch(`${backendUrl}/users?${queryParameters.toString()}`,{
         signal: signal,

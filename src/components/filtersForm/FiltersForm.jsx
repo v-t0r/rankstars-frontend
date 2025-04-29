@@ -1,7 +1,7 @@
 import classes from "./FiltersForm.module.css"
 
 import "react-datepicker/dist/react-datepicker.css";
-import { dateInputFormatedDate } from "../../utils/functions";
+import { dateInputFormatedDate, stringifyCategories } from "../../utils/functions";
 import { useEffect, useState } from "react";
 import CheckBoxInput from "../checkBoxInput.jsx/CheckBoxInput";
 
@@ -11,7 +11,7 @@ export default function FiltersForm({type, categoriesCount, inicialFilterValues,
         maxRating: "",
         minDate: "",
         maxDate: "",
-        selectedCategories: "",
+        category: "",
     })
        
     useEffect(() => {
@@ -20,12 +20,32 @@ export default function FiltersForm({type, categoriesCount, inicialFilterValues,
             maxRating: inicialFilterValues.maxRating ?? "",
             minDate: inicialFilterValues.minDate ?? "",
             maxDate: inicialFilterValues.maxDate ?? "",
-            selectedCategories: inicialFilterValues.categories ?? "",
+            category: inicialFilterValues.category ? inicialFilterValues.category.split(",") : []
         })
     }, [inicialFilterValues])
 
+    function handleChangeCategories(isChecked, categoryName) {
+
+        setFilters(prev => {
+            let newCategories = [...prev.category]
+            newCategories = isChecked ? newCategories.concat(categoryName) : newCategories.filter(cat => cat !== categoryName) 
+            return {...prev, category: newCategories}
+        })
+    }
+
     function handleApply(){
-        onSetFilters(Object.fromEntries(Object.entries(filters).filter(([_, value]) => (value != null && value != ""))))
+        onSetFilters(
+            Object.fromEntries(
+                Object.entries({
+                        ...filters,
+                        category: stringifyCategories(filters.category)
+                    })
+                    // eslint-disable-next-line no-unused-vars
+                    .filter(([_key, value]) => {
+                        return (value != null && value != "")
+                    })
+            )
+        )
     }
 
     return <div className={classes["card"]}>
@@ -84,17 +104,29 @@ export default function FiltersForm({type, categoriesCount, inicialFilterValues,
 
             <div className={classes["filter-div"]}>
                 <h3>Category</h3>
-                {categoriesCount.map((category) => {
-                    return <div className={classes["category-checkbox-div"]} key={category}>
-                        <CheckBoxInput size="20px" />
-                        <div className={classes["category-text"]}>
-                            <p>{type === "users" ? category.interest : category.category}</p>
-                            <span>({category.count})</span>
+                <div className={classes["checkbox-list"]}>
+                    {categoriesCount.map((category) => {
+                        
+                        const nameField = type === "users" ? "interestName" : "categoryName"
+                        const idField = type === "users" ? "interestId" : "categoryId"
+                        
+                        return <div className={classes["category-checkbox-div"]} key={category}>
+                            <CheckBoxInput 
+                                size="1.4rem"
+                                value={category[nameField]}
+                                checked = {filters.category.includes(category[idField])}
+                                onCheck={(newStatus) => handleChangeCategories(newStatus, category[idField])}
+                            />
+                            <div className={classes["category-text"]}>
+                                <p>{category[nameField]}</p>
+                                <span>[{category.count}]</span>
+                            </div>
                         </div>
                         
-                    </div>
-                    
-                })}
+                    })}
+                    {categoriesCount.length === 0 && <p style={{textAlign: "center", color: "var(--blue-gray)"}} >No results...</p>}
+                </div>
+                
             </div>
         </div>
         
