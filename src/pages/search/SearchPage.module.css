@@ -31,10 +31,26 @@
     align-items: center;
     flex: 1;
 }
+.filters-button{
+    height: 34px;
+    background-color: var(--secondary-background-color);
+    font-size: 1.1rem;
+}
+
+.filter-icon {
+    font-size: 1.4rem;
+}
+
+@media screen and (max-width: 750px) {
+    .sort-div{
+        justify-content: space-between;
+    }
+}
 
 @media screen and (max-width: 450px) {
     .tabs-div {
         margin-top: 8px;
         margin-bottom: 16px;
     }
+
 }

@@ -76,3 +76,14 @@
     padding: 8px;
     width: 100%;
 }
+
+@media screen and (max-width: 750px) {
+    .card {
+        min-height: 0px;
+        width: 300px;
+    }
+    .apply-button {
+        margin-top: 16px;
+    }
+}
+

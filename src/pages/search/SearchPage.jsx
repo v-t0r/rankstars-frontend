@@ -1,4 +1,5 @@
 import { useSearchParams } from "react-router-dom"
+import { useMediaQuery } from 'react-responsive'
 
 import classes from "./SearchPage.module.css"
 import { useEffect, useState } from "react"
@@ -11,11 +12,16 @@ import ErrorCard from "../../components/errorCard/ErrorCard"
 import { getUsers, getUsersInterests } from "../../services/users"
 import TabButton from "../../components/tabButton/TabButton"
 import FiltersForm from "../../components/filtersForm/FiltersForm"
+import Modal from "../../components/modal/Modal"
 import LoadMoreObserver from "../../components/loadMoreObserver/LoadMoreObserver"
 
 export default function SearchPage(){
     const [searchParams, setSearchParams] = useSearchParams()
     const [categories, setCategories] = useState([])
+    const [modalVisibility, setModalVisibility] = useState(false)
+    const isSmallWidth = useMediaQuery({query: "(max-width: 750px)"})
+
+    console.log(isSmallWidth)
 
     const where = searchParams.get("where")
 
@@ -57,11 +63,12 @@ export default function SearchPage(){
                 params.set("sortBy", "createdAt")
             }
             if(!prev.get("order")){
-                params.set("order", 1)
+                params.set("order", -1)
             }
 
             return params
         }, {replace: true})
+
     }, [setSearchParams])
 
     useEffect(() => {
@@ -76,7 +83,7 @@ export default function SearchPage(){
             const params = new URLSearchParams(prev)
             params.set("where", place)
             params.set("sortBy", "createdAt")
-            params.set("order", 1)
+            params.set("order", -1)
 
             params.delete("minRating")
             params.delete("maxRating")
@@ -112,7 +119,24 @@ export default function SearchPage(){
 
             return params
         }, {replace: true})
+
+        setModalVisibility(false)
     }
+
+    const filters = <>
+        <FiltersForm 
+            type={searchParams.get("where")}
+            inicialFilterValues={{
+                minRating: searchParams.get("minRating"),
+                maxRating: searchParams.get("maxRating"),
+                minDate: searchParams.get("minDate"),
+                maxDate: searchParams.get("maxDate"),
+                category: searchParams.get("category")
+            }}
+            categoriesCount={categories}
+            onSetFilters={handleSetFilters}    
+        />
+    </>
 
     let content = <></>
     if(data){
@@ -131,30 +155,24 @@ export default function SearchPage(){
         </div>
         
         <div className={classes["sort-div"]}>
+            {isSmallWidth && <button onClick={() => setModalVisibility(prev => !prev)} className={`button ${classes["filters-button"]}`}><span className={`material-symbols-outlined ${classes["filter-icon"]}`}>filter_list</span>Filters</button>}
+
             <div className={classes["select-div"]} >
                 <label htmlFor="type"hidden>Sort by</label>
                 <select id="type" value={JSON.stringify({sortBy: searchParams.get("sortBy"), order: +searchParams.get("order")})} onChange={(e) => handleSortBy(JSON.parse(e.target.value))} >
-                    <option value={JSON.stringify({sortBy: 'createdAt', order: -1})}>Newest Posts</option>
-                    <option value={JSON.stringify({sortBy: 'createdAt', order: 1})}>Earliest Posts</option>
-                    <option value={JSON.stringify({sortBy: 'rating', order: -1})}>Highest Ratings</option>
-                    <option value={JSON.stringify({sortBy: 'rating', order: 1})}>Lowest Ratings</option>
+                    <option value={JSON.stringify({sortBy: 'createdAt', order: -1})}>Newest {where === "users" ? "Users" :  "Posts"}</option>
+                    <option value={JSON.stringify({sortBy: 'createdAt', order: 1})}>Earliest {where === "users" ? "Users" :  "Posts"}</option>
+                    {where === "reviews" && <>
+                        <option value={JSON.stringify({sortBy: 'rating', order: -1})}>Highest Ratings</option>
+                        <option value={JSON.stringify({sortBy: 'rating', order: 1})}>Lowest Ratings</option>
+                    </>}
+                    
                 </select>
             </div>
         </div>
 
         <div className={classes["filters-and-content"]}>
-            <FiltersForm 
-                type={searchParams.get("where")}
-                inicialFilterValues={{
-                    minRating: searchParams.get("minRating"),
-                    maxRating: searchParams.get("maxRating"),
-                    minDate: searchParams.get("minDate"),
-                    maxDate: searchParams.get("maxDate"),
-                    category: searchParams.get("category")
-                }}
-                categoriesCount={categories}
-                onSetFilters={handleSetFilters}    
-            />
+            {!isSmallWidth && filters}
             
             <div className={classes["content-div"]}>
                 {content}
@@ -166,6 +184,13 @@ export default function SearchPage(){
             </div>
             
         </div>
+
+        {isSmallWidth && modalVisibility && <Modal onEscape={() => setModalVisibility(false)}>
+            <div style={{display: "flex", justifyContent: "right"}}>
+                <button className="negative-button" onClick={() => setModalVisibility(false)}>X</button>
+            </div>
+            {filters}
+        </Modal>}
     </div>
 }
 

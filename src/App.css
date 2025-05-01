@@ -205,4 +205,9 @@ footer {
         font-size: small;
         padding: 8px 20px;
     }
+
+    select {
+        font-size: 0.8rem;
+        height: 34px;
+    }
 }

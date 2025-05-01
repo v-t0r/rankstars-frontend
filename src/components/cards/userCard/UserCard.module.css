@@ -63,3 +63,23 @@
     -webkit-line-clamp: 5;
     overflow: hidden;
 }
+
+@media screen and (max-width: 750px) {
+    .image-container {
+        width: 128px;
+        height: 128px;
+    }
+
+
+}
+
+@media screen and (max-width: 450px) {
+    .image-container {
+        width: 80px;
+        height: 80px;
+    }
+
+    .user-info a{
+        font-size: 1rem;
+    }
+}
