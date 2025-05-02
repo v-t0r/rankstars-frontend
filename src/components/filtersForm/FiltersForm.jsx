@@ -33,6 +33,13 @@ export default function FiltersForm({type, categoriesCount, inicialFilterValues,
         })
     }
 
+    function handleChangeRating(newValue, inputId){
+        // console.log(newValue)
+        if(newValue < 0 || newValue > 100) return 
+        
+        setFilters(prev => ({...prev, [inputId]: newValue}))
+    }
+
     function handleApply(){
         onSetFilters(
             Object.fromEntries(
@@ -61,18 +68,20 @@ export default function FiltersForm({type, categoriesCount, inicialFilterValues,
                             id="minRating" 
                             type="number" 
                             placeholder="0"
-                            value={filters.minRating}   
-                            onChange={(e) => setFilters(prev => ({...prev, minRating: e.target.value}))} 
+                            value={filters.minRating} 
+                            onKeyDown={(e) => [".", ",", "-", "+"].includes(e.key) && e.preventDefault()}
+                            onChange={(e) => handleChangeRating(e.target.value, e.target.id)} 
                         />
                     </div>
                     <div className={classes["label-input"]}>  
                         <label htmlFor="maxRating">Max</label>
                         <input 
-                            id="max-rating" 
+                            id="maxRating" 
                             type="number" 
                             placeholder="100" 
-                            value={filters.maxRating}   
-                            onChange={(e) => setFilters(prev => ({...prev, maxRating: e.target.value}))}
+                            value={filters.maxRating}
+                            onKeyDown={(e) => [".", ",", "-", "+"].includes(e.key) && e.preventDefault()}  
+                            onChange={(e) => handleChangeRating(e.target.value, e.target.id)}
                         />
                     </div>
                 </div>            

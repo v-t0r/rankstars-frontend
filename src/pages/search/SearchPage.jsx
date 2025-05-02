@@ -21,8 +21,6 @@ export default function SearchPage(){
     const [modalVisibility, setModalVisibility] = useState(false)
     const isSmallWidth = useMediaQuery({query: "(max-width: 750px)"})
 
-    console.log(isSmallWidth)
-
     const where = searchParams.get("where")
 
     const queryFunction = searchParams.get("where") === "users" ? getUsers : getPosts
