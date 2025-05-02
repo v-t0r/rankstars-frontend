@@ -49,8 +49,6 @@ export default function FeedPage() {
     setFeedType(newTab)
   }
 
- 
-
   let content = <></>
   if(data){
     const posts = data.pages.map(page => page.posts).flat(1)
@@ -64,8 +62,6 @@ export default function FeedPage() {
       
     </>
   }
-
-  console.log(data)
 
   return <>
     <div className={classes["tabs-div"]}>

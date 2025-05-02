@@ -21,9 +21,10 @@ export default function ListPage(){
     const [searchParams, setSearchParams] = useSearchParams()
     const paramsObject = Object.fromEntries(searchParams.entries())
 
-    const {data, isPending, isError} = useQuery({
+    const {data, isPending, isError, error} = useQuery({
         queryKey: ["list", `${listId}`, `${paramsObject.sortBy}`, `${paramsObject.order}`, `${paramsObject.page}`],
-        queryFn: ({signal}) => getPost({postId: listId, type: "lists", signal, sortBy: {sortBy: paramsObject.sortBy, order: +paramsObject.order}, page: +paramsObject.page})
+        queryFn: ({signal}) => getPost({postId: listId, type: "lists", signal, sortBy: paramsObject.sortBy, order: +paramsObject.order, page: +paramsObject.page}),
+        retry: false,
     })
 
     useEffect(() => {
@@ -74,7 +75,10 @@ export default function ListPage(){
     }
 
     if(isError){
-        content = <ErrorCard />
+        content = <ErrorCard 
+            title={error.status === 404 ? "404: List Not Found!" : undefined} 
+            message={error.status === 404 ? "Are you shure this is the address you are looking for?" : undefined}
+        />
     }
 
     if(data){

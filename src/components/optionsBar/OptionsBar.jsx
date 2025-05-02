@@ -54,7 +54,7 @@ export default function OptionsBar({post, type}){
     const { mutate: deleteMutate } = useMutation({
         mutationFn: deletePost,
         onSuccess: () => {
-            navigate(`/profile/${post.author._id}/`)
+            navigate(-1)
         }
     })
 

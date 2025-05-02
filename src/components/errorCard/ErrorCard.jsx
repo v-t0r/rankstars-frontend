@@ -1,6 +1,6 @@
 import classes from "./ErrorCard.module.css"
 
-export default function ErrorCard({title = "Server Side Error", message=null}){
+export default function ErrorCard({title = "Server Side Error", message=undefined}){
 
     if(!message){
         message = "Looks like we got a little problem in our servers! Can you try again later, please?"

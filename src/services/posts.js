@@ -19,23 +19,20 @@ export async function fetchReviewInfo({signal, reviewId}) {
     return review
 }
 
-export async function getPost({signal, postId, type, sortBy = {sortBy: "userOrder", order: null}, page = null}) {
+export async function getPost({signal, postId, type, sortBy = "userOrder", order = null, page = null}) {
+    const queryParams = new URLSearchParams()
 
-    sortBy.sortBy = sortBy.sortBy || "userOrder"
-    sortBy.order = sortBy.order || 1
-
-    let sortQuery = ""
-    if(type === "lists" && sortBy.sortBy !=="userOrder"){
-        sortQuery = `?sortBy=${sortBy.sortBy}&order=${sortBy.order}`
+    if(type=="lists" && sortBy !== "userOrder"){
+        queryParams.set("sortBy", sortBy)
+        queryParams.set("order", order)
     }
 
-    let pageQuery = ""
-    if(page){
-        pageQuery = sortBy.sortBy !== "userOrder" ? "&" : "?"
-        pageQuery = pageQuery + `quantity=${ITEMS_PER_PAGE}&offset=${ITEMS_PER_PAGE*(page-1)}`
+    if(type === "lists" && page){
+        queryParams.set("limit", ITEMS_PER_PAGE)
+        queryParams.set("skip", ITEMS_PER_PAGE * (page-1))
     }
     
-    const response = await fetch(`${backendUrl}/${type}/${postId}${sortQuery}${pageQuery}`, {
+    const response = await fetch(`${backendUrl}/${type}/${postId}?${queryParams.toString()}`, {
         signal: signal,
         method: "GET",
         credentials: "include",

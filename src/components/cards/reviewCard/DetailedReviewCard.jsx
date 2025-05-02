@@ -1,13 +1,12 @@
 import classes from "./DetailedReviewCard.module.css"
 
 import { imageBackendUrl } from "../../../utils/constants"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { getRatingColorClass } from "../../../utils/functions"
 import { useRef, useState } from "react"
 
 export default function DetailedReviewCard({review, reviewPage = false}) {   
 
-    const location = useLocation()
     const navigate = useNavigate()
     const { boxColor } = getRatingColorClass(review.rating)
 
@@ -32,7 +31,7 @@ export default function DetailedReviewCard({review, reviewPage = false}) {
     return <div className={classes["card"]}>
         <div className={classes["img-and-info"]}>
             <div 
-                onClick={() => navigate(`/review/${review._id}`, { state: { prevPage: location.pathname, linkText: "back" }})} 
+                onClick={() => navigate(`/review/${review._id}`)} 
                 className={classes["img-container"]}
             >
                 <img 
@@ -47,7 +46,7 @@ export default function DetailedReviewCard({review, reviewPage = false}) {
             <div className={classes["review-info"]}>
                 <div className={classes["title-container"]}>
                     {reviewPage && <h3>{review.title}</h3>}
-                    {!reviewPage && <Link to= {`/review/${review._id}`} state={ {prevPage: location.pathname, linkText: "back"} } ><h3>{review.title}</h3></Link>}
+                    {!reviewPage && <Link to= {`/review/${review._id}`} ><h3>{review.title}</h3></Link>}
                 </div>
                 <div className={classes["author"]}>
                     <Link to={`/profile/${review.author._id}`}>{review.author.username}</Link>

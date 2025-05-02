@@ -1,4 +1,4 @@
-import { Link, useLocation, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { getPost } from "../../services/posts"
 import { useQuery } from "@tanstack/react-query"
 
@@ -11,11 +11,11 @@ import ErrorCard from "../../components/errorCard/ErrorCard"
  
 export default function ReviewPage(){
     const {id: reviewId} = useParams()
-    const location = useLocation()
 
-    const {data, isPending, isError} = useQuery({
+    const {data, isPending, isError, error} = useQuery({
         queryKey: ["review", `${reviewId}`],
         queryFn: ({signal}) => getPost({postId: reviewId, type: "reviews", signal}),
+        retry: false,
         staleTime: 0
     })
 
@@ -26,7 +26,10 @@ export default function ReviewPage(){
     }
 
     if(isError) {
-        content = <ErrorCard />
+        content = <ErrorCard 
+            title={error.status === 404 ? "404: Review Not Found!" : undefined} 
+            message={error.status === 404 ? "Are you shure this is the address you are looking for?" : undefined}
+        />
     }
 
     if(data) {
@@ -34,15 +37,10 @@ export default function ReviewPage(){
 
         content = <>
             <div className={classes["general-container"]}>
-                <Link className={classes["back-link"]} to={location.state ? location.state.prevPage : "/"} >
-                    <span className={`material-symbols-outlined ${classes["menu-icon"]}`}>arrow_back</span>
-                    {location.state ? location.state.linkText : "back"}
-                </Link>
                 <div className={classes["review-div"]}>
                     <DetailedReviewCard review={review} reviewPage={true} />
                 </div>
                 
-
                 <div className={classes["options-bar-div"]}>
                     <OptionsBar post={review} type={"reviews"}/>
                 </div>
@@ -50,7 +48,6 @@ export default function ReviewPage(){
                 <CommentContainer postId = {review._id} type={"reviews"} />
 
             </div>
-        
         </>
     }
 
