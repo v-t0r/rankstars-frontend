@@ -1,12 +1,11 @@
 import classes from "./DetailedReviewCard.module.css"
-
+import React from "react"
 import { imageBackendUrl } from "../../../utils/constants"
 import { Link, useNavigate } from "react-router-dom"
 import { getRatingColorClass } from "../../../utils/functions"
 import { useRef, useState } from "react"
 
-export default function DetailedReviewCard({review, reviewPage = false}) {   
-
+export default React.memo(function DetailedReviewCard({review, reviewPage = false}) {   
     const navigate = useNavigate()
     const { boxColor } = getRatingColorClass(review.rating)
 
@@ -64,4 +63,4 @@ export default function DetailedReviewCard({review, reviewPage = false}) {
         </div>
 
     </div>
-}
+})

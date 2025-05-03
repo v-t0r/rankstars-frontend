@@ -1,10 +1,11 @@
 import classes from "./DetailedListCard.module.css"
 
+import React from "react"
 import { Link, useNavigate } from "react-router-dom"
 
 import ImageGrid from "../../imageGrid/ImageGrid"
 
-export default function DetailedListCard({list}){
+export default React.memo(function DetailedListCard({list}){
     const navigate = useNavigate()
 
     const images = list.reviews.map(review => review.imagesUrls[0])
@@ -32,4 +33,4 @@ export default function DetailedListCard({list}){
                 </div>
             </div>
         </div>
-}
+})

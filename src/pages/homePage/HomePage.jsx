@@ -12,7 +12,7 @@ import FeedPost from "../../components/feedPost/FeedPost"
 import LoadMoreObserver from "../../components/loadMoreObserver/LoadMoreObserver"
 
 export default function FeedPage() {
-  const [ feedType, setFeedType ] = useState("following")
+  const [ feedType, setFeedType ] = useState("recent posts")
 
   const loggedUserInfo = useSelector(state => state.user.user)
   const dispatch = useDispatch()
