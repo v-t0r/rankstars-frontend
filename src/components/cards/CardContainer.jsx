@@ -12,7 +12,7 @@ import ErrorCard from "../errorCard/ErrorCard"
 
 export default function CardContainer({userId, type}) {
 
-    const queryFn = ({signal}) => type === "reviews" ? fetchUserReviews(signal, userId) : fetchUserLists(signal, userId)
+    const queryFn = ({signal}) => type === "reviews" ? fetchUserReviews({signal, userId}) : fetchUserLists({signal, userId})
     const queryKey = type === "reviews" ? ["reviews", "user", `${userId}`] : ["lists", "user", `${userId}`]
 
     const {data, isPending, isError} = useQuery({

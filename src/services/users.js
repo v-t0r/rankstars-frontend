@@ -51,11 +51,13 @@ export async function unfollowUser(userId) {
     return await response.json()
 }
 
-export async function fetchUserReviews(signal, userId, sortBy = {sortBy: 'createdAt', order: -1}, page = null) {
+export async function fetchUserReviews({signal, userId, searchParams, page = 1}) {
 
-    const pageQuery = page ? `&skip=${ITEMS_PER_PAGE*(page-1)}&limit=${ITEMS_PER_PAGE}` : ""
+    const queryParameters = new URLSearchParams(searchParams)
+    queryParameters.set("limit", ITEMS_PER_PAGE)
+    queryParameters.set("skip", ITEMS_PER_PAGE*(page-1))
 
-    const response = await fetch(`${backendUrl}/users/${userId}/reviews?sortBy=${sortBy.sortBy}&order=${sortBy.order}${pageQuery}`, {
+    const response = await fetch(`${backendUrl}/users/${userId}/reviews?${queryParameters}`, {
         signal: signal,
         method: "GET",
         credentials: "include",
@@ -72,11 +74,13 @@ export async function fetchUserReviews(signal, userId, sortBy = {sortBy: 'create
     return reviews
 }
 
-export async function fetchUserLists(signal, userId, sortBy = {sortBy: 'createdAt', order: -1}, page = null) {
+export async function fetchUserLists({signal, userId, searchParams, page = 1}) {
 
-    const pageQuery = page ? `&skip=${ITEMS_PER_PAGE*(page-1)}&limit=${ITEMS_PER_PAGE}` : ""
+    const queryParameters = new URLSearchParams(searchParams)
+    queryParameters.set("limit", ITEMS_PER_PAGE)
+    queryParameters.set("skip", ITEMS_PER_PAGE*(page-1))
 
-    const response = await fetch (`${backendUrl}/users/${userId}/lists?sortBy=${sortBy.sortBy}&order=${sortBy.order}${pageQuery}`, {
+    const response = await fetch (`${backendUrl}/users/${userId}/lists?${queryParameters}`, {
         signal: signal,
         method: "GET",
         credentials: "include",

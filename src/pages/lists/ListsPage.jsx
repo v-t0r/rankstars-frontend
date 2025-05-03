@@ -1,7 +1,6 @@
 import classes from "./ListsPage.module.css"
-import { useState } from "react"
 
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams, useSearchParams } from "react-router-dom"
 
 import PostList from "../../components/postList/PostList"
 import { fetchUserInfo, fetchUserLists } from "../../services/users"
@@ -11,12 +10,13 @@ import LoadMoreObserver from "../../components/loadMoreObserver/LoadMoreObserver
 import { ITEMS_PER_PAGE } from "../../utils/constants"
 
 export default function ListsPage(){
-    const [sortBy, setSortBy] = useState({sortBy: 'createdAt', order: -1})
+    const [searchParams, setSearchParams] = useSearchParams({sortBy: "createdAt", order: -1})
+
     const {id} = useParams()
     
     const { data, isPending, isError, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
-        queryKey: [ "lists", "user", `${id}`, `${sortBy.sortBy}`, `${sortBy.order}`],
-        queryFn: ({ signal, pageParam=1 }) => fetchUserLists(signal, id, sortBy, pageParam),
+        queryKey: [ "lists", "user", `${id}`, `${searchParams.toString()}`],
+        queryFn: ({ signal, pageParam=1 }) => fetchUserLists({signal, userId: id, searchParams: searchParams.toString(), page: pageParam}),
         getNextPageParam: (lastPage, allPages) => {
             return (lastPage.lists.length != ITEMS_PER_PAGE) ? undefined : allPages.length + 1
         }
@@ -26,6 +26,17 @@ export default function ListsPage(){
         queryKey: ["username", `${id}`],
         queryFn: ({signal}) => fetchUserInfo({signal, id, basicOnly: true})
     })
+
+    function handleChangeSort(newValue){
+        setSearchParams(prev => {
+            const newParams = new URLSearchParams(prev)
+
+            newParams.set("sortBy", newValue.sortBy)
+            newParams.set("order", newValue.order)
+
+            return newParams
+        })
+    }
 
     let content
     if(isPending) {
@@ -50,7 +61,11 @@ export default function ListsPage(){
                 <h1><Link className="inverted" to={`/profile/${id}`} >{userData?.user?.username ?? "user"}</Link>&apos;s lists</h1>
                 <div className={classes["select-div"]} >
                     <label htmlFor="type"hidden>Sort by</label>
-                    <select id="type" value={JSON.stringify(sortBy)} onChange={(e) => setSortBy(JSON.parse(e.target.value))} >
+                    <select 
+                        id="type" 
+                        value={JSON.stringify({sortBy: searchParams.get("sortBy"), order: +searchParams.get("order")})} 
+                        onChange={(e) => handleChangeSort(JSON.parse(e.target.value))}
+                    >
                         <option value={JSON.stringify({sortBy: 'createdAt', order: -1})}>Newest Posts</option>
                         <option value={JSON.stringify({sortBy: 'createdAt', order: 1})}>Earliest Posts</option>
                     </select>
