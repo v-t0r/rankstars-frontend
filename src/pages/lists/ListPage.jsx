@@ -77,7 +77,7 @@ export default function ListPage(){
     if(isError){
         content = <ErrorCard 
             title={error.status === 404 ? "404: List Not Found!" : undefined} 
-            message={error.status === 404 ? "Are you shure this is the address you are looking for?" : undefined}
+            message={error.status === 404 ? "Are you sure this is the address you are looking for?" : undefined}
         />
     }
 

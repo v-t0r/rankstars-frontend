@@ -172,7 +172,7 @@ export default function NewReviewForm({reviewId = undefined, onCancel}){
                 onConfirm={() => {setModal(false), onCancel()}}
                 onCancel={() => setModal(false)}
                 title={"Cancel Review"}
-                message={"Are you shure you want cancel this review?"}
+                message={"Are you sure you want cancel this review?"}
             />}
         </AnimatePresence>
     </>

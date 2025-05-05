@@ -14,7 +14,7 @@ export default React.memo(function DetailedReviewCard({review, reviewPage = fals
     const imageRef = useRef()
 
     function handleImageAspectRatio(){
-        //this function makes shure that horizontal images shows as a square
+        //this function makes sure that horizontal images shows as a square
         const {naturalWidth, naturalHeight} = imageRef.current
         setHorizontalImage(naturalHeight < naturalWidth)
     }

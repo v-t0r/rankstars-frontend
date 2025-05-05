@@ -31,6 +31,7 @@
     align-items: center;
     flex: 1;
 }
+
 .filters-button{
     height: 34px;
     background-color: var(--secondary-background-color);
@@ -51,6 +52,14 @@
     .tabs-div {
         margin-top: 8px;
         margin-bottom: 16px;
+    }
+
+    .filters-button{
+        font-size: 0.8rem;
+    }
+    
+    .filter-icon {
+        font-size: 0.8rem;
     }
 
 }

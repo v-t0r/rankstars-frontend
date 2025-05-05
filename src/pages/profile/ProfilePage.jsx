@@ -110,7 +110,7 @@ export default function ProfilePage(){
     if(isError){
         content = <>
             {error.status === 404 ? 
-                <ErrorCard title="User not exist!" message={<p>Are you shure this is the address you are looking for?</p>} />
+                <ErrorCard title="User not exist!" message={<p>Are you sure this is the address you are looking for?</p>} />
                 :
                 <ErrorCard />
             }

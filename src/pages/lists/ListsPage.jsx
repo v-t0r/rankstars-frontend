@@ -8,9 +8,16 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import LoaderDots from "../../components/loaderDots/LoaderDots"
 import LoadMoreObserver from "../../components/loadMoreObserver/LoadMoreObserver"
 import { ITEMS_PER_PAGE } from "../../utils/constants"
+import { getPostsCategories } from "../../services/posts"
+import { useMediaQuery } from "react-responsive"
+import { useState } from "react"
+import FiltersForm from "../../components/filtersForm/FiltersForm"
+import Modal from "../../components/modal/Modal"
 
 export default function ListsPage(){
     const [searchParams, setSearchParams] = useSearchParams({sortBy: "createdAt", order: -1})
+    const [modalVisibility, setModalVisibility] = useState(false)
+    const isSmallWidth = useMediaQuery({query: "(max-width: 750px)"})
 
     const {id} = useParams()
     
@@ -27,6 +34,14 @@ export default function ListsPage(){
         queryFn: ({signal}) => fetchUserInfo({signal, id, basicOnly: true})
     })
 
+    const { data: categoriesData } = useQuery({
+        queryKey: [`${id}`, `${searchParams.toString()}`, "lists", "categories"],
+        queryFn: ({signal}) => {
+            let paramsAndAuthor = new URLSearchParams(searchParams)
+            paramsAndAuthor.set("author", id)
+            return getPostsCategories({signal, type: "lists", searchParams: paramsAndAuthor})}
+    })
+
     function handleChangeSort(newValue){
         setSearchParams(prev => {
             const newParams = new URLSearchParams(prev)
@@ -37,6 +52,34 @@ export default function ListsPage(){
             return newParams
         })
     }
+
+    function handleSetFilters(filters){
+        setSearchParams(prev => {
+            const params = new URLSearchParams()
+            params.set("sortBy", prev.get("sortBy"))
+            params.set("order", prev.get("order"))
+
+            for(const [key, value] of Object.entries(filters)){
+                params.set(key, value)
+            }
+
+            return params
+        }, {replace: true})
+
+        setModalVisibility(false)
+    }
+
+    const filters = <FiltersForm
+        type={"lists"}
+        inicialFilterValues={{
+            minDate: searchParams.get("minDate"),
+            maxDate: searchParams.get("maxDate"),
+            category: searchParams.get("category")
+        }}
+        onSetFilters={handleSetFilters}
+        categoriesCount={categoriesData ? categoriesData.categories : []}
+    />
+
 
     let content
     if(isPending) {
@@ -60,6 +103,7 @@ export default function ListsPage(){
         <div className={classes["header-section"]}>   
                 <h1><Link className="inverted" to={`/profile/${id}`} >{userData?.user?.username ?? "user"}</Link>&apos;s lists</h1>
                 <div className={classes["select-div"]} >
+                    {isSmallWidth && <button onClick={() => setModalVisibility(prev => !prev)} className={`button ${classes["filters-button"]}`}><span className={`material-symbols-outlined ${classes["filter-icon"]}`}>filter_list</span>Filters</button>}
                     <label htmlFor="type"hidden>Sort by</label>
                     <select 
                         id="type" 
@@ -72,15 +116,26 @@ export default function ListsPage(){
                 </div>
             </div>
         
-        {content}
+        <div className={classes["content-div"]}>
 
-        {isFetchingNextPage && <LoaderDots/>}
+            {!isSmallWidth && filters}
 
-        <LoadMoreObserver fetchNextPage={fetchNextPage} hasNextPage={hasNextPage}/>
-
-        {(!hasNextPage && data?.pages.length > 1) &&
-            <h3 className={classes["no-more-lists-message"]}>It&apos;s a dead end! No more lists to load.</h3>
-        }
-
+            <div style={{display: "flex", flexDirection: "column", width: "100%"}}>
+                {content}
+                {isFetchingNextPage && <LoaderDots/>}
+                <LoadMoreObserver fetchNextPage={fetchNextPage} hasNextPage={hasNextPage}/>
+                {(!hasNextPage && data?.pages.length > 1) &&
+                    <h3 className={classes["no-more-lists-message"]}>It&apos;s a dead end! No more lists to load.</h3>
+                }
+            </div>
+        </div>
+        
+        {isSmallWidth && modalVisibility && <Modal onEscape={() => setModalVisibility(false)}>
+            <div style={{display: "flex", justifyContent: "right"}}>
+                <button className="negative-button" onClick={() => setModalVisibility(false)}>X</button>
+            </div>
+            {filters}
+        </Modal>}
+        
     </div>
 }

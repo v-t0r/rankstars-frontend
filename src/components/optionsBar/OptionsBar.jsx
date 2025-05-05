@@ -164,7 +164,7 @@ export default function OptionsBar({post, type}){
 
             {modalsVisibility.deleteModal && <ConfirmationModal 
                 title={`Delete ${type ==="reviews" ? "Review" : "List" }`}
-                message={`Are you shure you want to delete this ${type ==="reviews" ? "review" : "list" }?`}
+                message={`Are you sure you want to delete this ${type ==="reviews" ? "review" : "list" }?`}
                 onConfirm={() => deleteMutate({id: post._id, type: type})}
                 onCancel={() => setModalsVisibility(prevState => ({...prevState, deleteModal: false}))}
                 onEscape={() => setModalsVisibility(prevState => ({...prevState, deleteModal: false}))}

@@ -5,7 +5,7 @@ import { dateInputFormatedDate, stringifyCategories } from "../../utils/function
 import { useEffect, useState } from "react";
 import CheckBoxInput from "../checkBoxInput.jsx/CheckBoxInput";
 
-export default function FiltersForm({type, categoriesCount, inicialFilterValues, onSetFilters}){
+export default function FiltersForm({type, categoriesCount = [], inicialFilterValues, onSetFilters}){
     const [filters, setFilters] = useState({
         minRating: "",
         maxRating: "",

@@ -64,21 +64,6 @@
     border-radius: 50%;
 }
 
-.select-div select{
-    font-size: medium;
-    text-align: center;
-    background-color: var(--secondary-background-color);
-    color: white;
-    padding: 6px;
-    border-radius: 8px;
-    border: none;
-}
-
-.select-div select:focus {
-    border: none;
-    outline: none;
-}
-
 .reviews-div {
     width: 100%;
 }
