@@ -21,7 +21,7 @@ export default function EditListForm({listId, onClose}){
 
     const {data, isPending, isError} = useQuery({
         queryKey: ["list", `${listId}`],
-        queryFn: ({signal}) => getPost({postId: listId, type: "lists", signal})
+        queryFn: ({signal}) => getPost({ signal, postId: listId, type: "lists", summary: true})
     })
 
     useEffect(() => {
@@ -34,7 +34,6 @@ export default function EditListForm({listId, onClose}){
             })
         }
     }, [data])
-
 
     const [validationErrors, setValidationErrors] = useState([])
 

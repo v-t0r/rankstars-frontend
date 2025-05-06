@@ -87,24 +87,24 @@ export default function ListPage(){
         
         content = <div className={classes["main-container"]}>
             
-            <div className={classes["header-div"]}>
-                <div className={classes["title-div"]}>
-                    <h1>{list.title}</h1>
-                    <h2>a list by <Link to={`/profile/${list.author._id}`}>{list.author.username}</Link></h2>
-                </div>
-                <div className={classes["select-div"]} >
-                    <label htmlFor="type"hidden>Sort by</label>
-                    <select id="type" value={JSON.stringify({sortBy: paramsObject.sortBy, order: +paramsObject.order})} onChange={(e) => handleSortBy(JSON.parse(e.target.value))} >
-                        
-                        <option value={JSON.stringify({sortBy: 'userOrder', order: 1})}>User Order</option>
-                        <option value={JSON.stringify({sortBy: 'createdAt', order: -1})}>Newest Posts</option>
-                        <option value={JSON.stringify({sortBy: 'createdAt', order: 1})}>Earliest Posts</option>
-                        <option value={JSON.stringify({sortBy: 'rating', order: -1})}>Highest Ratings</option>
-                        <option value={JSON.stringify({sortBy: 'rating', order: 1})}>Lowest Ratings</option>
-
-                    </select>
-                </div>
+            <div className={classes["title-div"]}>
+                <h1>{list.title}</h1>
+                <h2>a list by <Link to={`/profile/${list.author._id}`}>{list.author.username}</Link></h2>
+                <p>{list.description}</p>
             </div>
+            <div className={classes["select-div"]} >
+                <label htmlFor="type"hidden>Sort by</label>
+                <select id="type" value={JSON.stringify({sortBy: paramsObject.sortBy, order: +paramsObject.order})} onChange={(e) => handleSortBy(JSON.parse(e.target.value))} >
+                    
+                    <option value={JSON.stringify({sortBy: 'userOrder', order: 1})}>User Order</option>
+                    <option value={JSON.stringify({sortBy: 'createdAt', order: -1})}>Newest Posts</option>
+                    <option value={JSON.stringify({sortBy: 'createdAt', order: 1})}>Earliest Posts</option>
+                    <option value={JSON.stringify({sortBy: 'rating', order: -1})}>Highest Ratings</option>
+                    <option value={JSON.stringify({sortBy: 'rating', order: 1})}>Lowest Ratings</option>
+
+                </select>
+            </div>
+
             
             <div className={classes["reviews-div"]}>
                 {list.reviews.length === 0 && 

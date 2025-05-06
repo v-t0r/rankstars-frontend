@@ -19,7 +19,7 @@ export async function fetchReviewInfo({signal, reviewId}) {
     return review
 }
 
-export async function getPost({signal, postId, type, sortBy = "userOrder", order = null, page = null}) {
+export async function getPost({signal, postId, type, sortBy = "userOrder", order = null, page = null, summary=false}) {
     const queryParams = new URLSearchParams()
 
     if(type=="lists" && sortBy !== "userOrder"){
@@ -30,6 +30,10 @@ export async function getPost({signal, postId, type, sortBy = "userOrder", order
     if(type === "lists" && page){
         queryParams.set("limit", ITEMS_PER_PAGE)
         queryParams.set("skip", ITEMS_PER_PAGE * (page-1))
+    }
+
+    if(type === "lists" && summary == true){
+        queryParams.set("summary", true)
     }
     
     const response = await fetch(`${backendUrl}/${type}/${postId}?${queryParams.toString()}`, {

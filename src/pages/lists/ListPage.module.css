@@ -13,10 +13,11 @@
 .header-div{
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: end;
     justify-content: space-between;
 
     width: 100%;
+    margin: 12px 0px;
 }
 
 .title-div {
@@ -25,6 +26,7 @@
     width: 100%;
     gap: 8px;
     margin-bottom: 3px;
+
 }
 
 .title-div h1 {
@@ -51,17 +53,14 @@
     color: var(--light-gray);
 }
 
-.author-div{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: start;
+.title-div p {
+    color: var(--light-gray);
+    margin: 0px 1px;
 }
 
-.author-div img {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
+.select-div {
+    align-self: flex-end;
+    margin-bottom: 10px;
 }
 
 .reviews-div {
