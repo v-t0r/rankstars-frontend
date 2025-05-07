@@ -54,6 +54,20 @@ export default function NewReviewForm({reviewId = undefined, onCancel}){
             })
         }
 
+        function handleEscape(e){
+            if(e.key === "Escape"){
+                e.preventDefault()
+                setModal(prev => !prev)
+            }
+        }
+
+        //unica forma de interceptar com segurança o cancel da dialog com a tecla ESC.
+        window.addEventListener("keydown", handleEscape)
+
+        return () => {
+            window.removeEventListener("keydown", handleEscape)
+        }
+
     }, [data])
 
     function handleImageChange(event){
