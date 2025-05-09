@@ -63,6 +63,10 @@ export default function EditUserForm({user, onClose}){
             errors = [...errors, ["username", "Username can't be empty."]]
         }
 
+        if(userForm.status.trim().length > 135){
+            errors = [...errors, ["status", "Status can't be longer than 135 characters."]]
+        }
+
         if(errors.length > 0){
             setValidationErrors(errors)
             return
@@ -80,13 +84,27 @@ export default function EditUserForm({user, onClose}){
                     <div className={classes["inputs-div"]}>
                         <div className={classes["label-input"]}>
                             <label htmlFor="username">Username</label>
-                            <input type="username" name="username" value={userForm.username} onChange={(e) => setUserForm(prev => ({...prev, username: e.target.value}))}/>
+                            <input id="username" name="username" value={userForm.username} onChange={(e) => setUserForm(prev => ({...prev, username: e.target.value}))}/>
                             {validationErrors.map((error, index) => error[0] === "username" && <p className="error-text" key={index}>{error[1]}</p>)}
                         </div>
 
                         <div className={classes["label-input"]}>
                             <label htmlFor="status">Status</label>
-                            <textarea type="status" name="status" value={userForm.status} onChange={(e) => setUserForm(prev => ({...prev, status: e.target.status}))}/>
+                            <textarea 
+                                id="status"
+                                name="status" 
+                                value={userForm.status} 
+                                onChange={(e) => setUserForm(prev => {
+                                    const temp = e.target.value
+                                    
+                                    if( (temp.split("\n") || []).length > 7 ) {
+                                        return prev
+                                    }
+
+                                    return {...prev, status: e.target.value}                                  
+                                })}/>
+                            <p style={{textAlign: "right"}} className={`${userForm.status.length > 135 ? "error-text" : undefined}`}>{userForm.status.length}/135</p>
+                            {validationErrors.map((error, index) => error[0] === "status" && <p className="error-text" key={index}>{error[1]}</p>)}
                         </div>
                         <div className={classes["buttons"]}>
                             <button type="button" onClick={() => setFormPage("interests")} className={`button`}>Edit Interests</button>
@@ -104,9 +122,7 @@ export default function EditUserForm({user, onClose}){
         }
 
         {formPage === "interests" && 
-
             <InterestsForm user={user} onClose={() => setFormPage("principal")} />
-
         }
     </>
 }
