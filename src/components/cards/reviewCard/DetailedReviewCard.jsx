@@ -44,6 +44,8 @@ export default React.memo(function DetailedReviewCard({review, reviewPage = fals
                         onLoad={handleImageAspectRatio}
                         style={horizontalImage ? { aspectRatio: "1/1" } : {}}     
                     />
+
+                    {reviewPage && <span className={`material-symbols-outlined ${classes["photos-icon"]}`}>photo_library</span>}
                 </div>
 
                 <div className={classes["review-info"]}>
