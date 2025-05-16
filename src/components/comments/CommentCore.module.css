@@ -92,6 +92,14 @@
     color: white;
 }
 
+.up-voted {
+    color: rgb(255, 255, 255) !important;
+}
+
+.down-voted {
+    color: rgb(255, 255, 255) !important;
+}
+
 .overflow-menu-list button {
     display: flex;
     flex-direction: row;

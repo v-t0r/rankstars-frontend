@@ -65,17 +65,73 @@ export async function patchComment({id, form}) {
 }
 
 export async function deleteComment({id}) {
-    const response = await fetch((`${backendUrl}/comments/${id}`),{
-        method: "DELETE",
-        credentials: "include",
-    })
+    try{
+        const response = await fetch((`${backendUrl}/comments/${id}`),{
+            method: "DELETE",
+            credentials: "include",
+        })
 
-    if(!response.ok){
-        const error = new Error("Error while deleting comment")
-        error.status = response.status
-        error.info = response.json()
+        if(!response.ok){
+            const error = new Error("Error while deleting comment")
+            error.status = response.status
+            error.info = response.json()
+            throw error
+        }
+
+        return await response.json()
+    
+    }catch(error){
+        if(!error.status){
+            error.status == 500
+        }
         throw error
     }
+}
 
-    return await response.json()
+export async function addCommentVote({id, voteType}) {
+    try{
+        const response = await fetch((`${backendUrl}/comments/${id}/${voteType}`), {
+            method: "POST",
+            credentials: "include"
+        })
+
+        if(!response.ok){
+            const error = new Error("Error while voting in a comment")
+            error.status = response.status
+            error.info = response.json()
+            throw error
+        }
+
+        return await response.json()
+    
+    }catch(error){
+        if(!error.status){
+            error.status == 500
+        }
+        throw error
+    }
+}
+
+export async function rremoveCommentVote({id, voteType}) {
+    try{
+        const response = await fetch((`${backendUrl}/comments/${id}/${voteType}`), {
+            method: "DELETE",
+            credentials: "include"
+        })
+
+        if(!response.ok){
+            const error = new Error("Error while removing the vote in a comment")
+            error.status = response.status
+            error.info = response.json()
+            throw error
+        }
+
+        return await response.json()
+    
+    }catch(error){
+        if(!error.status){
+            error.status == 500
+        }
+        throw error
+    }
 }
