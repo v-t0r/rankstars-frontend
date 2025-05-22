@@ -8,9 +8,10 @@
 
 :root {
     /* Colors */
-    --background-color: rgb(26, 47, 65);
-    --secondary-background-color: rgb(33, 57, 78);
-    --input-background-color: rgb(70, 84, 100);
+
+    --background-color: rgb(16, 27, 37);
+    --secondary-background-color: rgb(21, 36, 49);
+    --input-background-color: rgb(51, 62, 75);
 
     --button-color: rgb(22, 168, 178);
     --button-active-color: rgb(26, 150, 159);
@@ -56,6 +57,10 @@ main {
     margin: auto;
     padding: 10px;
     overflow: hidden;
+}
+
+main.wide-main{
+    max-width: 1500px;
 }
 
 a {
@@ -171,6 +176,10 @@ footer {
 }
 .error-text{
     color: var(--error-color)
+}
+
+.positive-text{
+    color: var(--positive-color)
 }
 
 .good-review{

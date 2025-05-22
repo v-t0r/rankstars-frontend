@@ -6,6 +6,7 @@
     
     background-color: var(--secondary-background-color);
     padding: 0 48px;
+    /* gap: 8px; */
 /* 
     min-width: var(--header-min-width); */
     height: var(--header-height);
@@ -87,12 +88,16 @@
     font-size: x-large;
 }
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1100px) {
     .search-bar-form{
         position: relative;
         translate: 0% 0%;
         width: 320px;
         left: auto
+    }
+
+        .header-logo h1 {
+        display: none;
     }
 }
 
@@ -113,10 +118,6 @@
 
     .header-logo img {
         width: 48px;
-    }
-
-    .header-logo h1 {
-        display: none;
     }
 
     .search-bar {

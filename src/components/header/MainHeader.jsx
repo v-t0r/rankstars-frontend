@@ -28,7 +28,7 @@ export default function MainHeader(){
     }, [location, searchParams])
 
     function handleHome() {
-        navigate("/")    
+        navigate("/feed")    
     }
 
     function handleSearch(e){

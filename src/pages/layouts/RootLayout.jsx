@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation } from "react-router-dom"
 import MainHeader from "../../components/header/MainHeader"
 import Modal from "../../components/modal/Modal"
 import LoginForm from "../../components/loginForm/LoginForm"
@@ -17,6 +17,9 @@ export default function RootLayout(){
     const dispatch = useDispatch()
     const timeoutRef = useRef(null)
     
+    const location = useLocation()
+    const isWidePage = location.pathname === "/"
+
     useEffect(()=>{
         if(timeoutRef.current){
             clearTimeout(timeoutRef.current)
@@ -31,7 +34,7 @@ export default function RootLayout(){
 
     return <>
         <MainHeader />
-        <main>
+        <main className={isWidePage ? "wide-main" : undefined}>
             <Outlet />
 
             <AnimatePresence>

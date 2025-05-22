@@ -62,7 +62,6 @@ export default function CommentInput({parent, type}){
             <textarea
                 ref={commentTextAreaRef} 
                 name="comment" 
-                id="comment" 
                 placeholder="Leave a comment..."
                 onKeyDown={handleKeyDown}>
             </textarea>

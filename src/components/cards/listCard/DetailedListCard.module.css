@@ -3,7 +3,6 @@
     flex-direction: row;
     justify-content: left;
     gap: 16px;
-
     flex: 1;
 }
 
@@ -52,6 +51,10 @@
 
 .title-div a:hover {
     color: var(--light-gray);
+}
+
+.see-more {
+    margin-top: 5px;
 }
 
 .description-div a {

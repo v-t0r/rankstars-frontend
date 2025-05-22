@@ -20,9 +20,11 @@ export default React.memo(function DetailedListCard({list}){
             <div   className={classes["list-info-div"]}>
                 <div className={classes["title-div"]}>
                     <Link to= {`/list/${list._id}`}>
-                        <h1>{list.title}</h1></Link>
+                        <h1>{list.title}</h1>
+                    </Link>
                     <Link 
-                        to={`/list/${list._id}?page=1&sortBy=userOrder&order=1`}    
+                        to={`/list/${list._id}?page=1&sortBy=userOrder&order=1`} 
+                        className={classes["see-more"]}   
                     >
                         See more
                     </Link>

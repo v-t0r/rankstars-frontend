@@ -1,14 +1,9 @@
-import { createUserContext } from "../../services/auth"
 import { backendUrl } from "../../utils/constants"
 import classes from "./LoginForm.module.css"
 import { useState } from "react"
 
-import InterestsForm from "../interestsForm/InterestsForm"
-
 export default function SignupForm({onClose, onLogin}){
     const [validationErrors, setValidationErrors] = useState([])
-
-    const [formPage, setFormPage] = useState(1)
 
     async function handleSubmit(e){
         e.preventDefault()
@@ -52,18 +47,6 @@ export default function SignupForm({onClose, onLogin}){
                 return
             }
 
-            //LOGIN AUTOMATICO APÓS SIGNUP
-            const responseLogin = await fetch(`${backendUrl}/login`, {
-                method: "POST",
-                credentials: "include",
-                body: formData
-            })
-
-            const { expDate } = await responseLogin.json()
-            createUserContext(expDate)
-            
-            setFormPage(2)
-
         }catch(error){
             error.status = 500
             throw error
@@ -71,7 +54,7 @@ export default function SignupForm({onClose, onLogin}){
     }
 
     return <div className={classes["container"]}> 
-        {formPage === 1 && <>
+        <>
             <div className={classes["header"]}>
                 <h1>Signup</h1>
                 <button className="negative-button" onClick={onClose}>X</button>
@@ -105,13 +88,11 @@ export default function SignupForm({onClose, onLogin}){
                 {validationErrors.map((error, index) => error[0] === "general" && <p key={index} className="error-text">{error[1]}</p>)}
                 <div className={classes["button-link"]}>
                     <button className="button" type="submit" disabled={navigation.state === "submitting"}>Signup</button>
-                    <button className="text-button" onClick={onLogin}>or login</button>
+                    <button className="text-button" type="button" onClick={onLogin}>or login</button>
                 </div>
 
             </form>
-        </>}
-
-        {formPage === 2 && <InterestsForm onClose={onClose} />}
+        </>
         
     </div>
 }

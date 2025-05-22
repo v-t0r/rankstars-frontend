@@ -77,8 +77,12 @@ export async function fetchUserReviews({signal, userId, searchParams, page = 1})
 export async function fetchUserLists({signal, userId, searchParams, page = 1}) {
 
     const queryParameters = new URLSearchParams(searchParams)
-    queryParameters.set("limit", ITEMS_PER_PAGE)
-    queryParameters.set("skip", ITEMS_PER_PAGE*(page-1))
+
+    if(page != null){
+        queryParameters.set("limit", ITEMS_PER_PAGE)
+        queryParameters.set("skip", ITEMS_PER_PAGE*(page-1))
+    }
+    
 
     const response = await fetch (`${backendUrl}/users/${userId}/lists?${queryParameters}`, {
         signal: signal,

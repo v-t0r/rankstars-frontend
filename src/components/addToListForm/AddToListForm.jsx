@@ -13,7 +13,7 @@ export default function AddToListForm({review, onClose, onNewList=null}){
 
     const {data, isPending, isError} = useQuery({
         queryKey: ["lists", "user", `${userId}`],
-        queryFn: ({signal}) => fetchUserLists(signal, userId),
+        queryFn: ({signal}) => fetchUserLists({signal, userId, page: null}),
         staleTime: 0
     })
 

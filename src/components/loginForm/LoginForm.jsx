@@ -1,10 +1,30 @@
 import { createUserContext } from "../../services/auth"
 import { backendUrl } from "../../utils/constants"
 import classes from "./LoginForm.module.css"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+
+import InterestsForm from "../interestsForm/InterestsForm"
+import { useSelector } from "react-redux"
 
 export default function LoginForm({onClose, onSignup}){
     const [validationErrors, setValidationErrors] = useState([])
+    const [showInterestsForm, setShowInterestsForm] = useState(false)
+
+    const userInfo = useSelector(state => state.user)
+
+    useEffect(() => {
+        if(userInfo.user && userInfo.user.interests.length > 0){
+            onClose()
+        }
+        
+        if(userInfo.user && userInfo.user.interests.length === 0){
+            setShowInterestsForm(true)
+        }
+
+    }, [userInfo, onClose])
+
+
+
 
     async function handleSubmit(e){
         e.preventDefault()
@@ -39,34 +59,39 @@ export default function LoginForm({onClose, onSignup}){
         }
         
         const { expDate } = await response.json()
-        createUserContext(expDate)
-        onClose()
+        await createUserContext(expDate)
     }
 
-    return <div className={classes["container"]}> 
-        <div className={classes["header"]}>
-            <h1>Login</h1>
-            <button className="negative-button" onClick={onClose}>X</button>
-        </div>
-        
-        <form className={classes["form"]} onSubmit={handleSubmit}>
-            <div className={classes["label-input"]}>
-                <label htmlFor="email">Email</label>
-                <input type="text" name="email" id="email"></input>
-                {validationErrors.map((error, index) => error[0] === "email" && <p key={index} className="error-text">{error[1]}</p>)}
+    return <>
+        {!showInterestsForm && <div className={classes["container"]}> 
+            <div className={classes["header"]}>
+                <h1>Login</h1>
+                <button className="negative-button" onClick={onClose}>X</button>
             </div>
+            
+            <form className={classes["form"]} onSubmit={handleSubmit}>
+                <div className={classes["label-input"]}>
+                    <label htmlFor="email">Email</label>
+                    <input type="text" name="email" id="email"></input>
+                    {validationErrors.map((error, index) => error[0] === "email" && <p key={index} className="error-text">{error[1]}</p>)}
+                </div>
 
-            <div className={classes["label-input"]}>
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password" id="password"/>
-                {validationErrors.map((error, index) => error[0] === "password" && <p key={index} className="error-text">{error[1]}</p>)}
-            </div>
-            {validationErrors.map((error, index) => error[0] === "general" && <p key={index} className="error-text">{error[1]}</p>)}
-            <div className={classes["button-link"]}>
-                <button className="button" type="submit" disabled={navigation.state === "submitting"}>Login</button>
-                <button className="text-button" onClick={onSignup}>or signup</button>
-            </div>
+                <div className={classes["label-input"]}>
+                    <label htmlFor="password">Password</label>
+                    <input type="password" name="password" id="password"/>
+                    {validationErrors.map((error, index) => error[0] === "password" && <p key={index} className="error-text">{error[1]}</p>)}
+                </div>
+                {validationErrors.map((error, index) => error[0] === "general" && <p key={index} className="error-text">{error[1]}</p>)}
+                <div className={classes["button-link"]}>
+                    <button className="button" type="submit" disabled={navigation.state === "submitting"}>Login</button>
+                    <button className="text-button" type="button" onClick={onSignup}>or signup</button>
+                </div>
+            </form>
+        </div>}
 
-        </form>
-    </div>
+        {
+            showInterestsForm && <InterestsForm user={userInfo.user} onClose={onClose} />
+        }
+
+    </>
 }

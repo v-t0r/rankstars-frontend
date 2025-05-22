@@ -12,7 +12,7 @@ import FeedPost from "../../components/feedPost/FeedPost"
 import LoadMoreObserver from "../../components/loadMoreObserver/LoadMoreObserver"
 
 export default function FeedPage() {
-  const [ feedType, setFeedType ] = useState("recent posts")
+  const [ feedType, setFeedType ] = useState("recent-posts")
 
   const loggedUserInfo = useSelector(state => state.user.user)
   const dispatch = useDispatch()
@@ -53,14 +53,16 @@ export default function FeedPage() {
   if(data){
     const posts = data.pages.map(page => page.posts).flat(1)
 
-    content = <>
-      <ul className={classes["posts-list"]}>
-        {posts.map((post, index) => {
-          return <li key={index}><FeedPost post={post}/></li>
-        })}
-      </ul>
-      
-    </>
+    content = posts.length === 0 ? 
+        <p style={{color: "var(--blue-gray)", textAlign: "center", marginTop: "16px", fontSize: "1.1rem"}} >There is no posts to show yet. <br/> {feedType === "following" ? "Why don't you follow some people?" : "Why don't you add new interest in your profile?"}</p> 
+            : 
+        <>
+            <ul className={classes["posts-list"]}>
+                {posts.map((post, index) => {
+                return <li key={index}><FeedPost post={post}/></li>
+                })}
+            </ul>
+        </>
   }
 
   return <>
