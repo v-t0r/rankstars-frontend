@@ -4,7 +4,7 @@ import {useLocation, useNavigate, useSearchParams} from "react-router-dom"
 
 import SideMenu from "../sideMenu/SideMenu"
 import { useDispatch, useSelector } from "react-redux"
-import { loginModalActions } from "../../store"
+import { modalActions } from "../../store"
 import { useEffect, useRef } from "react"
 
 export default function MainHeader(){
@@ -56,7 +56,7 @@ export default function MainHeader(){
             </form>
 
             <div className={classes["profile-div"]}>
-                {!user && <button className="text-button" onClick={() => dispatch(loginModalActions.setLoginModalVisibility(true))}>Login/Signup</button>}
+                {!user && <button className="text-button" onClick={() => dispatch(modalActions.setModal("login"))}>Login/Signup</button>}
                 {user && <SideMenu/>}
             </div>
 

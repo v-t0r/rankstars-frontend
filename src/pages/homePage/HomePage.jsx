@@ -7,7 +7,7 @@ import { fetchFeed } from "../../services/feed"
 import LoaderDots from "../../components/loaderDots/LoaderDots"
 import ErrorCard from "../../components/errorCard/ErrorCard"
 import { useDispatch, useSelector } from "react-redux"
-import { loginModalActions } from "../../store"
+import { modalActions } from "../../store"
 import FeedPost from "../../components/feedPost/FeedPost"
 import LoadMoreObserver from "../../components/loadMoreObserver/LoadMoreObserver"
 
@@ -43,7 +43,7 @@ export default function FeedPage() {
 
   function handleSwitchTab(newTab){
     if(!loggedUserInfo){
-      dispatch(loginModalActions.setLoginModalVisibility(true))
+      dispatch(modalActions.setModal("login"))
       return
     }
     setFeedType(newTab)

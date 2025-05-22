@@ -7,7 +7,7 @@ import { queryClient } from "../../services/queryClient"
 import { useDispatch, useSelector } from "react-redux"
 import { useMutation } from "@tanstack/react-query"
 import { followUser, unfollowUser } from "../../services/users"
-import { loginModalActions, userActions } from "../../store"
+import { modalActions, userActions } from "../../store"
 
 export default function UsersList({username, profileUserId, users, type, onClose}) {
     
@@ -50,7 +50,7 @@ export default function UsersList({username, profileUserId, users, type, onClose
     function handleFollow(userId, followingStatus){
         //user não está logado
         if(!loggedUserInfo){
-            dispatch(loginModalActions.setLoginModalVisibility(true))
+            dispatch(modalActions.setModal("login"))
             onClose()
             return
         }

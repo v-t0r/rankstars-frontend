@@ -5,7 +5,7 @@ import { useLocation, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
 import { useDispatch, useSelector } from "react-redux"
-import { loginModalActions, userActions } from "../../store"
+import { modalActions, userActions } from "../../store"
 
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { queryClient } from "../../services/queryClient"
@@ -139,7 +139,7 @@ export default function ProfilePage(){
                     {!loggedUserProfile ? 
                         <button 
                             className={followOp == "follow" ? classes["follow-button"] : classes["unfollow-button"]} 
-                            onClick={() => loggedUserInfo ? mutate(id) : dispatch(loginModalActions.setLoginModalVisibility(true))}
+                            onClick={() => loggedUserInfo ? mutate(id) : dispatch(modalActions.setModal("login"))}
                         >
                             {buttonText}
                         </button>

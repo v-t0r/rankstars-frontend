@@ -3,7 +3,7 @@ import classes from "./OptionsBar.module.css"
 
 import { useState } from "react"
 
-import { loginModalActions, userActions } from "../../store"
+import { modalActions, userActions } from "../../store"
 import { useDispatch, useSelector } from "react-redux"
 
 import { useMutation } from "@tanstack/react-query"
@@ -79,7 +79,7 @@ export default function OptionsBar({post, type}){
 
     function handleLike(){
         if(!loggedUserInfo){
-            dispatch(loginModalActions.setLoginModalVisibility(true))
+            dispatch(modalActions.setModal("login"))
             return
         }
 
@@ -128,7 +128,7 @@ export default function OptionsBar({post, type}){
                                     onClick={() => {
                                         setModalsVisibility(prevState => ({...prevState, overflowMenu: false }))
                                         if(!loggedUserInfo){
-                                            dispatch(loginModalActions.setLoginModalVisibility(true))
+                                            dispatch(modalActions.setModal("login"))
                                             return
                                         }
                                         setModalsVisibility(prevState => ({...prevState, listsModal: true }))

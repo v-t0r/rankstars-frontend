@@ -6,7 +6,7 @@ import OverflowMenu from "../overflowMenu/overflowMenu"
 import { useDispatch, useSelector } from "react-redux"
 import { useMutation } from "@tanstack/react-query"
 import { addCommentVote, deleteComment, rremoveCommentVote } from "../../services/comments"
-import { commentsAction, loginModalActions } from "../../store"
+import { commentsAction, modalActions } from "../../store"
 import Modal from "../modal/Modal"
 import EditCommentForm from "./editCommentForm/editCommentForm"
 import { AnimatePresence } from "framer-motion"
@@ -99,14 +99,14 @@ export default function CommentCore({comment, type = "comment", onReplyClick}){
             {loggedUserInfo?._id === comment.author._id && <button onClick={() => setModalsVisibility(prev => ({...prev, overflowMenu: !prev.overflowMenu}))}><span className={`material-symbols-outlined`}>more_vert</span></button>}
             <button 
                 className={`${comment.upVotes.includes(loggedUserInfo?._id) ? classes["up-voted"] : undefined}`}
-                onClick={() => loggedUserInfo ? handleVote("upvotes") : dispatch(loginModalActions.setLoginModalVisibility(true))}
+                onClick={() => loggedUserInfo ? handleVote("upvotes") : dispatch(modalActions.setModal("login"))}
             >
                 <span className={`material-symbols-outlined`}>keyboard_arrow_up</span>
             </button>
             <p>{comment.upVotesCount - comment.downVotesCount}</p>
             <button 
                 className={`${comment.downVotes.includes(loggedUserInfo?._id) ? classes["down-voted"] : undefined}`}
-                onClick={() => loggedUserInfo ? handleVote("downvotes") : dispatch(loginModalActions.setLoginModalVisibility(true))}
+                onClick={() => loggedUserInfo ? handleVote("downvotes") : dispatch(modalActions.setModal("login"))}
             >
                 <span className={`material-symbols-outlined`}>keyboard_arrow_down</span>
             </button>

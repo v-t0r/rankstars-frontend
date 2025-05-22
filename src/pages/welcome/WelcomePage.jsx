@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { Link, useNavigate } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { modalActions } from "../../store/index"
 import { useMediaQuery } from "react-responsive"
 
 import classes from "./WelcomePage.module.css"
@@ -41,10 +42,13 @@ const lists = [
 ]
 
 export default function WelcomePage() {
-
     const [verbIndex, setsetVerbIndex] = useState(0)
+
     const isSmallWidth = useMediaQuery({query: '(max-width: 550px)'})
+
+    const dispatch = useDispatch()
     const navigate = useNavigate()
+
     const loggedUserInfo = useSelector(state => state.user.user)
 
     useEffect(() => {
@@ -128,7 +132,13 @@ export default function WelcomePage() {
                 <h2>And maybe discover new ones...</h2>
                 
                 {!isSmallWidth && <div className={classes["button-div"]}>
-                    <motion.button whileHover={{scale: 1.07}} className={`button ${classes["signup-button"]}`}>Sign Up</motion.button>
+                    <motion.button 
+                        whileHover={{scale: 1.07}} 
+                        className={`button ${classes["signup-button"]}`}
+                        onClick={() => dispatch(modalActions.setModal("signup"))}    
+                    >
+                        Sign Up
+                    </motion.button>
                 </div>}
 
             </div>
@@ -137,6 +147,7 @@ export default function WelcomePage() {
                     <motion.button 
                         whileHover={{scale: 1.07}} 
                         className={`button ${classes["signup-button"]}`}
+                        onClick={() => dispatch(modalActions.setModal("signup"))}
                     >
                         Sign Up
                     </motion.button>
