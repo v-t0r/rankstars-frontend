@@ -37,13 +37,15 @@ export default function EditListForm({listId, onClose}){
 
     const [validationErrors, setValidationErrors] = useState([])
 
-    const {mutate: patchListMutate} = useMutation({
+    const {mutate: patchListMutate, isMutationPending, isSuccess} = useMutation({
         mutationFn: patchPost,
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ["list", `${listId}`]})
             onClose()
         }
     })
+
+    const isSubmitted = isMutationPending || isSuccess
 
     function handleSubmit(e){
         e.preventDefault()
@@ -148,10 +150,9 @@ export default function EditListForm({listId, onClose}){
         
             <div className={classes["action-buttons-div"]}>
                 <button type="button" className="negative-button" onClick={onClose}>cancel</button>
-                <button type="submit" className="secondary-button button">Save</button>
+                <button type="submit" className="secondary-button button" disabled={isSubmitted} >{isSubmitted ? "Saving" : "Save"}</button>
             </div>
         </form>
-
     </>
     }
 

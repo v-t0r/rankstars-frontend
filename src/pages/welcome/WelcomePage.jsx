@@ -89,7 +89,7 @@ export default function WelcomePage() {
             
             <div className={classes["outer-image-container"]}>
                 <div className={classes["inner-image-container"]}>
-                    <img src={isSmallWidth ? "/assets/movie-2-mobile.jpg" : "/assets/movie-2.jpg"} alt="picture of a movie" />
+                    <img src={isSmallWidth ? "/assets/movie-mobile.jpg" : "/assets/movie.jpg"} alt="picture of a movie" />
                 </div>
             </div>
         </section>
@@ -155,7 +155,7 @@ export default function WelcomePage() {
             
             <div className={classes["outer-image-container"]}>
                 <div className={classes["inner-image-container"]}>
-                    <img src={isSmallWidth ? "/assets/videogame-3-mobile.jpg" : "/assets/videogame-3.jpg"} />
+                    <img src={isSmallWidth ? "/assets/videogame-mobile.jpg" : "/assets/videogame.jpg"} />
                 </div>
             </div>
         </section>

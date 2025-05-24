@@ -8,9 +8,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { useMutation } from "@tanstack/react-query"
 import { followUser, unfollowUser } from "../../services/users"
 import { modalActions, userActions } from "../../store"
+import { useState } from "react"
 
 export default function UsersList({username, profileUserId, users, type, onClose}) {
-    
+
+    const [isLocked, setIsLocked] = useState(false)
+
     const navigate = useNavigate()
 
     const loggedUserInfo = useSelector(state => state.user.user)
@@ -18,11 +21,15 @@ export default function UsersList({username, profileUserId, users, type, onClose
 
     const {mutate: mutateFollowUser} = useMutation({
         mutationFn: followUser,
+        onMutate: () => setIsLocked(true),
+        onSettled: () => setIsLocked(false),
         onSuccess: (_data, variables, _context) => updateUserContext("follow", variables)
     })
 
     const {mutate: mutateUnfollowUser} = useMutation({
         mutationFn: unfollowUser,
+        onMutate: () => setIsLocked(true),
+        onSettled: () => setIsLocked(false),
         onSuccess: (_data, variables, _context) => updateUserContext("unfollow", variables)
     })
 
@@ -103,6 +110,7 @@ export default function UsersList({username, profileUserId, users, type, onClose
                                     (following_status[index] === "follow" || following_status[index] === "follow back") ? 
                                     classes["follow-button"] : classes["unfollow-button"]
                                 }
+                                disabled={isLocked}
                                 onClick={() => handleFollow(user._id, following_status[index])}
                             >        
                                 {following_status[index]}

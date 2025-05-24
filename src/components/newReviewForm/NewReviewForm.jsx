@@ -33,13 +33,16 @@ export default function NewReviewForm({reviewId = undefined, onCancel}){
 
     const mutationFunction = reviewId ? patchPost : postReview
 
-    const { mutate } = useMutation({
+    const { mutate, isPending: isMutatePending, isSuccess } = useMutation({
         mutationFn: mutationFunction,
         onSuccess: () => {
             queryClient.invalidateQueries()
             onCancel()
         }
     })
+
+    //already submitted once
+    const isSubmitted = isMutatePending || isSuccess
 
     useEffect(() => {
         if(data){
@@ -93,6 +96,9 @@ export default function NewReviewForm({reviewId = undefined, onCancel}){
     }
 
     function handleSubmit(event){
+
+        console.log("Fez submit")
+
         event.preventDefault()
         const formData = new FormData(event.target)
 
@@ -173,7 +179,7 @@ export default function NewReviewForm({reviewId = undefined, onCancel}){
 
             <div className={classes["buttons"]}>
                 <button  type="button" className="negative-button" onClick={() => setModal(true)}>cancel</button>
-                <button className="button secondary-button" type="submit">{reviewId ? "Save" : "Post"}</button>
+                <button className={`button "secondary-button"`} type="submit" disabled={isSubmitted}>{isSubmitted ? "Saving" : reviewId ? "Save" : "Post"}</button>
             </div>
         </form>
     }

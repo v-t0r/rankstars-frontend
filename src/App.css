@@ -151,6 +151,12 @@ footer {
     background-color: rgb(37, 180, 9);
 }
 
+.disabled,
+.disabled:hover,
+.disabled:active {
+    background-color: rgb(53, 53, 53);
+}
+
 .text-button{
     color: var(--light-gray);
     background: none;

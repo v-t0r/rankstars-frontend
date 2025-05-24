@@ -4,11 +4,11 @@ import { createList, addReviewToList } from "../../services/posts"
 import { useState } from "react"
 import { queryClient } from "../../services/queryClient"
 
-export default function NewListForm({onClose, onCancel, onReviewPage=false, review=null}){
+export default function NewListForm({onClose, onCancel, review=null}){
 
     const [validationErrors, setValidationErrors] = useState([])
 
-    const { mutate: newListMutate } = useMutation({
+    const { mutate: newListMutate, isPending, isSuccess } = useMutation({
         mutationFn: createList,
         onSuccess: (data) => {
             if(review){
@@ -20,10 +20,12 @@ export default function NewListForm({onClose, onCancel, onReviewPage=false, revi
         }
     })
 
-    const { mutate: addReviewMutate } = useMutation({
+    const { mutate: addReviewMutate} = useMutation({
         mutationFn: addReviewToList,
         onSuccess: onClose
     })
+
+    const isSubmitted = isPending || isSuccess
 
     function handleSubmit(e){
         e.preventDefault()
@@ -65,8 +67,8 @@ export default function NewListForm({onClose, onCancel, onReviewPage=false, revi
         
 
         <div className={classes["action-buttons-div"]}>
-            <button type="button" className={onReviewPage ? "text-button" : "negative-button"} onClick={onCancel}>{onReviewPage ? "back" : "cancel"}</button>
-            <button type="submit" className="button secondary-button">Create</button>
+            <button type="button" className={review ? "text-button" : "negative-button"} onClick={onCancel}>{review ? "back" : "cancel"}</button>
+            <button type="submit" className="button secondary-button" disabled={isSubmitted} >{isSubmitted ? "Creating" : "Create"}</button>
         </div>
 
     </form>

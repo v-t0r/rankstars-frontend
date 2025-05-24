@@ -22,6 +22,8 @@ import ErrorCard from "../../components/errorCard/ErrorCard"
 import EditUserForm from "../../components/editUserForm/EditUserForm"
 
 export default function ProfilePage(){
+    const [isLocked, setIsLocked] = useState(false)
+
     const {id} = useParams()
     const loggedUserInfo = useSelector(state => state.user.user)
 
@@ -69,6 +71,8 @@ export default function ProfilePage(){
     //mutation para o usuário logado (deixar de) seguir o usuário
     const { mutate } = useMutation({
         mutationFn: mutationFunction,
+        onMutate: () => setIsLocked(true),
+        onSettled: () => setIsLocked(false), 
         onSuccess: () => updateUserContext(followOp)
     }) 
 
@@ -138,7 +142,8 @@ export default function ProfilePage(){
                     <p onClick={() => handleModal("followers")} >{totalFollowers} {totalFollowers === 1? "Follower" : "Followers"}</p>
                     {!loggedUserProfile ? 
                         <button 
-                            className={followOp == "follow" ? classes["follow-button"] : classes["unfollow-button"]} 
+                            className={followOp == "follow" ? classes["follow-button"] : classes["unfollow-button"]}
+                            disabled={isLocked} 
                             onClick={() => loggedUserInfo ? mutate(id) : dispatch(modalActions.setModal("login"))}
                         >
                             {buttonText}

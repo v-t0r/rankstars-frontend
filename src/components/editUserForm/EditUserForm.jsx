@@ -23,7 +23,7 @@ export default function EditUserForm({user, onClose}){
 
     const dispatch = useDispatch()
 
-    const { mutate } = useMutation({
+    const { mutate, isPending, isSuccess } = useMutation({
         mutationFn: patchUser,
         onSuccess: (data) => {
             queryClient.invalidateQueries()
@@ -36,9 +36,10 @@ export default function EditUserForm({user, onClose}){
         }
     })
 
+    const isSubmitted = isPending || isSuccess
+
     function handleImageChange(event){
         const selectedImage = event.target.files[0]
-        console.log(selectedImage)
         setUserForm(prevState => ({...prevState, image: selectedImage}))
     }
 
@@ -116,7 +117,7 @@ export default function EditUserForm({user, onClose}){
                 
                 <div className={classes["action-buttons"]}>
                     <button  type="button" className="negative-button" onClick={onClose}>cancel</button>
-                    <button className="button secondary-button" type="submit">Save</button>
+                    <button className="button secondary-button" type="submit" disabled={isSubmitted}>{isSubmitted ? "Saving" : "Save"}</button>
                 </div>
             </form>
         }

@@ -11,13 +11,15 @@ export default function EditCommentForm({comment, onCancel}){
 
     const dispatch = useDispatch()
 
-    const {mutate: editMutate} = useMutation({
+    const {mutate: editMutate, isPending, isSuccess} = useMutation({
         mutationFn: patchComment,
         onSuccess: () => {
             dispatch(commentsAction.editComment({comment: comment, newContent: commentState.content}))
             onCancel()
         }
     })
+
+    const isSubmitted = isPending || isSuccess
 
     function handleSubmit(e){
         e.preventDefault()
@@ -45,8 +47,8 @@ export default function EditCommentForm({comment, onCancel}){
         {validationErrors.map((error, index) => error[0] === "content" && <p key={index} className="error-text">{error[1]}</p>)}
 
         <div className={classes["action-buttons"]}>
-            <button type="button" className="negative-button" onClick={onCancel}>discard</button>
-            <button type="submit" className="button secondary-button">update</button>
+            <button type="button" className="negative-button" onClick={onCancel}>Discard</button>
+            <button type="submit" className="button secondary-button" disabled={isSubmitted} >{isSubmitted ? "Updating" : "Update"}</button>
         </div> 
     </form>
 }

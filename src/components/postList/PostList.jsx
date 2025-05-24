@@ -4,7 +4,7 @@ import DetailedReviewCard from "../cards/reviewCard/DetailedReviewCard"
 import DetailedListCard from "../cards/listCard/DetailedListCard"
 import UserCard from "../cards/userCard/userCard"
 
-export default function PostList({type = "reviews", posts}) {
+export default function PostList({type = "reviews", posts = []}) {
 
     return <div className={classes["posts-section"]}>
         <ul>

@@ -35,7 +35,7 @@ export default function SearchPage(){
             })
         },
         getNextPageParam: (lastPage, allPages) => {
-            return lastPage[searchParams.get("where")].length == 0 ? undefined : allPages.length + 1
+            return lastPage[searchParams.get("where")]?.length == 0 ? undefined : allPages.length + 1
         }
     })
 
@@ -139,7 +139,6 @@ export default function SearchPage(){
     let content = <></>
     if(data){
         const posts = data.pages.map(page => page[searchParams.get("where")]).flat(1)
-        
         content = <PostList type={searchParams.get("where")} posts={posts}/>
         if(posts.length === 0) content = <h2>There is no results for this search...</h2>
     }
