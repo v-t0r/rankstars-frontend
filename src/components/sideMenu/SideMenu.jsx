@@ -73,7 +73,7 @@ export default function SideMenu(){
                                     </Link>
                                 </li>
 
-                                <li><Link to={`/`}><span className={`material-symbols-outlined ${classes["menu-icon"]}`}>info</span>About RankStars</Link></li>                    
+                                <li><Link to={`https://github.com/v-t0r/rankstars-frontend`}><span className={`material-symbols-outlined ${classes["menu-icon"]}`}>info</span>About RankStars</Link></li>                    
                             </ul>
                             <button onClick={logout} className={`negative-button ${classes["logout-button"]}`}>
                                 <span className={`material-symbols-outlined ${classes["menu-icon"]}`}>logout</span>Logout

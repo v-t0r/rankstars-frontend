@@ -1,4 +1,5 @@
 import { backendUrl } from "../../utils/constants"
+import { isStrongPassword } from "../../utils/functions"
 import classes from "./LoginForm.module.css"
 import { useState } from "react"
 
@@ -12,7 +13,7 @@ export default function SignupForm({onClose, onLogin}){
         const data = Object.fromEntries(formData)
         let errors = []
 
-        if(data.username.trim() === ""){ //senhas devem coincidir
+        if(data.username.trim() === ""){
             errors = [...errors, ["username", "Username can't be empty!"]]
         }
 
@@ -20,11 +21,14 @@ export default function SignupForm({onClose, onLogin}){
             errors = [...errors, ["email", "Please enter a valid email!"]]
         }
 
-        if(data.password.length < 3){ //adicionar requisitos mais complexos posteriormente
-            errors = [...errors, ["password", "Password must be at least 3 characters."]]
+        const {isStrong, errors: passwordErrors} = isStrongPassword(data.password)
+        if(!isStrong){
+            passwordErrors.forEach((error) => {
+                errors = [...errors, ["password", error]]
+            })
         }
 
-        if(data.password.trim() != data["confirm-password"].trim()){ //senhas devem coincidir
+        if(data.password.trim() != data["confirm-password"].trim() || data["confirm-password"] === ""){ //senhas devem coincidir
             errors = [...errors, ["confirm-password", "Passwords does not match!"]]
         }
 
@@ -45,6 +49,10 @@ export default function SignupForm({onClose, onLogin}){
                 errors = [...errors, ["general", ...errorInfo.data.map(error => error.msg)]]
                 setValidationErrors(errors)
                 return
+            }
+
+            if(response.ok){
+                onLogin()
             }
 
         }catch(error){

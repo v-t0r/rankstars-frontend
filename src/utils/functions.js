@@ -79,3 +79,16 @@ export function stringifyCategories(array){
 
     return string
 }
+
+export function isStrongPassword(password){
+    const errors = []
+
+    if(password.length < 8) errors.push("Must have at least 8 characters!")
+    if( !(/[a-z]/.test(password)) ) errors.push("Must have at least one lowercase letter!")
+    if( !(/[A-Z]/.test(password)) ) errors.push("Must have at least one uppercase letter!")
+    if( !(/[0-9]/.test(password)) ) errors.push("Must have at least one number!")
+
+    if(errors.length === 0) return {isStrong: true, errors: []}
+    
+    return {isStrong: false, errors}
+}

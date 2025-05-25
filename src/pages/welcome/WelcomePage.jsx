@@ -52,9 +52,13 @@ export default function WelcomePage() {
     const loggedUserInfo = useSelector(state => state.user.user)
 
     useEffect(() => {
-        setInterval(() => {
+        const interval = setInterval(() => {
             setsetVerbIndex(prev => (prev + 1) % verbs.length)
         }, 5000)
+
+        return () => {
+            clearInterval(interval)
+        }
     }, [])
 
     useEffect(() => {

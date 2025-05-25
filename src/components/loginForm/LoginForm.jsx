@@ -23,9 +23,6 @@ export default function LoginForm({onClose, onSignup}){
 
     }, [userInfo, onClose])
 
-
-
-
     async function handleSubmit(e){
         e.preventDefault()
 
@@ -37,8 +34,8 @@ export default function LoginForm({onClose, onSignup}){
             errors = [...errors, ["email", "Please enter a valid email!"]]
         }
 
-        if(data.password.length < 3){ //adicionar requisitos mais complexos posteriormente
-            errors = [...errors, ["password", "Password must be at least 3 characters."]]
+        if(data.password.length === 0){
+            errors = [...errors, ["password", "Please insert the password."]]
         }
 
         if(errors.length > 0){

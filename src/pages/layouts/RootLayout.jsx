@@ -59,6 +59,15 @@ export default function RootLayout(){
 
         </main>
 
-        <footer>RankStars 2024 - Um projeto React & Express.JS</footer>
+        <footer>
+            <p>RankStars 2025 - Build with React & Express.JS</p>
+            <ul>
+                <li><a href="https://www.github.com/v-t0r/rankstars-frontend">About</a></li>
+                <li><a href="https://www.github.com/v-t0r">Github</a></li>
+                <li><a href="https://www.linkedin.com/in/vitor-b-05bba2124/">Linkedin</a></li>
+                <li><a href="mailto:vitorlemes.com@hotmail.com">Contact</a></li>
+            </ul>
+            
+        </footer>
     </>
 }
