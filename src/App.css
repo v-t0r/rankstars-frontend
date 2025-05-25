@@ -112,6 +112,23 @@ textarea {
 
 footer {
     text-align: center;
+    margin: 0 10%;
+}
+
+footer ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    list-style: none;
+    margin-bottom: 32px;
+    margin-top: 16px;
+}
+
+footer p:last-child {
+    margin-top: 8px;
+    margin-bottom: 32px;
 }
 
 .button{
